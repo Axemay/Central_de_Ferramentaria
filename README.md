@@ -1,4 +1,4 @@
-<h1>Sistemas de controle de reservas de ferramentas</h1>
+<h1>Sistema de controle de reservas de ferramentas</h1>
 
 <p>Projeto em grupo proposto como requisito para aquisição da certificação do Mundo 1, na graduação tecnológica de Desenvolvimento Full Stack da Universidade Estácio de Sá</p>
 <hr>
