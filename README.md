@@ -5,9 +5,9 @@
 <p>Grupo: DevTeam13</p>
 <p>Participantes:</p>
 <ul>
-<li>Maiara Accacio Machado</li>
-<li>Francisco Ferreira de Queiroz Neto</li>
-<li>Daniel</li>
+<li><a href="https://github.com/Axemay">Maiara Accacio Machado</a></li>
+<li><a href="https://github.com/fneto1723">Francisco Ferreira de Queiroz Neto</a></li>
+<li><a href="https://github.com/dpsndroid">Daniel</a></li>
 <li>Paulo</li>
 <li>Rafael</li>
 </ul>
