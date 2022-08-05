@@ -1,6 +1,22 @@
 import tkinter as tk
+from tkinter import ttk
+
 
 def janela_cadastro_tecnicos():
+    
+    global lista_tecnicos
+    lista_tecnicos = []
+
+    def codigo_tecnicos():
+        cpf = ('CPF: {}').format(vcpf.get())
+        nome = ('Nome: {}').format(vnome.get())
+        telefone = ('Telefone: {}').format(vtelefone.get())
+        turno = ('Turno: {}').format(vturno.get())
+        equipe = ('Equipe: {}').format(vequipe.get())
+        lista_tecnicos.append((cpf, nome, telefone, turno, equipe))
+        print(lista_tecnicos)
+
+
     cadastro_tecnicos = tk.Toplevel()
     cadastro_tecnicos.title('Janela de Cadastro de Técnicos')
     cadastro_tecnicos.iconphoto(False, tk.PhotoImage(file='ico/worker.png'))
@@ -29,9 +45,11 @@ def janela_cadastro_tecnicos():
     equipe.place(relx=0.05, rely= 0.26, relwidth=0.1, relheight=0.05)
     vequipe = tk.Entry(cadastro_tecnicos)
     vequipe.place(relx= 0.2, rely= 0.26, relwidth=0.5, relheight=0.05)
-    bsalvar = tk.Button(cadastro_tecnicos, text='Salvar Cadastro', )
-    bsalvar.place(relx = 0.33, rely= 0.35, relwidth=0.2, relheight= 0.05)
+    bsalvar = tk.Button(cadastro_tecnicos, text='Salvar Cadastro', command= codigo_tecnicos)
+    bsalvar.place(relx = 0.33, rely= 0.35, relwidth=0.2, relheight= 0.05)    
+    
 
+    
 def janela_consulta_tecnicos():
     consulta_tecnicos = tk.Toplevel()
     consulta_tecnicos.title('Janela de Consulta de Técnicos')
@@ -41,3 +59,5 @@ def janela_consulta_tecnicos():
     consulta_tecnicos.resizable(True, True)
     consulta_tecnicos.maxsize(width= 900, height=600) # dimensões máximas
     consulta_tecnicos.minsize(width= 400, height= 300) # dimensões mínimas
+    combobox = ttk.Combobox(consulta_tecnicos, values= lista_tecnicos)
+    combobox.place(relx = 0.02, rely= 0.15, relwidth=0.75, relheight=0.05)

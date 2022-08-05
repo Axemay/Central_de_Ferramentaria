@@ -1,6 +1,25 @@
+from msilib.schema import ComboBox
 import tkinter as tk
+from t import *
 
 def janela_cadastro_ferramentas():
+
+    global lista_ferramentas
+    lista_ferramentas = []
+
+    def codigo_ferramentas():
+        codigo = ('Código: {}').format(vcodigo_ferramenta.get())
+        descricao = ('Descrição da Ferramenta: {}').format(vdescricao_ferramenta.get())
+        fabricante = ('Fabricante: {}').format(vfabricante.get())
+        voltagem = ('Voltagem de Uso: {}').format(vvoltagem.get())
+        part_number = ('Part Number: {}').format(vpart_number.get())
+        tamanho = ('Tamanho da Ferramenta: {}').format(vtamanho.get())
+        unidade_medida = ('Unidade de Medida: {}').format(vunidade_medida.get())
+        tipo_ferramenta = ('Tipo de Ferramenta: {}').format(vtipo_ferramenta.get())
+        material = ('Material: {}').format(vmaterial_ferramenta.get())
+        lista_ferramentas.append((codigo, descricao, fabricante, voltagem, part_number, tamanho, unidade_medida, tipo_ferramenta, material))
+        
+
     cadastro_ferramentas = tk.Toplevel()
     cadastro_ferramentas.title('Janela de Cadastro de Ferramentas')
     cadastro_ferramentas.iconphoto(False, tk.PhotoImage(file='ico/tools.png'))
@@ -45,7 +64,7 @@ def janela_cadastro_ferramentas():
     material_ferramenta.place(relx= 0.05, rely= 0.5, relwidth=0.25, relheight=0.05)
     vmaterial_ferramenta = tk.Entry(cadastro_ferramentas)
     vmaterial_ferramenta.place(relx = 0.35, rely=0.5, relwidth=0.5, relheight=0.05)
-    bsalvar = tk.Button(cadastro_ferramentas, text= 'Salvar Cadastro')
+    bsalvar = tk.Button(cadastro_ferramentas, text= 'Salvar Cadastro', command = codigo_ferramentas)
     bsalvar.place(relx= 0.29, rely = 0.6, relwidth=0.4, relheight=0.05)
 
 
@@ -56,5 +75,8 @@ def janela_consulta_ferramentas():
     consulta_ferramentas.configure(background='#B9B7BD')
     consulta_ferramentas.geometry('700x500')
     consulta_ferramentas.resizable(True, True)
-    consulta_ferramentas.maxsize(width= 900, height=600) # dimensões máximas
-    consulta_ferramentas.minsize(width= 400, height= 300) # dimensões mínimas
+    consulta_ferramentas.maxsize(width= 1280, height=720) # dimensões máximas
+    consulta_ferramentas.minsize(width= 1280, height= 720) # dimensões mínimas
+    combobox = ttk.Combobox(consulta_ferramentas, values= lista_ferramentas)
+    combobox.place(relx=0.02, rely=0.15, relwidth=0.98, relheight=0.05)
+    
