@@ -8,7 +8,7 @@
 <li><a href="https://github.com/Axemay">Maiara Accacio Machado</a></li>
 <li><a href="https://github.com/fneto1723">Francisco Ferreira de Queiroz Neto</a></li>
 <li><a href="https://github.com/dpsndroid">Daniel</a></li>
-<li>Paulo</li>
+<li><a href="https://github.com/Rafa1a">Paulo</a></li>
 <li>Rafael</li>
 </ul>
 
