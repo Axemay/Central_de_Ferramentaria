@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
+import csv
 
+tecnico = dict()
 
 def janela_cadastro_tecnicos():
     
@@ -8,14 +10,21 @@ def janela_cadastro_tecnicos():
     lista_tecnicos = []
 
     def codigo_tecnicos():
-        cpf = ('CPF: {}').format(vcpf.get())
-        nome = ('Nome: {}').format(vnome.get())
-        telefone = ('Telefone: {}').format(vtelefone.get())
-        turno = ('Turno: {}').format(vturno.get())
-        equipe = ('Equipe: {}').format(vequipe.get())
-        lista_tecnicos.append((cpf, nome, telefone, turno, equipe))
-        print(lista_tecnicos)
 
+        tecnico['cpf'] = vcpf.get()
+        tecnico['nome'] = vnome.get()
+        tecnico['telefone'] = vtelefone.get()
+        tecnico['turno'] = vturno.get()
+        tecnico['equipe'] = vequipe.get()
+        lista_tecnicos.append(tecnico.copy())
+        print(lista_tecnicos)
+        return tecnico
+
+    with open('tecnico.csv', 'w', newline='') as arquivo:
+        campos = ['CPF', 'Nome', 'Telefone', 'Turno', 'Equipe']
+        escrever = csv.DictWriter(arquivo, fieldnames=campos)
+        escrever.writeheader()
+        escrever.writerow(tecnico)
 
     cadastro_tecnicos = tk.Toplevel()
     cadastro_tecnicos.title('Janela de Cadastro de Técnicos')
