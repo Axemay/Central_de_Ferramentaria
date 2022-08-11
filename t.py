@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+from tkinter import END
 import csv
 
 tecnico = dict()
@@ -10,22 +11,35 @@ def janela_cadastro_tecnicos():
     lista_tecnicos = []
 
     def codigo_tecnicos():
+        # coloquei a inserção direto no comando writerow, mas mantive pois não sei se é a solução definitiva
 
-        tecnico['cpf'] = vcpf.get()
-        tecnico['nome'] = vnome.get()
-        tecnico['telefone'] = vtelefone.get()
-        tecnico['turno'] = vturno.get()
-        tecnico['equipe'] = vequipe.get()
-        lista_tecnicos.append(tecnico.copy())
-        print(lista_tecnicos)
-        return tecnico
+        #tecnico['cpf'] = vcpf.get()
+        #tecnico['nome'] = vnome.get()
+        #tecnico['telefone'] = vtelefone.get()
+        #tecnico['turno'] = vturno.get()
+        #tecnico['equipe'] = vequipe.get()
+        #lista_tecnicos.append(tecnico.copy())
+        #print(lista_tecnicos)
+        #return tecnico
+#-----------------------------------------------------------------------------------------
+        with open("tecnico.csv", "a", newline="") as arquivo:
+            campos = ["CPF", "Nome", "Telefone", "Turno", "Equipe"]
+            escrever = csv.DictWriter(arquivo, fieldnames=campos, delimiter=",", lineterminator="\n")
+            # não consegui manter o cabeçalho, ele repetia. Inseri no csv e permiti apenas a inserção das linhas
+            #escrever.writeheader()
 
-    with open('tecnico.csv', 'w', newline='') as arquivo:
-        campos = ['CPF', 'Nome', 'Telefone', 'Turno', 'Equipe']
-        escrever = csv.DictWriter(arquivo, fieldnames=campos)
-        escrever.writeheader()
-        escrever.writerow(tecnico)
+            escrever.writerow({"CPF": vcpf.get(), "Nome": vnome.get(), "Telefone": vtelefone.get(), "Turno": vturno.get(), "Equipe": vequipe.get()})
 
+    # função para limpar os campos do entry, para nova digitação, tem que importar END do tkinter
+
+    def limpa_tela(): 
+        vcpf.delete(0, END)
+        vnome.delete(0, END)
+        vtelefone.delete(0, END)
+        vturno.delete(0, END)
+        vequipe.delete(0, END)
+
+#------------------------------------------------------------------------------------------
     cadastro_tecnicos = tk.Toplevel()
     cadastro_tecnicos.title('Janela de Cadastro de Técnicos')
     cadastro_tecnicos.iconphoto(False, tk.PhotoImage(file='ico/worker.png'))
@@ -34,30 +48,39 @@ def janela_cadastro_tecnicos():
     cadastro_tecnicos.resizable(True, True)
     cadastro_tecnicos.maxsize(width= 900, height=600) # dimensões máximas
     cadastro_tecnicos.minsize(width= 400, height= 300) # dimensões mínimas
+    
     cpf = tk.Label(cadastro_tecnicos, text="CPF:", bg='#ffd')
     cpf.place(relx=0.05, rely=0.02, relwidth=0.1, relheight=0.05)
     vcpf = tk.Entry(cadastro_tecnicos)
     vcpf.place(relx=0.2, rely=0.02, relwidth=0.5, relheight=0.05)
+    
     nome = tk.Label(cadastro_tecnicos, text='Nome:', bg='#ffd')
     nome.place(relx=0.05, rely=0.08, relwidth=0.1, relheight=0.05)
     vnome = tk.Entry(cadastro_tecnicos)
     vnome.place(relx = 0.2, rely= 0.08, relwidth= 0.5, relheight= 0.05)
+    
     telefone = tk.Label(cadastro_tecnicos, text='Telefone:', bg='#ffd')
     telefone.place(relx= 0.05, rely= 0.14, relwidth = 0.1, relheight=0.05)
     vtelefone = tk.Entry(cadastro_tecnicos)
     vtelefone.place(relx= 0.2, rely= 0.14, relwidth= 0.5, relheight=0.05)
+    
     turno = tk.Label(cadastro_tecnicos, text='Turno:', bg='#ffd')
     turno.place(relx= 0.05, rely = 0.2, relwidth=0.1, relheight=0.05)
     vturno = tk.Entry(cadastro_tecnicos)
     vturno.place(relx= 0.2, rely= 0.2, relwidth= 0.5, relheight= 0.05)
+    
     equipe = tk.Label(cadastro_tecnicos, text='Equipe:', bg='#ffd')
     equipe.place(relx=0.05, rely= 0.26, relwidth=0.1, relheight=0.05)
     vequipe = tk.Entry(cadastro_tecnicos)
     vequipe.place(relx= 0.2, rely= 0.26, relwidth=0.5, relheight=0.05)
-    bsalvar = tk.Button(cadastro_tecnicos, text='Salvar Cadastro', command= codigo_tecnicos)
-    bsalvar.place(relx = 0.33, rely= 0.35, relwidth=0.2, relheight= 0.05)    
     
+    bsalvar = tk.Button(cadastro_tecnicos, text='Salvar Cadastro', command= codigo_tecnicos)
+    bsalvar.place(relx = 0.25, rely= 0.35, relwidth=0.2, relheight= 0.05)
 
+    blimpar = tk.Button(cadastro_tecnicos, text="Limpar Campos", command=limpa_tela)
+    blimpar.place(relx=0.45, rely=0.35, relwidth=0.2, relheight=0.05)
+    
+    
     
 def janela_consulta_tecnicos():
     consulta_tecnicos = tk.Toplevel()
