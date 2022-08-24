@@ -23,9 +23,9 @@ def janela_cadastro_reservas():
     cadastro_reservas.maxsize(width= 900, height=600) # dimensões máximas
     cadastro_reservas.minsize(width= 400, height= 300) # dimensões mínimas
     comb_tecnicos = ttk.Combobox(cadastro_reservas, )
-    comb_tecnicos.place(relx = 0.02, rely= 0.15, relwidth=0.75, relheight=0.05)
+    comb_tecnicos.place(relx = 0.13, rely= 0.15, relwidth=0.75, relheight=0.05)
     comb_ferramentas = ttk.Combobox(cadastro_reservas,)
-    comb_ferramentas.place(relx = 0.02, rely= 0.25, relwidth=0.75, relheight=0.05)
+    comb_ferramentas.place(relx = 0.13, rely= 0.25, relwidth=0.75, relheight=0.05)
     bsalvar = tk.Button(cadastro_reservas, text='Salvar Cadastro', bg='#ffd', )
     bsalvar.place(relx = 0.33, rely = 0.35, relwidth=0.35 ,relheight= 0.05)
     
@@ -40,4 +40,4 @@ def janela_consulta_reservas():
     consulta_reservas.maxsize(width= 900, height=600) # dimensões máximas
     consulta_reservas.minsize(width= 400, height= 300) # dimensões mínimas
     combobox = ttk.Combobox(consulta_reservas, values=lista_reserva)
-    combobox.place(relx= 0.2, rely= 0.15, relwidth= 0.98, relheight=0.05)
+    combobox.place(relx= 0.05, rely= 0.15, relwidth= 0.90, relheight=0.05)

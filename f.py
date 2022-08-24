@@ -2,10 +2,14 @@ from msilib.schema import ComboBox
 import tkinter as tk
 from t import *
 
+
+
 def janela_cadastro_ferramentas():
 
     global lista_ferramentas
     lista_ferramentas = []
+    global contador
+    contador = 0
 
     def codigo_ferramentas():
         codigo = ('Código: {}').format(vcodigo_ferramenta.get())
@@ -28,6 +32,13 @@ def janela_cadastro_ferramentas():
             #escrever.writeheader()
 
             escrever.writerow({"Codigo": vcodigo_ferramenta.get(), "Descricao": vdescricao_ferramenta.get(), "Fabricante": vfabricante.get(), "Voltagem": vvoltagem.get(), "Partnumber": vpart_number.get(), "Tamanho": vtamanho.get(), "Unidade": vunidade_medida.get(), "Tipo": vtipo_ferramenta.get(), "Material": vmaterial_ferramenta.get()})
+            limpa_tela()
+            global contador
+            contador += 1  
+            res = tk.Label(cadastro_ferramentas, text=f"{contador} Cadastro(s) efetuado(s) com sucesso!\nDigite novamente para mais um cadastro", bg="#B9B7BD", font= ("verdana", 11))
+            res.place(relx= 0.10, rely= 0.70, relwidth = 0.8, relheight=0.1)
+
+        
 
     # função para limpar os campos do entry, para nova digitação
 
@@ -104,6 +115,9 @@ def janela_cadastro_ferramentas():
     blimpar = tk.Button(cadastro_ferramentas, text="Limpar Campos", command=limpa_tela)
     blimpar.place(relx=0.50, rely=0.6, relwidth=0.2, relheight=0.05)
 
+    res = tk.Label(cadastro_ferramentas, text="Insira acima os dados da ferramenta", bg="#B9B7BD",font= ("verdana",11))
+    res.place(relx= 0.10, rely= 0.70, relwidth = 0.8, relheight=0.05)
+
 
 def janela_consulta_ferramentas():
     consulta_ferramentas = tk.Toplevel()
@@ -114,6 +128,9 @@ def janela_consulta_ferramentas():
     consulta_ferramentas.resizable(True, True)
     consulta_ferramentas.maxsize(width= 1280, height=720) # dimensões máximas
     consulta_ferramentas.minsize(width= 1280, height= 720) # dimensões mínimas
-    combobox = ttk.Combobox(consulta_ferramentas, values= lista_ferramentas)
-    combobox.place(relx=0.02, rely=0.15, relwidth=0.98, relheight=0.05)
+    #combobox = ttk.Combobox(consulta_ferramentas, values= lista_ferramentas)
+    #combobox.place(relx=0.02, rely=0.15, relwidth=0.98, relheight=0.05)
+
+    frame2 = Frame(consulta_ferramentas,bd= 4, bg="#ffffff", highlightbackground="grey", highlightthickness=2)
+    frame2.place(relx= 0.01, rely=0.02, relwidth=0.98, relheight=0.65)
     

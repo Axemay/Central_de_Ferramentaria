@@ -1,14 +1,20 @@
+from contextlib import ContextDecorator
 import tkinter as tk
-from tkinter import ttk
+from tkinter import Frame, ttk
 from tkinter import END
 import csv
 
+
 tecnico = dict()
+
+
 
 def janela_cadastro_tecnicos():
     
     global lista_tecnicos
     lista_tecnicos = []
+    global contador
+    contador = 0
 
     def codigo_tecnicos():
         # coloquei a inserção direto no comando writerow, mas mantive pois não sei se é a solução definitiva
@@ -21,14 +27,22 @@ def janela_cadastro_tecnicos():
         #lista_tecnicos.append(tecnico.copy())
         #print(lista_tecnicos)
         #return tecnico
+        
 #-----------------------------------------------------------------------------------------
         with open("tecnico.csv", "a", newline="") as arquivo:
+            
             campos = ["CPF", "Nome", "Telefone", "Turno", "Equipe"]
             escrever = csv.DictWriter(arquivo, fieldnames=campos, delimiter=",", lineterminator="\n")
             # não consegui manter o cabeçalho, ele repetia. Inseri no csv e permiti apenas a inserção das linhas
             #escrever.writeheader()
+            escrever.writerow({"CPF": vcpf.get(), "Nome": vnome.get(), "Telefone": vtelefone.get(), "Turno": vturno.get(), "Equipe": vequipe.get()}) 
+            limpa_tela()
+            global contador
+            contador += 1  
+            res = tk.Label(cadastro_tecnicos, text=f"{contador} Cadastro(s) efetuado(s) com sucesso!\nDigite novamente para mais um cadastro", bg="#B9B7BD", font= ("verdana", 11))
+            res.place(relx= 0.05, rely= 0.50, relwidth = 0.8, relheight=0.1)
+            
 
-            escrever.writerow({"CPF": vcpf.get(), "Nome": vnome.get(), "Telefone": vtelefone.get(), "Turno": vturno.get(), "Equipe": vequipe.get()})
 
     # função para limpar os campos do entry, para nova digitação, tem que importar END do tkinter
 
@@ -38,6 +52,9 @@ def janela_cadastro_tecnicos():
         vtelefone.delete(0, END)
         vturno.delete(0, END)
         vequipe.delete(0, END)
+
+    
+
 
 #------------------------------------------------------------------------------------------
     cadastro_tecnicos = tk.Toplevel()
@@ -79,6 +96,10 @@ def janela_cadastro_tecnicos():
 
     blimpar = tk.Button(cadastro_tecnicos, text="Limpar Campos", command=limpa_tela)
     blimpar.place(relx=0.45, rely=0.35, relwidth=0.2, relheight=0.05)
+
+    res = tk.Label(cadastro_tecnicos, text="Insira acima os dados do funcionário", bg="#B9B7BD",font= ("verdana",11))
+    res.place(relx= 0.05, rely= 0.50, relwidth = 0.8, relheight=0.05)
+
     
     
     
@@ -91,5 +112,10 @@ def janela_consulta_tecnicos():
     consulta_tecnicos.resizable(True, True)
     consulta_tecnicos.maxsize(width= 900, height=600) # dimensões máximas
     consulta_tecnicos.minsize(width= 400, height= 300) # dimensões mínimas
-    combobox = ttk.Combobox(consulta_tecnicos, values= lista_tecnicos)
-    combobox.place(relx = 0.02, rely= 0.15, relwidth=0.75, relheight=0.05)
+    #combobox = ttk.Combobox(consulta_tecnicos, values= lista_tecnicos)
+    #combobox.place(relx = 0.02, rely= 0.15, relwidth=0.75, relheight=0.05)
+
+
+    frame1 = Frame(consulta_tecnicos,bd= 4, bg="#ffffff", highlightbackground="grey", highlightthickness=2)
+    frame1.place(relx= 0.02, rely=0.02, relwidth=0.96, relheight=0.65)
+        
