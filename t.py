@@ -59,7 +59,7 @@ def janela_cadastro_tecnicos():
 #------------------------------------------------------------------------------------------
     cadastro_tecnicos = tk.Toplevel()
     cadastro_tecnicos.title('Janela de Cadastro de Técnicos')
-    cadastro_tecnicos.iconphoto(False, tk.PhotoImage(file='ico/worker.png'))
+    #cadastro_tecnicos.iconphoto(False, tk.PhotoImage(file='ico/worker.png'))
     cadastro_tecnicos.configure(background='#B9B7BD')
     cadastro_tecnicos.geometry('700x500')
     cadastro_tecnicos.resizable(True, True)
@@ -106,7 +106,7 @@ def janela_cadastro_tecnicos():
 def janela_consulta_tecnicos():
     consulta_tecnicos = tk.Toplevel()
     consulta_tecnicos.title('Janela de Consulta de Técnicos')
-    consulta_tecnicos.iconphoto(False, tk.PhotoImage(file='ico/worker.png'))
+    #consulta_tecnicos.iconphoto(False, tk.PhotoImage(file='ico/worker.png'))
     consulta_tecnicos.configure(background='#B9B7BD')
     consulta_tecnicos.geometry('700x500')
     consulta_tecnicos.resizable(True, True)

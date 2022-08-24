@@ -10,6 +10,7 @@ from f import *
 
 janela = tk.Tk()
 
+
 class Aplicacao():
     def __init__(self):
         self.janela = janela
@@ -22,7 +23,7 @@ class Aplicacao():
 
     def janela_config(self):
         self.janela.title('Controle de Ferramentas')
-        self.janela.iconphoto(False, tk.PhotoImage(file='ico/tools.png'))
+        #self.janela.iconphoto(False, tk.PhotoImage(file='ico/tools.png'))
         self.janela.configure(background='#B9B7BD')
         self.janela.geometry('700x500')
         self.janela.resizable(True, True)
@@ -63,22 +64,22 @@ class Aplicacao():
 
     def labels(self):
         self.label_tec = tk.Label(self.frame_tecnico, text="Técnico", bg='#fff')
-        self.img_tec = tk.PhotoImage(file='ico/worker.png')
-        self.label_tec_Img = tk.Label(self.frame_tecnico, image=self.img_tec)
+        #self.img_tec = tk.PhotoImage(file='ico/worker.png')
+        #self.label_tec_Img = tk.Label(self.frame_tecnico, image=self.img_tec)
         self.label_tec.place(relx=0.4, rely=0.45, relwidth=0.25, relheight=0.1)
-        self.label_tec_Img.place(relx=0.3, rely=0.0, relwidth=0.4, relheight=0.4)
+        #self.label_tec_Img.place(relx=0.3, rely=0.0, relwidth=0.4, relheight=0.4)
 
         self.label_ferramenta = tk.Label(self.frame_ferramenta, text="Ferramenta", bg='#fff')
-        self.img_ferramenta = tk.PhotoImage(file='ico/toolcard.png')
-        self.label_ferramenta_Img = tk.Label(self.frame_ferramenta, image=self.img_ferramenta)
+        #self.img_ferramenta = tk.PhotoImage(file='ico/toolcard.png')
+        #self.label_ferramenta_Img = tk.Label(self.frame_ferramenta, image=self.img_ferramenta)
         self.label_ferramenta.place(relx=0.2, rely=0.45, relwidth=0.6, relheight=0.1)
-        self.label_ferramenta_Img.place(relx=0.3, rely=0.0, relwidth=0.5, relheight=0.4)
+        #self.label_ferramenta_Img.place(relx=0.3, rely=0.0, relwidth=0.5, relheight=0.4)
 
         self.label_reserva = tk.Label(self.frame_reserva, text="Reserva", bg='#fff')
-        self.img_reserva = tk.PhotoImage(file='ico/reserva.png')
-        self.label_reserva_Img = tk.Label(self.frame_reserva, image=self.img_reserva)
+        #self.img_reserva = tk.PhotoImage(file='ico/reserva.png')
+        #self.label_reserva_Img = tk.Label(self.frame_reserva, image=self.img_reserva)
         self.label_reserva.place(relx=0.3, rely=0.45, relwidth=0.4, relheight=0.1)
-        self.label_reserva_Img.place(relx=0.2, rely=0.0, relwidth=0.6, relheight=0.4)
+        #self.label_reserva_Img.place(relx=0.2, rely=0.0, relwidth=0.6, relheight=0.4)
 
 Aplicacao()
 
