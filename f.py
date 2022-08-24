@@ -126,7 +126,6 @@ def janela_consulta_ferramentas():
     consulta_ferramentas.configure(background='#B9B7BD')
     consulta_ferramentas.geometry('700x500')
     consulta_ferramentas.resizable(True, True)
-<<<<<<< Updated upstream
     consulta_ferramentas.maxsize(width= 1280, height=720) # dimensões máximas
     consulta_ferramentas.minsize(width= 1280, height= 720) # dimensões mínimas
     #combobox = ttk.Combobox(consulta_ferramentas, values= lista_ferramentas)
@@ -135,7 +134,5 @@ def janela_consulta_ferramentas():
     frame2 = Frame(consulta_ferramentas,bd= 4, bg="#ffffff", highlightbackground="grey", highlightthickness=2)
     frame2.place(relx= 0.01, rely=0.02, relwidth=0.98, relheight=0.65)
     
-=======
     #consulta_ferramentas.maxsize(width= 900, height=600) # dimensões máximas
     #consulta_ferramentas.minsize(width= 400, height= 300) # dimensões mínimas
->>>>>>> Stashed changes
