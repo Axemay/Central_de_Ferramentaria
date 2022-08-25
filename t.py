@@ -20,57 +20,56 @@ def janela_cadastro_tecnicos():
  ######### VERIFICAÇÃO DE ERROS, VALIDAÇÃO ########################           
 
     def codigo_tecnicos():
-        campo1 = vcpf.get()
+        cpf = vcpf.get()
         while True:
-            if len(campo1) == 11:
+            if len(cpf) == 11:
                 try:
-                    campo1 = int(campo1)
+                    cpf = int(cpf)
                 except (ValueError, TypeError):
                     messagebox.showerror("Erro", "CPF: Digite apenas números")
                 else:
-                    res1 = campo1
+                    res1 = cpf
             else:
                 messagebox.showerror("Erro", "CPF: Insira exatamente 11 dígitos")
             break 
-
-        campo2 = vnome.get()
-        res2 = campo2.title()
+        
+        nome = vnome.get()
+        res2 = nome.title()
                 
-        campo3 = vtelefone.get()
+        tel = vtelefone.get()
         while True:
-            if len(campo3) == 10:
+            if len(tel) == 10 or len(tel) == 11:
                 try:
-                    
-                    campo3 = int(campo3)                
+                    tel = int(tel)                
                 except (ValueError, TypeError):
                     messagebox.showerror("Erro", "TELEFONE: Digite apenas números")
                 else:
-                    res3 = campo3
+                    res3 = tel
             else:
-                messagebox.showerror("Erro", "TELEFONE: Insira 10 dígitos, incluindo prefixo")
+                messagebox.showerror("Erro", "TELEFONE: Insira 10 dígitos para telefone fixo e 11 dígitos para celular, incluindo prefixo")
             break 
 
-        campo4 = vturno.get()
-        campo4 = campo4.lower()
+        turno = vturno.get()
+        turno = turno.lower()
         while True:
-            if campo4 == "m":
-                res4 = campo4
-            elif campo4 == "t":
-                res4 = campo4
-            elif campo4 == "n":
-                res4 = campo4
+            if turno == "m":
+                res4 = turno
+            elif turno == "t":
+                res4 = turno
+            elif turno == "n":
+                res4 = turno
             else:
                 messagebox.showerror("Erro", "TURNO: Os turnos disponíveis são: M, T ou N")
             break
         
-        campo5 = vequipe.get()
+        equipe = vequipe.get()
         while True:
             try:
-                campo5 = int(campo5)
+                equipe = int(equipe)
             except (ValueError, TypeError):
                 messagebox.showerror("Erro", "EQUIPE: Digite apenas números")
             else:
-                res5 = campo5
+                res5 = equipe
             break
         
         #lista_tecnicos.append(tecnico.copy())
@@ -137,16 +136,16 @@ def janela_cadastro_tecnicos():
     vequipe.place(relx= 0.2, rely= 0.26, relwidth=0.5, relheight=0.05)
     
     bsalvar = tk.Button(cadastro_tecnicos, text='Salvar Cadastro', command= codigo_tecnicos)
-    bsalvar.place(relx = 0.25, rely= 0.35, relwidth=0.2, relheight= 0.05)
+    bsalvar.place(relx = 0.24, rely= 0.35, relwidth=0.2, relheight= 0.05)
 
     blimpar = tk.Button(cadastro_tecnicos, text="Limpar Campos", command=limpa_tela)
-    blimpar.place(relx=0.45, rely=0.35, relwidth=0.2, relheight=0.05)
+    blimpar.place(relx=0.46, rely=0.35, relwidth=0.2, relheight=0.05)
 
     res = tk.Label(cadastro_tecnicos, text="Insira acima os dados do funcionário", bg="#B9B7BD",font= ("verdana",11))
     res.place(relx= 0.05, rely= 0.50, relwidth = 0.8, relheight=0.05)
 
-    op = tk.Label(cadastro_tecnicos, text="TURNO: Manhã (m), Tarde (t), Noite (n)\n\nCPF deve conter exatamente 11 dígitos\n\nTelefone deve conter 10 dígitos com prefixo incluso", bg="#B9B7BD",font= ("verdana",9))
-    op.place(relx= 0.05, rely= 0.70, relwidth = 0.8, relheight=0.30)
+    op = tk.Label(cadastro_tecnicos, text="TURNO: Manhã (m), Tarde (t), Noite (n)\n\nCPF deve conter exatamente 11 dígitos\n\nTelefone deve conter 10 dígitos com prefixo incluso\n\nTodos os campos devem ser preenchidos", bg="#B9B7BD",font= ("verdana",9))
+    op.place(relx= 0.05, rely= 0.60, relwidth = 0.8, relheight=0.40)
 
     
     

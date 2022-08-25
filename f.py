@@ -12,16 +12,50 @@ def janela_cadastro_ferramentas():
     contador = 0
 
     def codigo_ferramentas():
-        codigo = ('Código: {}').format(vcodigo_ferramenta.get())
-        descricao = ('Descrição da Ferramenta: {}').format(vdescricao_ferramenta.get())
-        fabricante = ('Fabricante: {}').format(vfabricante.get())
-        voltagem = ('Voltagem de Uso: {}').format(vvoltagem.get())
-        part_number = ('Part Number: {}').format(vpart_number.get())
-        tamanho = ('Tamanho da Ferramenta: {}').format(vtamanho.get())
-        unidade_medida = ('Unidade de Medida: {}').format(vunidade_medida.get())
-        tipo_ferramenta = ('Tipo de Ferramenta: {}').format(vtipo_ferramenta.get())
-        material = ('Material: {}').format(vmaterial_ferramenta.get())
-        lista_ferramentas.append((codigo, descricao, fabricante, voltagem, part_number, tamanho, unidade_medida, tipo_ferramenta, material))
+        codigo = vcodigo_ferramenta.get()
+        while True:
+            try:
+                codigo = int(codigo)
+            except (ValueError, TypeError):
+                messagebox.showerror("Erro", "CPF: Digite apenas números")
+            else:
+                res1 = codigo
+            break
+            
+        descricao = vdescricao_ferramenta.get()
+        res2 = descricao.capitalize()
+
+        fabricante = vfabricante.get()
+        res3 = fabricante.capitalize()
+
+        voltagem = vvoltagem.get()
+        while True:
+            try:
+                voltagem = int(voltagem)
+            except (ValueError, TypeError):
+                messagebox.showerror("Erro", "CPF: Digite apenas números")
+            else:
+                res4 = voltagem
+            break
+
+        part_number = vpart_number.get()
+        res5 = part_number.lower()
+        # sugestões
+
+        tamanho = vtamanho.get()
+        res6 = tamanho
+        # sugestões
+
+        unidade_medida = vunidade_medida.get()
+        res7 = unidade_medida.lower()
+        # sugestões
+
+        tipo_ferramenta = vtipo_ferramenta.get()
+        res8 = tipo_ferramenta.lower()
+        # sugestões 
+        material = vmaterial_ferramenta.get()
+        res9 = material.lower()
+        #lista_ferramentas.append((codigo, descricao, fabricante, voltagem, part_number, tamanho, unidade_medida, tipo_ferramenta, material))
 
 #--------------------------------------------------------------------------------------------
 
@@ -31,7 +65,7 @@ def janela_cadastro_ferramentas():
             # não consegui manter o cabeçalho, ele repetia. Inseri no csv e permiti apenas a inserção das linhas
             #escrever.writeheader()
 
-            escrever.writerow({"Codigo": vcodigo_ferramenta.get(), "Descricao": vdescricao_ferramenta.get(), "Fabricante": vfabricante.get(), "Voltagem": vvoltagem.get(), "Partnumber": vpart_number.get(), "Tamanho": vtamanho.get(), "Unidade": vunidade_medida.get(), "Tipo": vtipo_ferramenta.get(), "Material": vmaterial_ferramenta.get()})
+            escrever.writerow({"Codigo": res1, "Descricao": res2, "Fabricante": res3, "Voltagem": res4, "Partnumber": res5, "Tamanho": res6, "Unidade": res7, "Tipo": res8, "Material": res9})
             limpa_tela()
             global contador
             contador += 1  

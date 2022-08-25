@@ -23,7 +23,7 @@ class Aplicacao():
 
     def janela_config(self):
         self.janela.title('Controle de Ferramentas')
-        #self.janela.iconphoto(False, tk.PhotoImage(file='ico/tools.png'))
+        self.janela.iconphoto(False, tk.PhotoImage(file='ico/tools.png'))
         self.janela.configure(background='#B9B7BD')
         self.janela.geometry('700x500')
         self.janela.resizable(True, True)
