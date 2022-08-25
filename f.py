@@ -1,7 +1,7 @@
 from msilib.schema import ComboBox
 import tkinter as tk
 from t import *
-
+import csv
 
 
 def janela_cadastro_ferramentas():
@@ -165,8 +165,40 @@ def janela_consulta_ferramentas():
     #combobox = ttk.Combobox(consulta_ferramentas, values= lista_ferramentas)
     #combobox.place(relx=0.02, rely=0.15, relwidth=0.98, relheight=0.05)
 
-    frame2 = Frame(consulta_ferramentas,bd= 4, bg="#ffffff", highlightbackground="grey", highlightthickness=2)
-    frame2.place(relx= 0.01, rely=0.02, relwidth=0.98, relheight=0.65)
+    frame2 = ttk.Frame(consulta_ferramentas, width=600, height=300)
+
+    hscrollbar1 = ttk.Scrollbar(frame2, orient=tk.HORIZONTAL)
+    vscrollbar1 = ttk.Scrollbar(frame2, orient=tk.VERTICAL)
+    sizegrip1 = ttk.Sizegrip(frame2)
+    canvas1 = tk.Canvas(frame2, bd=0, highlightthickness=0, yscrollcommand=vscrollbar1.set, xscrollcommand=hscrollbar1.set)
+    vscrollbar1.config(command=canvas1.yview)
+    hscrollbar1.config(command=canvas1.xview)
     
+    subframe1 = ttk.Frame(canvas1)
+
+    with open("ferramenta.csv", newline="") as arquivof:
+        reader1 = csv.reader(arquivof)
+        r = 0
+        for col in reader1:
+            c = 0
+            for row in col:
+                label = tk.Label(subframe1, height=2,text=row, relief=tk.RIDGE)
+                label.grid(row=r, column=c)
+                c += 1
+            r += 1
+
+    subframe1.pack(fill=tk.BOTH, expand=tk.TRUE)
+    hscrollbar1.pack(fill=tk.X, side=tk.BOTTOM, expand=tk.FALSE)
+    vscrollbar1.pack(fill=tk.Y, side=tk.RIGHT, expand=tk.FALSE)
+    sizegrip1.pack(in_=hscrollbar1, side=tk.BOTTOM, anchor="se")
+    canvas1.pack(side=tk.LEFT, padx=5, pady=5, fill=tk.BOTH, expand=tk.TRUE)
+    frame2.pack(padx=5, pady=5, expand=True, fill=tk.BOTH)
+
+    canvas1.create_window(0, 0, window=subframe1)
+    consulta_ferramentas.update_idletasks()
+    canvas1.config(scrollregion=canvas1.bbox("all"))
+    canvas1.xview_moveto(0)
+    canvas1.yview_moveto(0)
+
     #consulta_ferramentas.maxsize(width= 900, height=600) # dimensões máximas
     #consulta_ferramentas.minsize(width= 400, height= 300) # dimensões mínimas
