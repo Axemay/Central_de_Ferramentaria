@@ -1,5 +1,5 @@
 import tkinter as tk
-
+import time
 from t import *
 from r import *
 from f import *
