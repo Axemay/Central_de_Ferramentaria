@@ -22,14 +22,29 @@ class funcs(csv):
         self.view_frame2.delete(*self.view_frame2.get_children())
 
         #self.entry_nomeE.insert(END, '%')
-        nome = self.entry_codigoE.get()
-        self.buscar(nome)
+        codigo = self.entry_codigoE.get()
+        nome = self.entry_nomeE.get()
+        cpf = self.entry_cpfE.get()
+        item = self.entry_itemE.get()
+        #self.buscar(nome)
+        self.busca_pessoa(codigo)
+        self.busca_pessoa(nome)
+        self.busca_pessoa(cpf)
+        self.busca_pessoa(item)
         #self.search(nome)
 
-        buscanomelista = self.buscar(nome)
+        buscacodigolista = self.busca_pessoa(codigo)
+        buscanomelista = self.busca_pessoa(nome)
+        buscacpflista = self.busca_pessoa(cpf)
+        buscaitemlista = self.busca_pessoa(item)
 
+        for i in buscacodigolista:
+            self.view_frame2.insert("", END, values=i)
         for i in buscanomelista:
-
+            self.view_frame2.insert("", END, values=i)
+        for i in buscacpflista:
+            self.view_frame2.insert("", END, values=i)
+        for i in buscaitemlista:
             self.view_frame2.insert("", END, values=i)
 
         self.limpar_dados()
@@ -124,7 +139,7 @@ class Aplication(funcs):
         self.botao_limpar.place(relx=0.2, rely=0.8, relwidth=0.1, relheight=0.1)
 
         self.botao_buscar = Button(self.frame_1, text='Buscar', bd=6, bg='#868B8E', fg='white',
-                                   font=('poppins', 10, 'bold'))
+                                   font=('poppins', 10, 'bold'), command= self.busca)
         self.botao_buscar.place(relx=0.31, rely=0.8, relwidth=0.1, relheight=0.1)
 
         self.botao_novo = Button(self.frame_1, text='Novo', bd=6, bg='#868B8E', fg='white',

@@ -5,7 +5,7 @@ import re
 from tkinter import *
 import tkinter as tk
 from tkinter import ttk
-
+from typing import Dict
 
 
 
@@ -71,7 +71,6 @@ class csv :
                 return self.data
             #     return row
 
-
     def append(self, codigo, nome, cpf, item):
         # with open('./appcsv.csv') as self.file:
         #     self.csv_Dreader = DictReader(self.file)
@@ -120,7 +119,7 @@ class csv :
                 for row in self.data:
                     if row['codigo'] == codigo :
                             #or row['nome'] == nome or row['cpf'] == cpf or row['item'] == item:
-                        #row['codigo'] = codigo
+                        row['codigo'] = codigo
                         row['nome'] = nome
                         row['cpf'] = cpf
                         row['item'] = item
@@ -128,15 +127,31 @@ class csv :
             except Exception as e:
                 print('erro ao atualizar: ', e)
 
-    def buscar(self, codigo):
+
+
+    def busca_pessoa(self, nome_buscado: str) -> Dict[str, str]:
+
         with open('./appcsv.csv') as self.file:
-            self.csv_Dreader = DictReader(self.file)
+
+            self.csv_Dreader = reader(self.file)
             self.data = list(self.csv_Dreader)
 
+        for pessoa in self.data:
+            col1, col2, col3, col4 = pessoa
 
-            for row in self.data:
-                if row['codigo'] == codigo:
-                    return row
+            # if nome_buscado == f'{col1}':
+            #     yield (pessoa)
+            # if nome_buscado == f'{col2}':
+            #     yield (pessoa)
+            # if nome_buscado == f'{col3}':
+            #     yield (pessoa)
+            # if nome_buscado == f'{col4}':
+            #     yield (pessoa)
+            regex = re.compile(fr'{col1}|{col2}|{col3}|{col4}', flags=re.I)
+            if regex.findall(nome_buscado):
+                yield (pessoa)
+        return {}
+
 
 # with open('./appcsv.csv') as file:
 #     csv_Dreader = DictReader(file)
