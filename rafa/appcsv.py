@@ -8,9 +8,9 @@ from tkinter import ttk
 from CRUDCSV import *
 janela = tk.Tk()
 
-class funcs(csv):
+class funcs(Csv):
     def chamada(self):
-        csv.__init__(self)
+        Csv.__init__(self)
     def variaveis(self):
         self.codigo = self.entry_codigoE.get()
         self.nome = self.entry_nomeE.get()
