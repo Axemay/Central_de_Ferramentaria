@@ -14,46 +14,52 @@ class funcs(Csv):
         Csv.__init__(self)
     #chamada do modulo herança multipla
     def variaveis(self):
-        self.codigo = self.entry_codigoE.get()
-        self.nome = self.entry_nomeE.get()
-        self.cpf = self.entry_cpfE.get()
-        self.item = self.entry_itemE.get()
+        self.cpf = self.vcpf.get()
+        self.nome = self.vnome.get()
+        self.telefone = self.vtelefone.get()
+        self.turno = self.vturno.get()
+        self.equipe = self.vequipe.get()
 
     def busca(self):
         self.view_frame2.delete(*self.view_frame2.get_children())
 
         # self.entry_nomeE.insert(END, '%')
-        codigo = self.entry_codigoE.get()
-        nome = self.entry_nomeE.get()
-        cpf = self.entry_cpfE.get()
-        item = self.entry_itemE.get()
+        cpf = self.vcpf.get()
+        nome = self.vnome.get()
+        telefone =  self.vtelefone.get()
+        turno = self.vturno.get()
+        equipe = self.vequipe.get()
         # self.buscar(nome)
-        self.busca_pessoa(codigo)
-        self.busca_pessoa(nome)
         self.busca_pessoa(cpf)
-        self.busca_pessoa(item)
+        self.busca_pessoa(nome)
+        self.busca_pessoa(telefone)
+        self.busca_pessoa(turno)
+        self.busca_pessoa(equipe)
+
         # self.search(nome)
 
-        buscacodigolista = self.busca_pessoa(codigo)
-        buscanomelista = self.busca_pessoa(nome)
         buscacpflista = self.busca_pessoa(cpf)
-        buscaitemlista = self.busca_pessoa(item)
+        buscanomelista = self.busca_pessoa(nome)
+        buscatelefonelista = self.busca_pessoa(telefone)
+        buscaturnolista = self.busca_pessoa(turno)
+        buscaequipelista = self.busca_pessoa(equipe)
 
-        for i in buscacodigolista:
+        for i in buscacpflista:
             self.view_frame2.insert("", END, values=i)
         for i in buscanomelista:
             self.view_frame2.insert("", END, values=i)
-        for i in buscacpflista:
+        for i in buscatelefonelista:
             self.view_frame2.insert("", END, values=i)
-        for i in buscaitemlista:
+        for i in buscaturnolista:
             self.view_frame2.insert("", END, values=i)
-
+        for i in buscaequipelista:
+            self.view_frame2.insert("", END, values=i)
         self.limpar_dados()
 
     def atualizar(self):
         self.variaveis()
         # self.doubleclick(event='click')
-        self.update(self.codigo, self.nome, self.cpf, self.item)
+        self.update(self.cpf, self.nome, self.telefone, self.turno, self.equipe)
 
         self.select_list()
         self.limpar_dados()
@@ -62,16 +68,66 @@ class funcs(Csv):
         self.variaveis()
         # self.delete(self.codigo)
 
-        self.delet(self.codigo)
+        self.delet(self.cpf, self.nome)
         self.limpar_dados()
         self.select_list()
 
     def add_cliente(self):
 
+        cpf = self.vcpf.get()
+        while True:
+            if len(cpf) == 11:
+                try:
+                    cpf = int(cpf)
+                except (ValueError, TypeError):
+                    messagebox.showerror("Erro", "CPF: Digite apenas números")
+                else:
+                    self.res1 = cpf
+            else:
+                messagebox.showerror("Erro", "CPF: Insira exatamente 11 dígitos")
+            break
+
+        nome = self.vnome.get()
+        self.res2 = nome.title()
+
+        tel = self.vtelefone.get()
+        while True:
+            if len(tel) == 10 or len(tel) == 11:
+                try:
+                    tel = int(tel)
+                except (ValueError, TypeError):
+                    messagebox.showerror("Erro", "TELEFONE: Digite apenas números")
+                else:
+                    self.res3 = tel
+            else:
+                messagebox.showerror("Erro",
+                                     "TELEFONE: Insira 10 dígitos para telefone fixo e 11 dígitos para celular, incluindo prefixo")
+            break
+
+        turno = self.vturno.get()
+        turno = turno.upper()
+        while True:
+            if turno == "M":
+                self.res4 = turno
+            elif turno == "T":
+                self.res4 = turno
+            elif turno == "N":
+                self.res4 = turno
+            else:
+                messagebox.showerror("Erro", "TURNO: Os turnos disponíveis são: M, T ou N")
+            break
+
+        equipe = self.vequipe.get()
+        while True:
+            try:
+                equipe = int(equipe)
+            except (ValueError, TypeError):
+                messagebox.showerror("Erro", "EQUIPE: Digite apenas números")
+            else:
+                self.res5 = equipe
+            break
         try:
-            self.variaveis()
-            # self.insertt(self.codigo, self.nome, self.cpf, self.item)
-            self.append(self.codigo, self.nome, self.cpf, self.item)
+            self.append(self.res1, self.res2, self.res3, self.res4, self.res5)
             self.select_list()
 
         except Exception as e:
@@ -90,7 +146,7 @@ class funcs(Csv):
                 continue
             self.view_frame2.insert("", END, values=i)
 
-    def limpa_tela(self):
+    def limpar_dados(self):
         self.vcpf.delete(0, END)
         self.vnome.delete(0, END)
         self.vtelefone.delete(0, END)
@@ -98,7 +154,7 @@ class funcs(Csv):
         self.vequipe.delete(0, END)
 
     def doubleclick(self, event):
-        self.limpa_tela()
+        self.limpar_dados()
         self.view_frame2.selection()
 
         for n in self.view_frame2.selection():
@@ -109,98 +165,6 @@ class funcs(Csv):
             self.vturno.insert(END, col4)
             self.vequipe.insert(END, col5)
 class TK(funcs):
-    def cadastro_t(self):
-        global lista_tecnicos
-        lista_tecnicos = []
-
-        global contador
-        contador = 0
-
-        ######### VERIFICAÇÃO DE ERROS, VALIDAÇÃO ########################
-
-    def codigo_tecnicos(self):
-        cpf = self.vcpf.get()
-        while True:
-            if len(cpf) == 11:
-                try:
-                    cpf = int(cpf)
-                except (ValueError, TypeError):
-                    messagebox.showerror("Erro", "CPF: Digite apenas números")
-                else:
-                    res1 = cpf
-            else:
-                messagebox.showerror("Erro", "CPF: Insira exatamente 11 dígitos")
-            break
-
-        nome = self.vnome.get()
-        res2 = nome.title()
-
-        tel = self.vtelefone.get()
-        while True:
-            if len(tel) == 10 or len(tel) == 11:
-                try:
-                    tel = int(tel)
-                except (ValueError, TypeError):
-                    messagebox.showerror("Erro", "TELEFONE: Digite apenas números")
-                else:
-                    res3 = tel
-            else:
-                messagebox.showerror("Erro",
-                                     "TELEFONE: Insira 10 dígitos para telefone fixo e 11 dígitos para celular, incluindo prefixo")
-            break
-
-        turno = self.vturno.get()
-        turno = turno.upper()
-        while True:
-            if turno == "M":
-                res4 = turno
-            elif turno == "T":
-                res4 = turno
-            elif turno == "N":
-                res4 = turno
-            else:
-                messagebox.showerror("Erro", "TURNO: Os turnos disponíveis são: M, T ou N")
-            break
-
-        equipe = self.vequipe.get()
-        while True:
-            try:
-                equipe = int(equipe)
-            except (ValueError, TypeError):
-                messagebox.showerror("Erro", "EQUIPE: Digite apenas números")
-            else:
-                res5 = equipe
-            break
-
-        # lista_tecnicos.append(tecnico.copy())
-        # print(lista_tecnicos)
-        # return tecnico
-
-        ########### REGISTRO NO ARQUIVO CSV ##################################
-
-        with open("tecnico.csv", "a", newline="") as arquivo:
-
-            campos = ["CPF", "Nome", "Telefone", "Turno", "Equipe"]
-            escrever = csv.DictWriter(arquivo, fieldnames=campos, delimiter=",", lineterminator="\n")
-            # não consegui manter o cabeçalho, ele repetia. Inseri no csv e permiti apenas a inserção das linhas
-            # escrever.writeheader()
-
-            escrever.writerow({"CPF": res1, "Nome": res2, "Telefone": res3, "Turno": res4, "Equipe": res5})
-
-            self.limpa_tela()
-
-            global contador
-
-            contador += 1
-
-            res = tk.Label(self.cadastro_tecnicos,
-                           text=f"{contador} Cadastro(s) efetuado(s) com sucesso!\nDigite novamente para mais um cadastro",
-                           bg="#B9B7BD", font=("verdana", 11))
-            res.place(relx=0.05, rely=0.50, relwidth=0.8, relheight=0.1)
-
-    ###### função para limpar os campos do entry, para nova digitação, tem que importar END do tkinter
-
-
 
     # ------------------------------------------------------------------------------------------
     def janela_front(self):
@@ -263,21 +227,24 @@ class TK(funcs):
 
             self.vequipe = tk.Entry(self.frame_1, bd=3, font=('poppins', 16, 'bold'))
             self.vequipe.place(relx=0.22, rely=0.68, relwidth=0.4, relheight=0.11)
-            ## BUTTON
-            self.bsalvar = tk.Button(self.frame_1, text='Salvar Cadastro', bd=5, command=self.codigo_tecnicos)
+####################           ## BUTTON
+            self.bsalvar = tk.Button(self.frame_1, text='Salvar Cadastro', bd=5, command=self.add_cliente)
             self.bsalvar.place(relx=0.22, rely=0.85, relwidth=0.15, relheight=0.12)
 
-            self.blimpar = tk.Button(self.frame_1, text="Limpar Campos",bd=5, command=self.limpa_tela)
+            self.blimpar = tk.Button(self.frame_1, text="Limpar Campos",bd=5, command=self.limpar_dados)
             self.blimpar.place(relx=0.05, rely=0.85, relwidth=0.15, relheight=0.12)
 #############
-            self.bbusca = tk.Button(self.frame_1, text="Busca", bd=5, command=self.limpa_tela)
+            self.bbusca = tk.Button(self.frame_1, text="Busca", bd=5, command=self.busca)
             self.bbusca.place(relx=0.55, rely=0.85, relwidth=0.12, relheight=0.12)
 
-            self.bup = tk.Button(self.frame_1, text="Atualizar Cadastro", bd=5, command=self.limpa_tela)
+            self.bup = tk.Button(self.frame_1, text="Update", bd=5, command= self.atualizar)
             self.bup.place(relx=0.69, rely=0.85, relwidth=0.13, relheight=0.12)
 
-            self.bdelet = tk.Button(self.frame_1, text="Deletar", bd=5, command=self.limpa_tela)
+            self.bdelet = tk.Button(self.frame_1, text="Deletar", bd=5, command= self.delete)
             self.bdelet.place(relx=0.83, rely=0.85, relwidth=0.13, relheight=0.12)
+
+            self.bat = tk.Button(self.cadastro_tecnicos, text="Atualizar Lista", bd=5, command=self.select_list)
+            self.bat.place(relx=0.05, rely=0.45, relwidth=0.065, relheight=0.05)
             ########## MENSAGEM
             self.res = tk.Label(self.frame_4, text="Insira acima os dados do funcionário", bg="#ffd", font=("poppins", 18, 'bold'))
             self.res.place(relx=0.01, rely=0.2, relwidth=0.98, relheight=0.7)

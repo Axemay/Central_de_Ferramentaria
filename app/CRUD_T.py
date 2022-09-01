@@ -19,73 +19,74 @@ class Csv :
 
             #     return row
 
-    def append(self, codigo, nome, cpf, item):
+    def append(self, cpf, nome, telefone, turno, equipe):
         # with open('./appcsv.csv') as self.file:
         #     self.csv_Dreader = DictReader(self.file)
         #     self.data2 = list(self.csv_Dreader)
-        with open('./appcsv.csv', 'a') as self.file:
-            header = ('codigo', 'nome', 'cpf', 'item')
+        with open('./tecnico.csv', 'a', newline="") as self.file:
+            header = ("cpf", "nome", "telefone", "turno", "equipe")
             #pulo = "\n"
             self.csv_Dwriter = DictWriter(self.file, fieldnames=header, lineterminator="\n" )
 
-            data = ({'codigo' : codigo,
+            data = ({'cpf' : cpf,
                     'nome' : nome,
-                     'cpf' : cpf,
-                     'item' : item})
+                     'telefone' : telefone,
+                     'turno' : turno,
+                     'equipe' : equipe })
+
 
             #self.csv_Dwriter.writerows(self.data2)
             self.csv_Dwriter.writerow(data)
             #self.csv_Dwriter.writerows(data)
 
-    def delet(self, codigo):
-        with open('./appcsv.csv') as self.file:
+    def delet(self,cpf, nome):
+        with open('./tecnico.csv') as self.file:
             self.csv_Dreader = DictReader(self.file)
             self.data = list(self.csv_Dreader)
-        with open('./appcsv.csv', 'w') as self.file:
-            header = ('codigo', 'nome', 'cpf', 'item')
+        with open('./tecnico.csv', 'w') as self.file:
+            header = ("cpf", "nome", "telefone", "turno", "equipe")
 
             self.csv_Dwriter = DictWriter(self.file, fieldnames=header, lineterminator='\n')
 
             self.csv_Dwriter.writeheader()
             for row in self.data:
-                if row['codigo'] == codigo:
+                if row['cpf'] == cpf and row['nome'] == nome:
                     continue
 
                 self.csv_Dwriter.writerow(row)
 
-    def update(self, codigo, nome, cpf, item):
-        with open('./appcsv.csv') as self.file:
+    def update(self, cpf, nome, telefone, turno, equipe):
+        with open('./tecnico.csv') as self.file:
             self.csv_Dreader = DictReader(self.file)
             self.data = list(self.csv_Dreader)
-        with open('./appcsv.csv', 'w') as self.file:
-            header = ('codigo', 'nome', 'cpf', 'item')
+        with open('./tecnico.csv', 'w') as self.file:
+            header = ("cpf", "nome", "telefone", "turno", "equipe")
 
             self.csv_Dwriter = DictWriter(self.file, fieldnames=header, lineterminator='\n')
 
             self.csv_Dwriter.writeheader()
             try:
                 for row in self.data:
-                    if row['codigo'] == codigo :
+                    if row['cpf'] == cpf or row['nome'] == nome:
                             #or row['nome'] == nome or row['cpf'] == cpf or row['item'] == item:
-                        row['codigo'] = codigo
-                        row['nome'] = nome
                         row['cpf'] = cpf
-                        row['item'] = item
+                        row['nome'] = nome
+                        row['telefone'] = telefone
+                        row['turno'] = turno
+                        row['equipe'] = equipe
                     self.csv_Dwriter.writerow(row)
             except Exception as e:
                 print('erro ao atualizar: ', e)
 
-
-
     def busca_pessoa(self, nome_buscado: str) -> Dict[str, str]:
 
-        with open('./appcsv.csv') as self.file:
+        with open('./tecnico.csv') as self.file:
 
             self.csv_Dreader = reader(self.file)
             self.data = list(self.csv_Dreader)
 
         for pessoa in self.data:
-            col1, col2, col3, col4 = pessoa
+            col1, col2, col3, col4, col5 = pessoa
 
             # if nome_buscado == f'{col1}':
             #     yield (pessoa)
@@ -95,11 +96,10 @@ class Csv :
             #     yield (pessoa)
             # if nome_buscado == f'{col4}':
             #     yield (pessoa)
-            regex = re.compile(fr'{col1}|{col2}|{col3}|{col4}', flags=re.I)
+            regex = re.compile(fr'{col1}|{col2}|{col3}|{col4}|{col5}', flags=re.I)
             if regex.findall(nome_buscado):
                 yield (pessoa)
         return {}
-
 
 
 if __name__ == '__main__':
