@@ -59,25 +59,30 @@ class Csv :
 
                 self.csv_Dwriter.writerow(row)
 
-    def update(self, cpf, nome, telefone, turno, equipe):
-        with open('./tecnico.csv') as self.file:
+    def updatef(self, codigo, descricao, fabricante, voltagem, partnumber, tamanho,unidade, tipo,material):
+        with open('./ferramenta.csv', encoding='utf-8') as self.file:
             self.csv_Dreader = DictReader(self.file)
             self.data = list(self.csv_Dreader)
-        with open('./tecnico.csv', 'w') as self.file:
-            header = ("cpf", "nome", "telefone", "turno", "equipe")
+        with open('./ferramenta.csv', 'w', encoding='utf-8') as self.file:
+            header = ("codigo","descricao","fabricante","voltagem","partnumber","tamanho","unidade","tipo","material")
 
             self.csv_Dwriter = DictWriter(self.file, fieldnames=header, lineterminator='\n')
 
             self.csv_Dwriter.writeheader()
             try:
                 for row in self.data:
-                    if row['cpf'] == cpf or row['nome'] == nome:
+                    if row['codigo'] == codigo :
                             #or row['nome'] == nome or row['cpf'] == cpf or row['item'] == item:
-                        row['cpf'] = cpf
-                        row['nome'] = nome
-                        row['telefone'] = telefone
-                        row['turno'] = turno
-                        row['equipe'] = equipe
+                        # row['codigo'] = codigo
+                        row['descricao'] = descricao
+                        row['fabricante'] = fabricante
+                        row['voltagem'] = voltagem
+                        row['partnumber'] = partnumber
+                        row['tamanho'] = tamanho
+                        row['unidade'] = unidade
+                        row['tipo'] = tipo
+                        row['material'] = material
+
                     self.csv_Dwriter.writerow(row)
             except Exception as e:
                 print('erro ao atualizar: ', e)

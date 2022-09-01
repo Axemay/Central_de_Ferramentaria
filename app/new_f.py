@@ -58,12 +58,12 @@ class funcs(Csv):
             self.view_frame2.insert("", END, values=i)
         for i in buscaequipelista:
             self.view_frame2.insert("", END, values=i)
-        self.limpar_dados()
+        self.limpar_dadosF()
 
     def atualizarf(self):
         self.variaveisf()
         # self.doubleclick(event='click')
-        self.update(self.cpf, self.nome, self.telefone, self.turno, self.equipe)
+        self.updatef(self.codigo, self.descricao, self.fabricante, self.voltagem, self.part_number, self.tamanho, self.unidade, self.tipo, self.material )
 
         self.select_listf()
         self.limpar_dadosF()

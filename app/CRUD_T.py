@@ -65,6 +65,7 @@ class Csv :
             self.csv_Dwriter = DictWriter(self.file, fieldnames=header, lineterminator='\n')
 
             self.csv_Dwriter.writeheader()
+
             try:
                 for row in self.data:
                     if row['cpf'] == cpf or row['nome'] == nome:
