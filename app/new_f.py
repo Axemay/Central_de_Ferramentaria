@@ -34,11 +34,11 @@ class funcs(Csv):
         turno = self.vturno.get()
         equipe = self.vequipe.get()
         # self.buscar(nome)
-        self.busca_pessoa(cpf)
-        self.busca_pessoa(nome)
-        self.busca_pessoa(telefone)
-        self.busca_pessoa(turno)
-        self.busca_pessoa(equipe)
+        self.busca_pessoaf(cpf)
+        self.busca_pessoaf(nome)
+        self.busca_pessoaf(telefone)
+        self.busca_pessoaf(turno)
+        self.busca_pessoaf(equipe)
 
         # self.search(nome)
 
@@ -244,16 +244,23 @@ class front_Ferramentas(funcs):
         self.material_ferramenta.place(relx=0.01, rely=0.81, relwidth=0.25, relheight=0.08)
         self.vmaterial_ferramenta = tk.Entry(self.frame_1, bd=3, font=('poppins', 16, 'bold'))
         self.vmaterial_ferramenta.place(relx=0.28, rely=0.81, relwidth=0.7, relheight=0.07)
+
+        self.material_ferramenta = tk.Label(self.frame_1, text='Tempo MAX Reserva (H):', bg='#ffd', fg='#0D0D0D',
+                                            font=('poppins', 13, 'bold'))
+        self.material_ferramenta.place(relx=0.3, rely=0.89, relwidth=0.2, relheight=0.05)
+        self.vmaterial_ferramenta = tk.Entry(self.frame_1, bd=3, font=('poppins', 16, 'bold'))
+        self.vmaterial_ferramenta.place(relx=0.28, rely=0.81, relwidth=0.7, relheight=0.07)
+
 # ################ -------------- BOTÕES    ####--------------------------------------------------------------------------------
 #
         self.bsalvar = tk.Button(self.frame_1, text='Salvar Cadastro', command= self.add_clientef)
-        self.bsalvar.place(relx=0.15, rely=0.92, relwidth=0.15, relheight=0.07)
+        self.bsalvar.place(relx=0.15, rely=0.92, relwidth=0.1, relheight=0.07)
 
         self.blimpar = tk.Button(self.frame_1, text="Limpar Campos", command=self.limpar_dadosF)
         self.blimpar.place(relx=0.01, rely=0.92, relwidth=0.1, relheight=0.07)
 
         self.bbusca = tk.Button(self.frame_1, text="Pesquisar", bd=5, command=self.buscaf)
-        self.bbusca.place(relx=0.55, rely=0.92, relwidth=0.12, relheight=0.07)
+        self.bbusca.place(relx=0.55, rely=0.92, relwidth=0.1, relheight=0.07)
 
         self.bup = tk.Button(self.frame_1, text="Atualizar", bd=5, command= self.atualizarf)
         self.bup.place(relx=0.69, rely=0.92, relwidth=0.13, relheight=0.07)
@@ -266,6 +273,7 @@ class front_Ferramentas(funcs):
 
         res = tk.Label(self.frame_2, text="Insira acima os dados da ferramenta", bg="#ffd", font=("poppins", 18, 'bold'))
         res.place(relx=0.01, rely=0.01, relwidth=0.98, relheight=0.98)
+
         ## TRUEE VIEW
 
         self.dados_colunas = ("codigo","descricao","fabricante","voltagem","partnumber","tamanho","unidade","tipo","material")
