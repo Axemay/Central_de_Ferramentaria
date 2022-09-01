@@ -8,7 +8,7 @@ from typing import Dict
 class Csv :
 
     def leitor(self):
-        with open('./appcsv.csv') as self.file:
+        with open('./tecnico.csv') as self.file:
             self.csv_reader = reader(self.file)
             self.data = list(self.csv_reader)
 
@@ -16,6 +16,7 @@ class Csv :
 
 
                 return self.data
+
             #     return row
 
     def append(self, codigo, nome, cpf, item):

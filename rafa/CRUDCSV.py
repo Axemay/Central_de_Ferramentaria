@@ -68,7 +68,7 @@ class Csv :
             for row in self.data:
 
 
-                return self.data
+                yield row
             #     return row
 
     def append(self, codigo, nome, cpf, item):

@@ -101,9 +101,9 @@ class funcs(Csv):
 
         for n in self.view_frame2.selection():
             col1, col2, col3, col4 = self.view_frame2.item(n, 'values')
-            self.x= self.entry_codigoE.insert(END, col1)
-            y= self.entry_nomeE.insert(END, col2)
-            z=self.entry_cpfE.insert(END, col3)
+            self.entry_codigoE.insert(END, col1)
+            self.entry_nomeE.insert(END, col2)
+            self.entry_cpfE.insert(END, col3)
             self.entry_itemE.insert(END, col4)
 
 
@@ -142,7 +142,7 @@ class Aplication(funcs):
                                    font=('poppins', 10, 'bold'), command= self.busca)
         self.botao_buscar.place(relx=0.31, rely=0.8, relwidth=0.1, relheight=0.1)
 
-        self.botao_novo = Button(self.frame_1, text='Novo', bd=6, bg='#868B8E', fg='white',
+        self.botao_novo = Button(self.frame_1, text='Novo', bd=10, bg='#868B8E', fg='white',
                                  font=('poppins', 10, 'bold'), command= self.add_cliente)
         self.botao_novo.place(relx=0.7, rely=0.8, relwidth=0.09, relheight=0.09)
 
