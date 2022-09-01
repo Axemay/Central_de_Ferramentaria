@@ -63,6 +63,7 @@ class funcs(Csv):
     def atualizarf(self):
         self.variaveisf()
         # self.doubleclick(event='click')
+
         self.updatef(self.codigo, self.descricao, self.fabricante, self.voltagem, self.part_number, self.tamanho, self.unidade, self.tipo, self.material )
 
         self.select_listf()

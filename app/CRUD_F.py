@@ -19,7 +19,7 @@ class Csv :
 
             #     return row
 
-    def appendf(self, codigo, descricao, fabricante, voltagem, partnumber, tamanho,unidade, tipo,material):
+    def appendf(self, codigo, descricao, fabricante, voltagem, partnumber, tamanho, unidade, tipo, material):
         # with open('./appcsv.csv') as self.file:
         #     self.csv_Dreader = DictReader(self.file)
         #     self.data2 = list(self.csv_Dreader)
@@ -43,7 +43,7 @@ class Csv :
             self.csv_Dwriter.writerow(data)
             #self.csv_Dwriter.writerows(data)
 
-    def deletf(self, codigo, descricao):
+    def deletf(self, codigo):
         with open('./ferramenta.csv') as self.file:
             self.csv_Dreader = DictReader(self.file)
             self.data = list(self.csv_Dreader)
@@ -59,7 +59,7 @@ class Csv :
 
                 self.csv_Dwriter.writerow(row)
 
-    def updatef(self, codigo, descricao, fabricante, voltagem, partnumber, tamanho,unidade, tipo,material):
+    def updatef(self, codigo, descricao, fabricante, voltagem, partnumber, tamanho, unidade, tipo, material):
         with open('./ferramenta.csv', encoding='utf-8') as self.file:
             self.csv_Dreader = DictReader(self.file)
             self.data = list(self.csv_Dreader)
