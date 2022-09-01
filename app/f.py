@@ -91,7 +91,7 @@ def janela_cadastro_ferramentas():
 
     cadastro_ferramentas = tk.Toplevel()
     cadastro_ferramentas.title('Janela de Cadastro de Ferramentas')
-    #cadastro_ferramentas.iconphoto(False, tk.PhotoImage(file='ico/tools.png'))
+    cadastro_ferramentas.iconphoto(False, tk.PhotoImage(file='ico/tools.png'))
     cadastro_ferramentas.configure(background='#B9B7BD')
     cadastro_ferramentas.geometry('700x500')
     cadastro_ferramentas.resizable(True, True)
@@ -156,7 +156,7 @@ def janela_cadastro_ferramentas():
 def janela_consulta_ferramentas():
     consulta_ferramentas = tk.Toplevel()
     consulta_ferramentas.title('Janela de Consulta de Ferramentas')
-    #consulta_ferramentas.iconphoto(False, tk.PhotoImage(file='ico/tools.png'))
+    consulta_ferramentas.iconphoto(False, tk.PhotoImage(file='ico/tools.png'))
     consulta_ferramentas.configure(background='#B9B7BD')
     consulta_ferramentas.geometry('700x500')
     consulta_ferramentas.resizable(True, True)

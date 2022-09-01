@@ -167,7 +167,7 @@ class funcs(Csv):
 class TK(funcs):
 
     # ------------------------------------------------------------------------------------------
-    def janela_front(self):
+    def janela_frontT(self):
             ##config
             self.cadastro_tecnicos = tk.Toplevel()
             self.cadastro_tecnicos.title('Janela de Cadastro de Técnicos')
@@ -176,7 +176,7 @@ class TK(funcs):
             self.cadastro_tecnicos.geometry('1380x780')
             self.cadastro_tecnicos.resizable(True, True)
             self.cadastro_tecnicos.maxsize(width=1920, height=1080)  # dimensões máximas
-            self.cadastro_tecnicos.minsize(width=400, height=300)  # dimensões mínimas
+            self.cadastro_tecnicos.minsize(width=600, height=400)  # dimensões mínimas
 
             ##FRAMES
             self.frame_1 = Frame(self.cadastro_tecnicos, bd=4, bg="#868B8E", highlightbackground="#868B8E", highlightthickness=2)

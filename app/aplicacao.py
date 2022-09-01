@@ -4,6 +4,7 @@ from t import *
 from r import *
 from f import *
 from new_T import *
+from new_f import *
 #nomedomodulo.nomedadef
 
 # criar tela
@@ -11,9 +12,10 @@ from new_T import *
 janela = tk.Tk()
 
 
-class Aplicacao(TK):
+class Aplicacao(TK, front_Ferramentas):
     def __init__(self):
         TK.__init__(self)
+        front_Ferramentas.__init__(self)
         self.janela = janela
         self.janela_config()
         self.frames()
@@ -50,12 +52,12 @@ class Aplicacao(TK):
 
     def botoes(self):
 
-        self.bt_cadastrar_tec = tk.Button(self.frame_tecnico, text="Cadastrar", command= self.janela_front, bg='#B9B7BD')
+        self.bt_cadastrar_tec = tk.Button(self.frame_tecnico, text="Cadastrar", command= self.janela_frontT, bg='#B9B7BD')
         self.bt_cadastrar_tec.place(relx=0.1, rely=0.6, relwidth=0.8, relheight=0.15)
         self.bt_consultar_tec = tk.Button(self.frame_tecnico, text="Consultar", bg='#B9B7BD', command= janela_consulta_tecnicos)
         self.bt_consultar_tec.place(relx=0.1, rely=0.8, relwidth=0.8, relheight=0.15)
 
-        self.bt_cadastrar_ferramenta = tk.Button(self.frame_ferramenta, text="Cadastrar", bg='#B9B7BD', command= janela_cadastro_ferramentas)
+        self.bt_cadastrar_ferramenta = tk.Button(self.frame_ferramenta, text="Cadastrar", bg='#B9B7BD', command= self.janela_frontF)
         self.bt_cadastrar_ferramenta.place(relx=0.1, rely=0.6, relwidth=0.8, relheight=0.15)
         self.bt_consultar_ferramenta = tk.Button(self.frame_ferramenta, text="Consultar", bg='#B9B7BD', command = janela_consulta_ferramentas)
         self.bt_consultar_ferramenta.place(relx=0.1, rely=0.8, relwidth=0.8, relheight=0.15)
