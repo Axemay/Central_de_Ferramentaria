@@ -87,15 +87,15 @@ class Csv :
             except Exception as e:
                 print('erro ao atualizar: ', e)
 
-    def busca_pessoa(self, nome_buscado: str) -> Dict[str, str]:
+    def busca_pessoaf(self, nome_buscado: str) -> Dict[str, str]:
 
-        with open('./tecnico.csv') as self.file:
+        with open('./ferramento.csv') as self.file:
 
             self.csv_Dreader = reader(self.file)
             self.data = list(self.csv_Dreader)
 
         for pessoa in self.data:
-            col1, col2, col3, col4, col5 = pessoa
+            col1, col2, col3, col4, col5, col6, col7, col8, col9 = pessoa
 
             # if nome_buscado == f'{col1}':
             #     yield (pessoa)
@@ -105,7 +105,7 @@ class Csv :
             #     yield (pessoa)
             # if nome_buscado == f'{col4}':
             #     yield (pessoa)
-            regex = re.compile(fr'{col1}|{col2}|{col3}|{col4}|{col5}', flags=re.I)
+            regex = re.compile(fr'{col1}|{col2}|{col3}|{col4}|{col5}|{col6}|{col7}|{col8}|{col9}', flags=re.I)
             if regex.findall(nome_buscado):
                 yield (pessoa)
         return {}

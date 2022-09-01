@@ -29,9 +29,9 @@ class Aplicacao(TK, front_Ferramentas):
         self.janela.title('Controle de Ferramentas')
         self.janela.iconphoto(False, tk.PhotoImage(file='ico/tools.png'))
         self.janela.configure(background='#B9B7BD')
-        self.janela.geometry('700x500')
+        self.janela.geometry('1380x780')
         self.janela.resizable(True, True)
-        self.janela.maxsize(width= 900, height=600) # dimensões máximas
+        self.janela.maxsize(width= 1920, height=1080) # dimensões máximas
         self.janela.minsize(width= 400, height= 300) # dimensões mínimas
 
     def frames(self):
@@ -52,41 +52,36 @@ class Aplicacao(TK, front_Ferramentas):
 
     def botoes(self):
 
-        self.bt_cadastrar_tec = tk.Button(self.frame_tecnico, text="Cadastrar", command= self.janela_frontT, bg='#B9B7BD')
-        self.bt_cadastrar_tec.place(relx=0.1, rely=0.6, relwidth=0.8, relheight=0.15)
-        self.bt_consultar_tec = tk.Button(self.frame_tecnico, text="Consultar", bg='#B9B7BD', command= janela_consulta_tecnicos)
-        self.bt_consultar_tec.place(relx=0.1, rely=0.8, relwidth=0.8, relheight=0.15)
+        self.bt_cadastrar_tec = tk.Button(self.frame_tecnico, text="Acessar", command= self.janela_frontT, bd=3, font=('poppins', 19, 'bold'))
+        self.bt_cadastrar_tec.place(relx=0.1, rely=0.8, relwidth=0.8, relheight=0.15)
 
-        self.bt_cadastrar_ferramenta = tk.Button(self.frame_ferramenta, text="Cadastrar", bg='#B9B7BD', command= self.janela_frontF)
-        self.bt_cadastrar_ferramenta.place(relx=0.1, rely=0.6, relwidth=0.8, relheight=0.15)
-        self.bt_consultar_ferramenta = tk.Button(self.frame_ferramenta, text="Consultar", bg='#B9B7BD', command = janela_consulta_ferramentas)
-        self.bt_consultar_ferramenta.place(relx=0.1, rely=0.8, relwidth=0.8, relheight=0.15)
+        self.bt_cadastrar_ferramenta = tk.Button(self.frame_ferramenta, text="Acessar", bd=3, font=('poppins', 19, 'bold'), command= self.janela_frontF)
+        self.bt_cadastrar_ferramenta.place(relx=0.1, rely=0.8, relwidth=0.8, relheight=0.15)
 
-        self.bt_cadastrar_reserva = tk.Button(self.frame_reserva, text="Cadastrar", bg='#B9B7BD', command= janela_cadastro_reservas)
-        self.bt_cadastrar_reserva.place(relx=0.1, rely=0.6, relwidth=0.8, relheight=0.15)
-        self.bt_consultar_reserva = tk.Button(self.frame_reserva, text="Consultar", bg='#B9B7BD', command= janela_consulta_reservas)
-        self.bt_consultar_reserva.place(relx=0.1, rely=0.8, relwidth=0.8, relheight=0.15)
+        self.bt_cadastrar_reserva = tk.Button(self.frame_reserva, text="Acessar", bd=3, font=('poppins', 19, 'bold'), command= janela_cadastro_reservas)
+        self.bt_cadastrar_reserva.place(relx=0.1, rely=0.8, relwidth=0.8, relheight=0.15)
 
     def labels(self):
-        self.label_tec = tk.Label(self.frame_tecnico, text="Técnico", bg='#fff')
+        self.label_tec = tk.Label(self.frame_tecnico, text="Técnico", bg='#fff', font=('poppins', 25, 'bold'))
         self.img_tec = tk.PhotoImage(file='ico/worker.png')
         self.label_tec_Img = tk.Label(self.frame_tecnico, image=self.img_tec)
-        self.label_tec.place(relx=0.4, rely=0.45, relwidth=0.25, relheight=0.1)
+        self.label_tec.place(relx=0.3, rely=0.5, relwidth=0.4, relheight=0.2)
         self.label_tec_Img.place(relx=0.3, rely=0.0, relwidth=0.4, relheight=0.4)
 
-        self.label_ferramenta = tk.Label(self.frame_ferramenta, text="Ferramenta", bg='#fff')
+        self.label_ferramenta = tk.Label(self.frame_ferramenta, text="Ferramenta", bg='#fff', font=('poppins', 25, 'bold'))
         self.img_ferramenta = tk.PhotoImage(file='ico/toolcard.png')
         self.label_ferramenta_Img = tk.Label(self.frame_ferramenta, image=self.img_ferramenta)
-        self.label_ferramenta.place(relx=0.2, rely=0.45, relwidth=0.6, relheight=0.1)
+        self.label_ferramenta.place(relx=0.2, rely=0.5, relwidth=0.6, relheight=0.2)
         self.label_ferramenta_Img.place(relx=0.3, rely=0.0, relwidth=0.5, relheight=0.4)
 
-        self.label_reserva = tk.Label(self.frame_reserva, text="Reserva", bg='#fff')
+        self.label_reserva = tk.Label(self.frame_reserva, text="Reserva", bg='#fff', font=('poppins', 25, 'bold'))
         self.img_reserva = tk.PhotoImage(file='ico/reserva.png')
         self.label_reserva_Img = tk.Label(self.frame_reserva, image=self.img_reserva)
-        self.label_reserva.place(relx=0.3, rely=0.45, relwidth=0.4, relheight=0.1)
+        self.label_reserva.place(relx=0.3, rely=0.55, relwidth=0.4, relheight=0.1)
         self.label_reserva_Img.place(relx=0.2, rely=0.0, relwidth=0.6, relheight=0.4)
 
 Aplicacao()
 
 #axemay
 #dpsndroid
+#Rafinha
