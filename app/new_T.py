@@ -234,10 +234,10 @@ class TK(funcs):
             self.blimpar = tk.Button(self.frame_1, text="Limpar Campos",bd=5, command=self.limpar_dados)
             self.blimpar.place(relx=0.05, rely=0.85, relwidth=0.15, relheight=0.12)
 #############
-            self.bbusca = tk.Button(self.frame_1, text="Busca", bd=5, command=self.busca)
+            self.bbusca = tk.Button(self.frame_1, text="Pesquisar", bd=5, command=self.busca)
             self.bbusca.place(relx=0.55, rely=0.85, relwidth=0.12, relheight=0.12)
 
-            self.bup = tk.Button(self.frame_1, text="Update", bd=5, command= self.atualizar)
+            self.bup = tk.Button(self.frame_1, text="Atualizar", bd=5, command= self.atualizar)
             self.bup.place(relx=0.69, rely=0.85, relwidth=0.13, relheight=0.12)
 
             self.bdelet = tk.Button(self.frame_1, text="Deletar", bd=5, command= self.delete)
