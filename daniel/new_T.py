@@ -8,6 +8,8 @@ import csv
 from CRUD_T import *
 tecnico = dict()
 
+global contador
+contador = 0
 
 class funcs(Csv):
     def entrada(self):
@@ -72,7 +74,12 @@ class funcs(Csv):
         self.limpar_dados()
         self.select_list()
 
+        self.res = tk.Label(self.frame_4, text=f"Cadastro excluído  com sucesso!", bg="#B9B7BD", font=("poppins", 16, 'bold'))
+        self.res.place(relx=0.01, rely=0.2, relwidth=0.98, relheight=0.7)
+
+
     def add_cliente(self):
+
 
         cpf = self.vcpf.get()
         while True:
@@ -130,6 +137,12 @@ class funcs(Csv):
             self.append(self.res1, self.res2, self.res3, self.res4, self.res5)
             self.select_list()
 
+            global contador
+            contador += 1  
+            
+            self.res = tk.Label(self.frame_4, text=f"{contador} Cadastro(s) efetuado(s) com sucesso!\nDigite novamente para mais um cadastro", bg="#B9B7BD", font=("poppins", 16, 'bold'))
+            self.res.place(relx=0.01, rely=0.2, relwidth=0.98, relheight=0.7)
+
         except Exception as e:
             print("error ao inserir", e)
         self.limpar_dados()
@@ -156,6 +169,7 @@ class funcs(Csv):
     def doubleclick(self, event):
         self.limpar_dados()
         self.view_frame2.selection()
+
 
         for n in self.view_frame2.selection():
             col1, col2, col3, col4, col5 = self.view_frame2.item(n, 'values')
@@ -192,7 +206,7 @@ class TK(funcs):
             self.frame_4.place(relx=0.3, rely=0.425, relwidth=0.368, relheight=0.08)
 
 
-            ## BOTÕES, LEBELS, ENTRYS
+            ## BOTÕES, LABELS, ENTRIES
             self.cpf = tk.Label(self.frame_1, text="CPF:", bg='#ffd', fg='#0D0D0D',
                                    font=('poppins', 19, 'bold'))
             self.cpf.place(relx=0.05, rely=0.02, relwidth=0.15, relheight=0.12)
@@ -246,7 +260,7 @@ class TK(funcs):
             self.bat = tk.Button(self.cadastro_tecnicos, text="Atualizar Lista", bd=5, command=self.select_list)
             self.bat.place(relx=0.10, rely=0.44, relwidth=0.092, relheight=0.05)
             ########## MENSAGEM
-            self.res = tk.Label(self.frame_4, text="Insira acima os dados do funcionário", bg="#b9b7bd", font=("poppins", 18, 'bold'))
+            self.res = tk.Label(self.frame_4, text="Insira acima os dados do funcionário", bg="#b9b7bd", font=("poppins", 16, 'bold'))
             self.res.place(relx=0.01, rely=0.2, relwidth=0.98, relheight=0.7)
 
             self.op = tk.Label(self.frame_3,
