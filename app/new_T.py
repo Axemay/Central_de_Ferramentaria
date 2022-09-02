@@ -8,7 +8,38 @@ import csv
 from CRUD_T import *
 tecnico = dict()
 
+def valida_digito(cpfd):
+    cpf = cpfd
+    numero = []
+    digito = []
+    soma_um = soma_dois = 0
+    cont = 10
+    cont_dois = 11
+    for i in str(cpf):
+        if len(numero) < 9:
+            numero.append(i)
+        else:
+            digito.append(i)
+    for i in numero:
+        soma_um += (int(i) * cont)
+        cont = cont - 1
+    for i in numero:
+        soma_dois += (int(i) * cont_dois)
+        cont_dois = cont_dois - 1
 
+    # Encontra primeiro digito esperado
+    dig_um = 0 if soma_um % 11 < 2 else (11 - (soma_um % 11))
+
+    # Encontra segundo digito esperado
+    soma_dois += dig_um * 2
+    dig_dois = 0 if soma_dois % 11 < 2 else (11 - (soma_dois % 11))
+
+    # Verifica se digitos são válidos
+    if dig_um == int(digito[0]) and dig_dois == int(digito[1]):
+        return True
+    else:
+        return False
+    
 class funcs(Csv):
     def entrada(self):
         Csv.__init__(self)
@@ -73,18 +104,24 @@ class funcs(Csv):
         self.select_list()
 
     def add_cliente(self):
-
         cpf = self.vcpf.get()
+        cpf = self.vcpf.get()
+        valido = valida_digito(cpf)
         while True:
-            if len(cpf) == 11:
+
+            if len(cpf) == 11 and len(set(cpf)) != 1 and valido:
+
                 try:
                     cpf = int(cpf)
                 except (ValueError, TypeError):
                     messagebox.showerror("Erro", "CPF: Digite apenas números")
+
                 else:
                     self.res1 = cpf
+
             else:
-                messagebox.showerror("Erro", "CPF: Insira exatamente 11 dígitos")
+                messagebox.showerror("Erro", "CPF: Insira um CPF válido com exatamente 11 dígitos")
+
             break
 
         nome = self.vnome.get()
