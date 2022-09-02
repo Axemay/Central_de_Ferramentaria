@@ -66,19 +66,19 @@ class Aplicacao(TK, front_Ferramentas):
         self.img_tec = tk.PhotoImage(file='ico/worker.png')
         self.label_tec_Img = tk.Label(self.frame_tecnico, image=self.img_tec)
         self.label_tec.place(relx=0.3, rely=0.5, relwidth=0.4, relheight=0.2)
-        self.label_tec_Img.place(relx=0.3, rely=0.0, relwidth=0.4, relheight=0.4)
+        self.label_tec_Img.place(relx=0.29, rely=0.05, relwidth=0.4, relheight=0.4)
 
         self.label_ferramenta = tk.Label(self.frame_ferramenta, text="Ferramenta", bg='#fff', font=('poppins', 25, 'bold'))
         self.img_ferramenta = tk.PhotoImage(file='ico/toolcard.png')
         self.label_ferramenta_Img = tk.Label(self.frame_ferramenta, image=self.img_ferramenta)
         self.label_ferramenta.place(relx=0.2, rely=0.5, relwidth=0.6, relheight=0.2)
-        self.label_ferramenta_Img.place(relx=0.3, rely=0.0, relwidth=0.5, relheight=0.4)
+        self.label_ferramenta_Img.place(relx=0.25, rely=0.05, relwidth=0.5, relheight=0.4)
 
         self.label_reserva = tk.Label(self.frame_reserva, text="Reserva", bg='#fff', font=('poppins', 25, 'bold'))
         self.img_reserva = tk.PhotoImage(file='ico/reserva.png')
         self.label_reserva_Img = tk.Label(self.frame_reserva, image=self.img_reserva)
         self.label_reserva.place(relx=0.3, rely=0.55, relwidth=0.4, relheight=0.1)
-        self.label_reserva_Img.place(relx=0.2, rely=0.0, relwidth=0.6, relheight=0.4)
+        self.label_reserva_Img.place(relx=0.2, rely=0.05, relwidth=0.6, relheight=0.4)
 
 Aplicacao()
 

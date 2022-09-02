@@ -1,4 +1,5 @@
 cpf,nome,telefone,turno,equipe
+<<<<<<< Updated upstream
 12345678978,Jujuba Caluba,1111111111,n,1
 99999999999,Asdfasdfsdfsd,5555555555,m,2
 55555555555,Gato Maluco,4444444444,m,2
@@ -6,3 +7,8 @@ cpf,nome,telefone,turno,equipe
 12345678978,Joao Pereira,2122222222,M,1
 87965412364,Rafa,8888888888,T,5
 87965412364,Rafa,8888888888,T,5
+=======
+12345678978,Zé Das Couves De Lugar Nenhum,4444444444,M,1
+98765432132,João Ninguém De Além,5555555555,M,1
+65498732154,Maria Da Casa Da Tia,6666666666,N,2
+>>>>>>> Stashed changes

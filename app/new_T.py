@@ -8,6 +8,8 @@ import csv
 from CRUD_T import *
 tecnico = dict()
 
+global contador
+contador = 0
 
 class funcs(Csv):
     def entrada(self):
@@ -46,16 +48,12 @@ class funcs(Csv):
 
         for i in buscacpflista:
             self.view_frame2.insert("", END, values=i)
-
         for i in buscanomelista:
             self.view_frame2.insert("", END, values=i)
-
         for i in buscatelefonelista:
             self.view_frame2.insert("", END, values=i)
-
         for i in buscaturnolista:
             self.view_frame2.insert("", END, values=i)
-
         for i in buscaequipelista:
             self.view_frame2.insert("", END, values=i)
         self.limpar_dados()
@@ -76,7 +74,12 @@ class funcs(Csv):
         self.limpar_dados()
         self.select_list()
 
+        self.res = tk.Label(self.frame_4, text=f"Cadastro excluído  com sucesso!", bg="#B9B7BD", font=("poppins", 16, 'bold'))
+        self.res.place(relx=0.01, rely=0.2, relwidth=0.98, relheight=0.7)
+
+
     def add_cliente(self):
+
 
         cpf = self.vcpf.get()
         while True:
@@ -134,6 +137,12 @@ class funcs(Csv):
             self.append(self.res1, self.res2, self.res3, self.res4, self.res5)
             self.select_list()
 
+            global contador
+            contador += 1  
+            
+            self.res = tk.Label(self.frame_4, text=f"{contador} Cadastro(s) efetuado(s) com sucesso!", bg="#B9B7BD", font=("poppins", 16, 'bold'))
+            self.res.place(relx=0.01, rely=0.2, relwidth=0.98, relheight=0.7)
+
         except Exception as e:
             print("error ao inserir", e)
         self.limpar_dados()
@@ -161,6 +170,7 @@ class funcs(Csv):
         self.limpar_dados()
         self.view_frame2.selection()
 
+
         for n in self.view_frame2.selection():
             col1, col2, col3, col4, col5 = self.view_frame2.item(n, 'values')
             self.vcpf.insert(END, col1)
@@ -168,6 +178,9 @@ class funcs(Csv):
             self.vtelefone.insert(END, col3)
             self.vturno.insert(END, col4)
             self.vequipe.insert(END, col5)
+
+
+
 class TK(funcs):
 
     # ------------------------------------------------------------------------------------------
@@ -183,20 +196,20 @@ class TK(funcs):
             self.cadastro_tecnicos.minsize(width=600, height=400)  # dimensões mínimas
 
             ##FRAMES
-            self.frame_1 = Frame(self.cadastro_tecnicos, bd=4, bg="#868B8E", highlightbackground="#868B8E", highlightthickness=2)
+            self.frame_1 = Frame(self.cadastro_tecnicos, bd=4, bg="#868B8E", highlightbackground="#868B8E", highlightthickness=1)
             self.frame_1.place(relx=0.01, rely=0.006, relwidth=0.62, relheight=0.42)
 
-            self.frame_2 = Frame(self.cadastro_tecnicos, bd=4, bg="#868B8E", highlightbackground="#868B8E", highlightthickness=2)
+            self.frame_2 = Frame(self.cadastro_tecnicos, bd=4, bg="#868B8E", highlightbackground="#868B8E", highlightthickness=1)
             self.frame_2.place(relx=0.01, rely=0.505, relwidth=0.98, relheight=0.488)
 
-            self.frame_3 = Frame(self.cadastro_tecnicos, bd=4, bg="#ffd", highlightbackground="#0D0D0D",highlightthickness=3)
+            self.frame_3 = Frame(self.cadastro_tecnicos, bd=4, bg="#ffd", highlightbackground="#0D0D0D",highlightthickness=1)
             self.frame_3.place(relx=0.63, rely=0.006, relwidth=0.368, relheight=0.42)
 
-            self.frame_4 = Frame(self.cadastro_tecnicos, bd=4, bg="#ffd", highlightbackground="#0D0D0D", highlightthickness=3)
+            self.frame_4 = Frame(self.cadastro_tecnicos, bg="#b9b7bd", highlightbackground="#b9b7bd")
             self.frame_4.place(relx=0.3, rely=0.425, relwidth=0.368, relheight=0.08)
 
 
-            ## BOTÕES, LEBELS, ENTRYS
+            ## BOTÕES, LABELS, ENTRIES
             self.cpf = tk.Label(self.frame_1, text="CPF:", bg='#ffd', fg='#0D0D0D',
                                    font=('poppins', 19, 'bold'))
             self.cpf.place(relx=0.05, rely=0.02, relwidth=0.15, relheight=0.12)
@@ -231,26 +244,30 @@ class TK(funcs):
 
             self.vequipe = tk.Entry(self.frame_1, bd=3, font=('poppins', 16, 'bold'))
             self.vequipe.place(relx=0.22, rely=0.68, relwidth=0.4, relheight=0.11)
-####################           ## BUTTON
+####################   BUTTON
             self.bsalvar = tk.Button(self.frame_1, text='Salvar Cadastro', bd=5, command=self.add_cliente)
             self.bsalvar.place(relx=0.22, rely=0.85, relwidth=0.15, relheight=0.12)
 
             self.blimpar = tk.Button(self.frame_1, text="Limpar Campos",bd=5, command=self.limpar_dados)
             self.blimpar.place(relx=0.05, rely=0.85, relwidth=0.15, relheight=0.12)
-#############
+
             self.bbusca = tk.Button(self.frame_1, text="Pesquisar", bd=5, command=self.busca)
-            self.bbusca.place(relx=0.55, rely=0.85, relwidth=0.12, relheight=0.12)
+            self.bbusca.place(relx=0.46, rely=0.85, relwidth=0.15, relheight=0.12)
 
             self.bup = tk.Button(self.frame_1, text="Atualizar", bd=5, command= self.atualizar)
-            self.bup.place(relx=0.69, rely=0.85, relwidth=0.13, relheight=0.12)
+            self.bup.place(relx=0.63, rely=0.85, relwidth=0.15, relheight=0.12)
 
             self.bdelet = tk.Button(self.frame_1, text="Deletar", bd=5, command= self.delete)
-            self.bdelet.place(relx=0.83, rely=0.85, relwidth=0.13, relheight=0.12)
+            self.bdelet.place(relx=0.80, rely=0.85, relwidth=0.15, relheight=0.12)
 
             self.bat = tk.Button(self.cadastro_tecnicos, text="Atualizar Lista", bd=5, command=self.select_list)
-            self.bat.place(relx=0.05, rely=0.45, relwidth=0.065, relheight=0.05)
+            self.bat.place(relx=0.15, rely=0.44, relwidth=0.092, relheight=0.05)
+
+            self.bt_gerar_pdf = tk.Button(self.cadastro_tecnicos, text="Gerar PDF", bd=5)            
+            self.bt_gerar_pdf.place(relx=0.75, rely=0.44, relwidth=0.092, relheight=0.05)
+
             ########## MENSAGEM
-            self.res = tk.Label(self.frame_4, text="Insira acima os dados do funcionário", bg="#ffd", font=("poppins", 18, 'bold'))
+            self.res = tk.Label(self.frame_4, text="Insira acima os dados do funcionário", bg="#b9b7bd", font=("poppins", 16, 'bold'))
             self.res.place(relx=0.01, rely=0.2, relwidth=0.98, relheight=0.7)
 
             self.op = tk.Label(self.frame_3,
@@ -258,24 +275,24 @@ class TK(funcs):
                           bg="#ffd", font=("poppins", 13, 'bold'))
             self.op.place(relx=0.01, rely=0.01, relwidth=0.99, relheight=0.99)
 
-            ## TRUEE VIEW
+            ## TREE VIEW
 
             self.dados_colunas = ("cpf", "nome", "telefone", "turno", "equipe")
             self.view_frame2 = ttk.Treeview(self.frame_2, columns=self.dados_colunas, selectmode='browse')
 
             self.view_frame2.heading("#0", text="")
-            self.view_frame2.heading("cpf", text="Cpf", )
-            self.view_frame2.heading("nome", text="Nome", )
-            self.view_frame2.heading("telefone", text="Telefone", )
-            self.view_frame2.heading("turno", text="Turno", )
-            self.view_frame2.heading("equipe", text="Equipe")
+            self.view_frame2.heading("cpf", text="CPF")
+            self.view_frame2.heading("nome", text="NOME")
+            self.view_frame2.heading("telefone", text="TELEFONE")
+            self.view_frame2.heading("turno", text="TURNO")
+            self.view_frame2.heading("equipe", text="EQUIPE")
 
             self.view_frame2.column("#0", width=1)
-            self.view_frame2.column("cpf", minwidth=0, width=250)
-            self.view_frame2.column("nome", minwidth=0, width=250)
-            self.view_frame2.column("telefone", minwidth=0, width=250 )
-            self.view_frame2.column("turno", minwidth=0, width=250)
-            self.view_frame2.column("equipe", minwidth=0, width=249)
+            self.view_frame2.column("cpf", minwidth=0, width=200, anchor=tk.CENTER)
+            self.view_frame2.column("nome", minwidth=0, width=450, anchor=tk.CENTER)
+            self.view_frame2.column("telefone", minwidth=0, width=200, anchor=tk.CENTER )
+            self.view_frame2.column("turno", minwidth=0, width=200, anchor=tk.CENTER)
+            self.view_frame2.column("equipe", minwidth=0, width=199, anchor=tk.CENTER)
             self.view_frame2.place(relx=0.005, rely=0.03, relwidth=0.98, relheight=0.90)
 
             self.scrolbar_lista = Scrollbar(self.frame_2, orient="vertical", command=self.view_frame2.yview)

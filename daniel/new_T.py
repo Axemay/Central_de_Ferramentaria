@@ -140,7 +140,7 @@ class funcs(Csv):
             global contador
             contador += 1  
             
-            self.res = tk.Label(self.frame_4, text=f"{contador} Cadastro(s) efetuado(s) com sucesso!\nDigite novamente para mais um cadastro", bg="#B9B7BD", font=("poppins", 16, 'bold'))
+            self.res = tk.Label(self.frame_4, text=f"{contador} Cadastro(s) efetuado(s) com sucesso!", bg="#B9B7BD", font=("poppins", 16, 'bold'))
             self.res.place(relx=0.01, rely=0.2, relwidth=0.98, relheight=0.7)
 
         except Exception as e:
@@ -178,6 +178,9 @@ class funcs(Csv):
             self.vtelefone.insert(END, col3)
             self.vturno.insert(END, col4)
             self.vequipe.insert(END, col5)
+
+
+
 class TK(funcs):
 
     # ------------------------------------------------------------------------------------------
@@ -258,7 +261,11 @@ class TK(funcs):
             self.bdelet.place(relx=0.80, rely=0.85, relwidth=0.15, relheight=0.12)
 
             self.bat = tk.Button(self.cadastro_tecnicos, text="Atualizar Lista", bd=5, command=self.select_list)
-            self.bat.place(relx=0.10, rely=0.44, relwidth=0.092, relheight=0.05)
+            self.bat.place(relx=0.15, rely=0.44, relwidth=0.092, relheight=0.05)
+
+            self.bt_gerar_pdf = tk.Button(self.cadastro_tecnicos, text="Gerar PDF", bd=5)            
+            self.bt_gerar_pdf.place(relx=0.75, rely=0.44, relwidth=0.092, relheight=0.05)
+
             ########## MENSAGEM
             self.res = tk.Label(self.frame_4, text="Insira acima os dados do funcionário", bg="#b9b7bd", font=("poppins", 16, 'bold'))
             self.res.place(relx=0.01, rely=0.2, relwidth=0.98, relheight=0.7)
@@ -268,24 +275,24 @@ class TK(funcs):
                           bg="#ffd", font=("poppins", 13, 'bold'))
             self.op.place(relx=0.01, rely=0.01, relwidth=0.99, relheight=0.99)
 
-            ## TRUEE VIEW
+            ## TREE VIEW
 
             self.dados_colunas = ("cpf", "nome", "telefone", "turno", "equipe")
             self.view_frame2 = ttk.Treeview(self.frame_2, columns=self.dados_colunas, selectmode='browse')
 
             self.view_frame2.heading("#0", text="")
-            self.view_frame2.heading("cpf", text="Cpf", )
-            self.view_frame2.heading("nome", text="Nome", )
-            self.view_frame2.heading("telefone", text="Telefone", )
-            self.view_frame2.heading("turno", text="Turno", )
-            self.view_frame2.heading("equipe", text="Equipe")
+            self.view_frame2.heading("cpf", text="CPF")
+            self.view_frame2.heading("nome", text="NOME")
+            self.view_frame2.heading("telefone", text="TELEFONE")
+            self.view_frame2.heading("turno", text="TURNO")
+            self.view_frame2.heading("equipe", text="EQUIPE")
 
             self.view_frame2.column("#0", width=1)
-            self.view_frame2.column("cpf", minwidth=0, width=250)
-            self.view_frame2.column("nome", minwidth=0, width=250)
-            self.view_frame2.column("telefone", minwidth=0, width=250 )
-            self.view_frame2.column("turno", minwidth=0, width=250)
-            self.view_frame2.column("equipe", minwidth=0, width=249)
+            self.view_frame2.column("cpf", minwidth=0, width=200, anchor=tk.CENTER)
+            self.view_frame2.column("nome", minwidth=0, width=450, anchor=tk.CENTER)
+            self.view_frame2.column("telefone", minwidth=0, width=200, anchor=tk.CENTER )
+            self.view_frame2.column("turno", minwidth=0, width=200, anchor=tk.CENTER)
+            self.view_frame2.column("equipe", minwidth=0, width=199, anchor=tk.CENTER)
             self.view_frame2.place(relx=0.005, rely=0.03, relwidth=0.98, relheight=0.90)
 
             self.scrolbar_lista = Scrollbar(self.frame_2, orient="vertical", command=self.view_frame2.yview)
