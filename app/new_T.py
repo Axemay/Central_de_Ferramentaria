@@ -46,12 +46,16 @@ class funcs(Csv):
 
         for i in buscacpflista:
             self.view_frame2.insert("", END, values=i)
+
         for i in buscanomelista:
             self.view_frame2.insert("", END, values=i)
+
         for i in buscatelefonelista:
             self.view_frame2.insert("", END, values=i)
+
         for i in buscaturnolista:
             self.view_frame2.insert("", END, values=i)
+
         for i in buscaequipelista:
             self.view_frame2.insert("", END, values=i)
         self.limpar_dados()
