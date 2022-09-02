@@ -251,8 +251,8 @@ class front_Ferramentas(funcs):
         self.vmaterial_ferramenta = tk.Entry(self.frame_1, bd=3, font=('poppins', 16, 'bold'))
         self.vmaterial_ferramenta.place(relx=0.28, rely=0.81, relwidth=0.7, relheight=0.07)
 
-# ################ -------------- BOTÕES    ####--------------------------------------------------------------------------------
-#
+################# -------------- BOTÕES    ####--------------------------------------------------------------------------------
+
         self.bsalvar = tk.Button(self.frame_1, text='Salvar Cadastro', command= self.add_clientef)
         self.bsalvar.place(relx=0.15, rely=0.92, relwidth=0.1, relheight=0.07)
 
