@@ -234,7 +234,8 @@ class TK(funcs):
             self.frame_3 = Frame(self.cadastro_tecnicos, bd=4, bg="#ffd", highlightbackground="#0D0D0D",highlightthickness=1)
             self.frame_3.place(relx=0.63, rely=0.006, relwidth=0.368, relheight=0.42)
 
-            self.frame_4 = Frame(self.cadastro_tecnicos, bg="#b9b7bd", highlightbackground="#b9b7bd")
+            self.frame_4 = Frame(self.cadastro_tecnicos)
+            #bg="#b9b7bd", highlightbackground="#b9b7bd")
             self.frame_4.place(relx=0.3, rely=0.425, relwidth=0.368, relheight=0.08)
 
 
