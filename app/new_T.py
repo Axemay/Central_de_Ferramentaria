@@ -1,15 +1,25 @@
 from contextlib import ContextDecorator
+from faulthandler import disable
 import tkinter as tk
 from tkinter import Frame, ttk
 from tkinter import END
 from tkinter import messagebox
 from tkinter import Scrollbar
 import csv
+from wsgiref import validate
 from CRUD_T import *
+import CRUD_T
+
+
+
 tecnico = dict()
 
 global contador
 contador = 0
+
+global valida
+valida = False
+
 
 class funcs(Csv):
     def entrada(self):
@@ -67,20 +77,26 @@ class funcs(Csv):
         self.limpar_dados()
 
     def delete(self):
-        self.variaveis()
-        # self.delete(self.codigo)
+        global valida
+        if valida == True:
+            self.variaveis()
+            # self.delete(self.codigo)
 
-        self.delet(self.cpf, self.nome)
-        self.limpar_dados()
-        self.select_list()
-
-        self.res = tk.Label(self.frame_4, text=f"Cadastro excluído  com sucesso!", bg="#B9B7BD", font=("poppins", 16, 'bold'))
-        self.res.place(relx=0.01, rely=0.2, relwidth=0.98, relheight=0.7)
-
-
+            self.delet(self.cpf, self.nome)
+            self.limpar_dados()
+            self.select_list()
+        
+            self.res = tk.Label(self.frame_4, text=f"Cadastro excluído  com sucesso!", bg="#B9B7BD", font=("poppins", 16, 'bold'))
+            self.res.place(relx=0.01, rely=0.2, relwidth=0.98, relheight=0.7)
+            valida = False
+        else:
+            messagebox.showerror("Erro", "Selecione um cadastro para deletar")
+        
     def add_cliente(self):
+        global chave
+        chave = 0
 
-
+        
         cpf = self.vcpf.get()
         while True:
             if len(cpf) == 11:
@@ -90,14 +106,18 @@ class funcs(Csv):
                     messagebox.showerror("Erro", "CPF: Digite apenas números")
                 else:
                     self.res1 = cpf
+                    chave += 1
             else:
                 messagebox.showerror("Erro", "CPF: Insira exatamente 11 dígitos")
             break
 
         nome = self.vnome.get()
         self.res2 = nome.title()
+        chave += 1
+
 
         tel = self.vtelefone.get()
+        
         while True:
             if len(tel) == 10 or len(tel) == 11:
                 try:
@@ -106,9 +126,10 @@ class funcs(Csv):
                     messagebox.showerror("Erro", "TELEFONE: Digite apenas números")
                 else:
                     self.res3 = tel
+                    chave += 1
             else:
                 messagebox.showerror("Erro",
-                                     "TELEFONE: Insira 10 dígitos para telefone fixo e 11 dígitos para celular, incluindo prefixo")
+                                    "TELEFONE: Insira 10 dígitos para telefone fixo e 11 dígitos para celular, incluindo prefixo")
             break
 
         turno = self.vturno.get()
@@ -116,10 +137,13 @@ class funcs(Csv):
         while True:
             if turno == "M":
                 self.res4 = turno
+                chave += 1
             elif turno == "T":
                 self.res4 = turno
+                chave += 1
             elif turno == "N":
                 self.res4 = turno
+                chave += 1
             else:
                 messagebox.showerror("Erro", "TURNO: Os turnos disponíveis são: M, T ou N")
             break
@@ -132,20 +156,22 @@ class funcs(Csv):
                 messagebox.showerror("Erro", "EQUIPE: Digite apenas números")
             else:
                 self.res5 = equipe
+                chave += 1    
             break
-        try:
-            self.append(self.res1, self.res2, self.res3, self.res4, self.res5)
-            self.select_list()
 
-            global contador
-            contador += 1  
-            
-            self.res = tk.Label(self.frame_4, text=f"{contador} Cadastro(s) efetuado(s) com sucesso!", bg="#B9B7BD", font=("poppins", 16, 'bold'))
-            self.res.place(relx=0.01, rely=0.2, relwidth=0.98, relheight=0.7)
+        while True:
+            if chave == 5:
+                self.append(self.res1, self.res2, self.res3, self.res4, self.res5)
+                self.select_list()
+                global contador
+                contador += 1
+                self.res = tk.Label(self.frame_4, text=f"{contador} Cadastro(s) efetuado(s) com sucesso!", bg="#B9B7BD", font=("poppins", 16, 'bold'))
+                self.res.place(relx=0.01, rely=0.2, relwidth=0.98, relheight=0.7)
 
-        except Exception as e:
-            print("error ao inserir", e)
+            break
+
         self.limpar_dados()
+    
 
     def select_list(self):
         self.view_frame2.delete(*self.view_frame2.get_children())
@@ -169,6 +195,9 @@ class funcs(Csv):
     def doubleclick(self, event):
         self.limpar_dados()
         self.view_frame2.selection()
+        global valida
+        valida = True
+        
 
 
         for n in self.view_frame2.selection():

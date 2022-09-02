@@ -1,8 +1,9 @@
 from csv import writer, reader
 from csv import DictWriter, DictReader
 import re
+from tkinter import Tk
 from typing import Dict
-
+import new_T
 
 
 class Csv :
@@ -39,6 +40,8 @@ class Csv :
             self.csv_Dwriter.writerow(data)
             #self.csv_Dwriter.writerows(data)
 
+    
+
     def delet(self,cpf, nome):
         with open('./tecnico.csv') as self.file:
             self.csv_Dreader = DictReader(self.file)
@@ -54,6 +57,8 @@ class Csv :
                     continue
 
                 self.csv_Dwriter.writerow(row)
+
+
 
     def update(self, cpf, nome, telefone, turno, equipe):
         with open('./tecnico.csv') as self.file:
