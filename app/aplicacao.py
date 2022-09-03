@@ -25,7 +25,7 @@ class Aplicacao(TK, front_Ferramentas):
 
 
     def janela_config(self):
-        self.janela.title('Controle de Ferramentas')
+        self.janela.title('Central de Ferramentaria')
         self.janela.iconphoto(False, tk.PhotoImage(file='../ico/tools.png'))
         self.janela.configure(background='#B9B7BD')
         self.janela.geometry('1380x780')
@@ -34,6 +34,11 @@ class Aplicacao(TK, front_Ferramentas):
         self.janela.minsize(width= 400, height= 300) # dimensões mínimas
 
     def frames(self):
+        self.frame_titulo = tk.Frame(self.janela, bd=4, bg='#B9B7BD',
+                                      highlightbackground='#B9B7BD',
+                                      highlightthickness=2)
+        self.frame_titulo.place(relx=0.05, rely=0, relwidth=0.91, relheight=0.3)
+        
         self.frame_tecnico = tk.Frame(self.janela, bd= 4, bg='#fff',
                                       highlightbackground='#868B8E',
                                       highlightthickness=2)
@@ -61,6 +66,12 @@ class Aplicacao(TK, front_Ferramentas):
         self.bt_cadastrar_reserva.place(relx=0.1, rely=0.8, relwidth=0.8, relheight=0.15)
 
     def labels(self):
+        self.label_titulo = tk.Label(self.frame_titulo, text="Central de Ferramentaria", bg='#B9B7BD', font=('poppins', 50, 'bold'))
+        self.label_titulo.place(relx=0.0, rely=0.3, relwidth=1, relheight=0.3)
+        self.label_versao = tk.Label(self.frame_titulo, text="Versão 1.0", bg='#B9B7BD',
+                                     font=('poppins', 15))
+        self.label_versao.place(relx=0.0, rely=0.56, relwidth=1, relheight=0.3)
+        
         self.label_tec = tk.Label(self.frame_tecnico, text="Técnico", bg='#fff', font=('poppins', 25, 'bold'))
         self.img_tec = tk.PhotoImage(file='../ico/worker.png')
         self.label_tec_Img = tk.Label(self.frame_tecnico, image=self.img_tec)
