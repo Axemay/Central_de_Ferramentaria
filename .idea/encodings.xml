@@ -2,7 +2,7 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/app/ferramenta.csv" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/ferramenta.csv" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/tecnico.csv" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/ferramenta.csv" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/tecnico.csv" charset="UTF-8" />
   </component>
 </project>
