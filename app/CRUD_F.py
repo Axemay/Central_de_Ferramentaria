@@ -48,7 +48,7 @@ class Csv :
         with open('./ferramenta.csv') as self.file:
             self.csv_Dreader = DictReader(self.file)
             self.data = list(self.csv_Dreader)
-        with open('./ferramenta.csv', 'w') as self.file:
+        with open('./ferramenta.csv', 'w', encoding='utf-8') as self.file:
             header = ("codigo","descricao","fabricante","voltagem","partnumber","tamanho","unidade","tipo","material", "tempo")
 
             self.csv_Dwriter = DictWriter(self.file, fieldnames=header, lineterminator='\n')

@@ -9,6 +9,13 @@ import csv
 from CRUD_F import *
 
 
+global contador
+contador = 0
+
+global valida
+valida = False
+
+
 class funcs(Csv):
     def entrada(self):
         Csv.__init__(self)
@@ -96,12 +103,27 @@ class funcs(Csv):
         self.limpar_dadosF()
 
     def deletef(self):
-        self.variaveisf()
-        # self.delete(self.codigo)
+        global valida
+        if valida == True:
+            self.variaveisf()
+            # self.delete(self.codigo)
 
-        self.deletf(self.codigo)
-        self.limpar_dadosF()
-        self.select_listf()
+            self.deletf(self.codigo)
+            self.limpar_dadosF()
+            self.select_listf()
+        
+            self.res = tk.Label(self.frame_2, text=f"Cadastro excluído  com sucesso!", bg="#B9B7BD", font=("poppins", 16, 'bold'))
+            self.res.place(relx=0.00, rely=0.14, relwidth=1, relheight=1)
+            valida = False
+        else:
+            messagebox.showerror("Erro", "Selecione um cadastro para deletar")
+
+    def vazio(self, msg):
+        if msg == "":
+            messagebox.showerror("Erro", "Todos os campos devem ser preenchidos")
+        else:
+            return msg
+
 
     def add_clientef(self):
         global chave
@@ -118,11 +140,11 @@ class funcs(Csv):
                 chave += 1
             break
 
-        descricao = self.vdescricao_ferramenta.get()
+        descricao = self.vazio(self.vdescricao_ferramenta.get())
         self.res2 = descricao.capitalize()
         chave += 1
 
-        fabricante = self.vfabricante.get()
+        fabricante = self.vazio(self.vfabricante.get())
         self.res3 = fabricante.capitalize()
         chave += 1
 
@@ -137,43 +159,45 @@ class funcs(Csv):
                 chave += 1
             break
 
-        part_number = self.vpart_number.get()
+        part_number = self.vazio(self.vpart_number.get())
         self.res5 = part_number.lower()
         chave += 1
         # sugestões
 
-        tamanho = self.vtamanho.get()
+        tamanho = self.vazio(self.vtamanho.get())
         self.res6 = tamanho
         chave += 1
         # sugestões
 
-        unidade_medida = self.vunidade_medida.get()
+        unidade_medida = self.vazio(self.vunidade_medida.get())
         self.res7 = unidade_medida.lower()
         chave += 1
         # sugestões
 
-        tipo_ferramenta = self.vtipo_ferramenta.get()
+        tipo_ferramenta = self.vazio(self.vtipo_ferramenta.get())
         self.res8 = tipo_ferramenta.lower()
         chave += 1
         # sugestões
-        material = self.vmaterial_ferramenta.get()
+        material = self.vazio(self.vmaterial_ferramenta.get())
         self.res9 = material.lower()
         chave += 1
 
-        tempo = self.vTemMax_ferramenta.get()
+        tempo = self.vazio(self.vTemMax_ferramenta.get())
         self.res10 = tempo
         chave += 1
 
-        if chave == 10:
-            try:
-                self.appendf(self.res1, self.res2, self.res3, self.res4, self.res5, self.res6, self.res7, self.res8, self.res9, self.res10)
-                self.select_listf()
-                self.limpar_dadosF()
+        while True:
+            if chave == 10:
+                    self.appendf(self.res1, self.res2, self.res3, self.res4, self.res5, self.res6, self.res7, self.res8, self.res9, self.res10)
+                    self.select_listf()
+                    global contador
+                    contador += 1
+                    self.res = tk.Label(self.frame_2, text=f"{contador} Cadastro(s) efetuado(s) com sucesso!", bg="#B9B7BD", font=("poppins", 16, 'bold'))
+                    self.res.place(relx=0.00, rely=0.14, relwidth=1, relheight=1)
+                    self.limpar_dadosF()
+                    chave = 0
+            break
 
-            except Exception as e:
-                print("error ao inserir", e)
-
-        
 
     def select_listf(self):
         self.view_frame2f.delete(*self.view_frame2f.get_children())
@@ -198,9 +222,12 @@ class funcs(Csv):
         self.vtipo_ferramenta.delete(0, END)
         self.vmaterial_ferramenta.delete(0, END)
         self.vTemMax_ferramenta.delete(0, END)
+
     def doubleclickf(self, event):
         self.limpar_dadosF()
         self.view_frame2f.selection()
+        global valida
+        valida = True
 
         for n in self.view_frame2f.selection():
             col1, col2, col3, col4, col5, col6, col7, col8, col9, col10 = self.view_frame2f.item(n, 'values')
@@ -214,6 +241,7 @@ class funcs(Csv):
             self.vtipo_ferramenta.insert(END, col8)
             self.vmaterial_ferramenta.insert(END, col9)
             self.vTemMax_ferramenta.insert(END, col10)
+
 class front_Ferramentas(funcs):
     def janela_frontF(self):
         self.cadastro_ferramentas = tk.Toplevel()
@@ -316,8 +344,8 @@ class front_Ferramentas(funcs):
         #self.bat = tk.Button(self.cadastro_tecnicos, text="Atualizar Lista", bd=5, command=self.select_list)
         #self.bat.place(relx=0.05, rely=0.45, relwidth=0.065, relheight=0.05)
 
-        res = tk.Label(self.frame_2, text="Insira acima os dados da ferramenta", bg="#b9b7bd", font=("poppins", 16, 'bold'))
-        res.place(relx=0.00, rely=0.14, relwidth=1, relheight=1)
+        self.res = tk.Label(self.frame_2, text="Insira acima os dados da ferramenta", bg="#b9b7bd", font=("poppins", 16, 'bold'))
+        self.res.place(relx=0.00, rely=0.14, relwidth=1, relheight=1)
 
         ## TRUEE VIEW
 

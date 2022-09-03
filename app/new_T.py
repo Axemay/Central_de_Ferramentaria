@@ -167,11 +167,8 @@ class funcs(Csv):
                 contador += 1
                 self.res = tk.Label(self.frame_4, text=f"{contador} Cadastro(s) efetuado(s) com sucesso!", bg="#B9B7BD", font=("poppins", 16, 'bold'))
                 self.res.place(relx=0.01, rely=0.2, relwidth=0.98, relheight=0.7)
-
-            break
-
-        self.limpar_dados()
-    
+                self.limpar_dados()
+                chave = 0
 
     def select_list(self):
         self.view_frame2.delete(*self.view_frame2.get_children())
