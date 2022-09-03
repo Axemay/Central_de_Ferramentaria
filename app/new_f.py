@@ -289,18 +289,11 @@ class front_Ferramentas(funcs):
         self.TemMax_ferramenta = tk.Label(self.frame_1, text='Tempo MAX Reserva (D):', bg='#ffd', fg='#0D0D0D',
                                           font=('poppins', 15, 'bold'))
         self.TemMax_ferramenta.place(relx=0.65, rely=0.81, relwidth=0.22, relheight=0.07)
-        # self.vTemMax_ferramenta = tk.Entry(self.frame_1, bd=3, font=('poppins', 16, 'bold'))
-        # self.vTemMax_ferramenta.place(relx=0.78, rely=0.01, relwidth=0.2, relheight=0.07)
 
         lista_horas = ("06 horas", "12 horas", "18 horas", "24 horas", "30 horas")
 
         self.vTemMax_ferramenta = ttk.Combobox(self.frame_1, values=lista_horas)
         self.vTemMax_ferramenta.place(relx=0.88, rely=0.81, relwidth=0.1, relheight=0.07)
-        # self.TemMax_ferramenta = tk.Label(self.frame_1, text='Tempo MAX Reserva (D):', bg='#ffd', fg='#0D0D0D',
-        #                                     font=('poppins', 15, 'bold'))
-        # self.TemMax_ferramenta.place(relx=0.65, rely=0.81, relwidth=0.22, relheight=0.07)
-        # self.vTemMax_ferramenta = tk.Entry(self.frame_1, bd=3, font=('poppins', 16, 'bold'))
-        # self.vTemMax_ferramenta.place(relx=0.88, rely=0.81, relwidth=0.1, relheight=0.07)
 
 ################# -------------- BOTÕES    ####--------------------------------------------------------------------------------
 
