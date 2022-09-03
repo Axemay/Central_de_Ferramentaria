@@ -35,61 +35,13 @@ class funcs(Csv):
     def buscaf(self):
         self.view_frame2f.delete(*self.view_frame2f.get_children())
 
-        # self.entry_nomeE.insert(END, '%')
         codigo = self.vcodigo_ferramenta.get()
-        descricao = self.vdescricao_ferramenta.get()
-        fabricante = self.vfabricante.get()
-        voltagem = self.vvoltagem.get()
-        part_number = self.vpart_number.get()
-        tamanho = self.vtamanho.get()
-        unidade = self.vunidade_medida.get()
-        tipo = self.vtipo_ferramenta.get()
-        material = self.vmaterial_ferramenta.get()
-        tempo = self.vTemMax_ferramenta.get()
-        # self.buscar(nome)
-        self.busca_pessoaf(codigo)
-        self.busca_pessoaf(descricao)
-        self.busca_pessoaf(fabricante)
-        self.busca_pessoaf(voltagem)
-        self.busca_pessoaf(part_number)
-        self.busca_pessoaf(tamanho)
-        self.busca_pessoaf(unidade)
-        self.busca_pessoaf(tipo)
-        self.busca_pessoaf(material)
-        self.busca_pessoaf(tempo)
 
-        # self.search(nome)
+        self.busca_pessoaf(codigo)
 
         buscacodigolista = self.busca_pessoaf(codigo)
-        buscadescricaolista = self.busca_pessoaf(descricao)
-        buscafabricantelista = self.busca_pessoaf(fabricante)
-        buscavoltagemlista = self.busca_pessoaf(voltagem)
-        buscapart_numberlista = self.busca_pessoaf(part_number)
-        buscatamanholista = self.busca_pessoaf(tamanho)
-        buscaunidadelista = self.busca_pessoaf(unidade)
-        buscatipolista = self.busca_pessoaf(tipo)
-        buscamateriallista = self.busca_pessoaf(material)
-        buscatempolista = self.busca_pessoaf(tempo)
 
         for i in buscacodigolista:
-            self.view_frame2f.insert("", END, values=i)
-        for i in buscadescricaolista:
-            self.view_frame2f.insert("", END, values=i)
-        for i in buscafabricantelista:
-            self.view_frame2f.insert("", END, values=i)
-        for i in buscavoltagemlista:
-            self.view_frame2f.insert("", END, values=i)
-        for i in buscapart_numberlista:
-            self.view_frame2f.insert("", END, values=i)
-        for i in buscatamanholista:
-            self.view_frame2f.insert("", END, values=i)
-        for i in buscaunidadelista:
-            self.view_frame2f.insert("", END, values=i)
-        for i in buscatipolista:
-            self.view_frame2f.insert("", END, values=i)
-        for i in buscamateriallista:
-            self.view_frame2f.insert("", END, values=i)
-        for i in buscatempolista:
             self.view_frame2f.insert("", END, values=i)
 
         self.limpar_dadosF()

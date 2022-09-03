@@ -107,7 +107,7 @@ class Csv :
             #     yield (pessoa)
             # if nome_buscado == f'{col4}':
             #     yield (pessoa)
-            regex = re.compile(fr'{col1}|{col2}|{col3}|{col4}|{col5}|{col6}|{col7}|{col8}|{col9}|{col9}', flags=re.I)
+            regex = re.compile(fr'{col1}|{col2}|{col3}|{col4}|{col5}|{col6}|{col7}|{col8}|{col9}|{col10}', flags=re.I)
             if regex.findall(nome_buscado):
                 yield (pessoa)
         return {}
