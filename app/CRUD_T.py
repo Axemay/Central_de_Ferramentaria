@@ -9,7 +9,7 @@ import new_T
 class Csv :
 
     def leitor(self):
-        with open('./tecnico.csv') as self.file:
+        with open('./tecnico.csv', encoding='utf-8') as self.file:
             self.csv_reader = reader(self.file)
             self.data = list(self.csv_reader)
 
@@ -24,7 +24,7 @@ class Csv :
         # with open('./appcsv.csv') as self.file:
         #     self.csv_Dreader = DictReader(self.file)
         #     self.data2 = list(self.csv_Dreader)
-        with open('./tecnico.csv', 'a', newline="") as self.file:
+        with open('./tecnico.csv', 'a', newline="", encoding='utf-8') as self.file:
             header = ("cpf", "nome", "telefone", "turno", "equipe")
             #pulo = "\n"
             self.csv_Dwriter = DictWriter(self.file, fieldnames=header, lineterminator="\n" )
@@ -43,7 +43,7 @@ class Csv :
     
 
     def delet(self,cpf, nome):
-        with open('./tecnico.csv') as self.file:
+        with open('./tecnico.csv', encoding='utf-8') as self.file:
             self.csv_Dreader = DictReader(self.file)
             self.data = list(self.csv_Dreader)
         with open('./tecnico.csv', 'w') as self.file:
@@ -61,10 +61,10 @@ class Csv :
 
 
     def update(self, cpf, nome, telefone, turno, equipe):
-        with open('./tecnico.csv') as self.file:
+        with open('./tecnico.csv', encoding='utf-8') as self.file:
             self.csv_Dreader = DictReader(self.file)
             self.data = list(self.csv_Dreader)
-        with open('./tecnico.csv', 'w') as self.file:
+        with open('./tecnico.csv', 'w', encoding='utf-8') as self.file:
             header = ("cpf", "nome", "telefone", "turno", "equipe")
 
             self.csv_Dwriter = DictWriter(self.file, fieldnames=header, lineterminator='\n')
@@ -86,7 +86,7 @@ class Csv :
 
     def busca_pessoa(self, nome_buscado):
 
-        with open('./tecnico.csv') as self.file:
+        with open('./tecnico.csv', encoding='utf-8') as self.file:
 
             self.csv_Dreader = reader(self.file)
             self.data = list(self.csv_Dreader)

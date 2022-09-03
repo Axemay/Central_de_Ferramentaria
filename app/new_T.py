@@ -13,6 +13,8 @@ import CRUD_T
 
 
 tecnico = dict()
+global chave
+chave = 0
 
 global contador
 contador = 0
@@ -25,6 +27,37 @@ class funcs(Csv):
     def entrada(self):
         Csv.__init__(self)
     #chamada do modulo herança multipla
+    def valida_digito(self, cpfd):
+        cpf = cpfd
+        numero = []
+        digito = []
+        soma_um = soma_dois = 0
+        cont = 10
+        cont_dois = 11
+        for i in str(cpf):
+            if len(numero) < 9:
+                numero.append(i)
+            else:
+                digito.append(i)
+        for i in numero:
+            soma_um += (int(i) * cont)
+            cont = cont - 1
+        for i in numero:
+            soma_dois += (int(i) * cont_dois)
+            cont_dois = cont_dois - 1
+
+        # Encontra primeiro digito esperado
+        dig_um = 0 if soma_um % 11 < 2 else (11 - (soma_um % 11))
+
+        # Encontra segundo digito esperado
+        soma_dois += dig_um * 2
+        dig_dois = 0 if soma_dois % 11 < 2 else (11 - (soma_dois % 11))
+
+        # Verifica se digitos são válidos
+        if dig_um == int(digito[0]) and dig_dois == int(digito[1]):
+            return True
+        else:
+            return False
     def variaveis(self):
         self.cpf = self.vcpf.get()
         self.nome = self.vnome.get()
@@ -96,10 +129,11 @@ class funcs(Csv):
         global chave
         chave = 0
 
-        
         cpf = self.vcpf.get()
+        valido = self.valida_digito(cpf)
         while True:
-            if len(cpf) == 11:
+
+            if len(cpf) == 11 and len(set(cpf)) != 1 and valido:
                 try:
                     cpf = int(cpf)
                 except (ValueError, TypeError):
@@ -108,7 +142,7 @@ class funcs(Csv):
                     self.res1 = cpf
                     chave += 1
             else:
-                messagebox.showerror("Erro", "CPF: Insira exatamente 11 dígitos")
+                messagebox.showerror("Erro", "CPF: Insira um cpf VALIDO de 11 dígitos")
             break
 
         nome = self.vnome.get()
@@ -156,20 +190,20 @@ class funcs(Csv):
                 messagebox.showerror("Erro", "EQUIPE: Digite apenas números")
             else:
                 self.res5 = equipe
-                chave += 1    
+                chave += 1
             break
 
         while True:
             if chave == 5:
-                self.append(self.res1, self.res2, self.res3, self.res4, self.res5)
-                self.select_list()
-                global contador
-                contador += 1
-                self.res = tk.Label(self.frame_4, text=f"{contador} Cadastro(s) efetuado(s) com sucesso!", bg="#B9B7BD", font=("poppins", 16, 'bold'))
-                self.res.place(relx=0.01, rely=0.2, relwidth=0.98, relheight=0.7)
-                self.limpar_dados()
-                chave = 0
-
+                    self.append(self.res1, self.res2, self.res3, self.res4, self.res5)
+                    self.select_list()
+                    global contador
+                    contador += 1
+                    self.res = tk.Label(self.frame_4, text=f"{contador} Cadastro(s) efetuado(s) com sucesso!", bg="#B9B7BD", font=("poppins", 16, 'bold'))
+                    self.res.place(relx=0.01, rely=0.2, relwidth=0.98, relheight=0.7)
+                    self.limpar_dados()
+                    chave = 0
+            break
     def select_list(self):
         self.view_frame2.delete(*self.view_frame2.get_children())
         # self.view_frame2.selection(*self.view_frame2.get_children())

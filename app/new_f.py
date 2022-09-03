@@ -11,11 +11,11 @@ import csv
 from CRUD_F import *
 
 
-global contador
-contador = 0
+global fcontador
+fcontador = 0
 
-global valida
-valida = False
+global fvalida
+fvalida = False
 
 class funcs(Csv):
     def entrada(self):
@@ -104,8 +104,8 @@ class funcs(Csv):
         self.limpar_dadosF()
 
     def deletef(self):
-        global valida
-        if valida == True:
+        global fvalida
+        if fvalida == True:
             self.variaveisf()
             # self.delete(self.codigo)
 
@@ -115,7 +115,7 @@ class funcs(Csv):
         
             self.res = tk.Label(self.frame_2, text=f"Cadastro excluído  com sucesso!", bg="#B9B7BD", font=("poppins", 16, 'bold'))
             self.res.place(relx=0.00, rely=0.14, relwidth=1, relheight=1)
-            valida = False
+            fvalida = False
         else:
             messagebox.showerror("Erro", "Selecione um cadastro para deletar")
 
@@ -208,9 +208,9 @@ class funcs(Csv):
             if chave == 10:
                     self.appendf(self.res1, self.res2, self.res3, self.res4, self.res5, self.res6, self.res7, self.res8, self.res9, self.res10)
                     self.select_listf()
-                    global contador
-                    contador += 1
-                    self.res = tk.Label(self.frame_2, text=f"{contador} Cadastro(s) efetuado(s) com sucesso!", bg="#B9B7BD", font=("poppins", 16, 'bold'))
+                    global fcontador
+                    fcontador += 1
+                    self.res = tk.Label(self.frame_2, text=f"{fcontador} Cadastro(s) efetuado(s) com sucesso!", bg="#B9B7BD", font=("poppins", 16, 'bold'))
                     self.res.place(relx=0.00, rely=0.14, relwidth=1, relheight=1)
                     self.limpar_dadosF()
                     chave = 0
@@ -244,8 +244,8 @@ class funcs(Csv):
     def doubleclickf(self, event):
         self.limpar_dadosF()
         self.view_frame2f.selection()
-        global valida
-        valida = True
+        global fvalida
+        fvalida = True
 
         for n in self.view_frame2f.selection():
             col1, col2, col3, col4, col5, col6, col7, col8, col9, col10 = self.view_frame2f.item(n, 'values')

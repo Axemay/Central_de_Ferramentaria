@@ -45,7 +45,7 @@ class Csv :
             #self.csv_Dwriter.writerows(data)
 
     def deletf(self, codigo):
-        with open('./ferramenta.csv') as self.file:
+        with open('./ferramenta.csv', encoding='utf-8') as self.file:
             self.csv_Dreader = DictReader(self.file)
             self.data = list(self.csv_Dreader)
         with open('./ferramenta.csv', 'w', encoding='utf-8') as self.file:
