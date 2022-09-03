@@ -69,36 +69,18 @@ class funcs(Csv):
         self.view_frame2.delete(*self.view_frame2.get_children())
 
         # self.entry_nomeE.insert(END, '%')
-        cpf = self.vcpf.get()
-        nome = self.vnome.get()
-        telefone =  self.vtelefone.get()
-        turno = self.vturno.get()
-        equipe = self.vequipe.get()
-        # self.buscar(nome)
-        self.busca_pessoa(cpf)
-        self.busca_pessoa(nome)
-        self.busca_pessoa(telefone)
-        self.busca_pessoa(turno)
-        self.busca_pessoa(equipe)
+        pesquisa = self.vpesquisa.get()
+        pesquisa = pesquisa.upper()
 
-        # self.search(nome)
+        self.busca_pessoa(pesquisa)
 
-        buscacpflista = self.busca_pessoa(cpf)
-        buscanomelista = self.busca_pessoa(nome)
-        buscatelefonelista = self.busca_pessoa(telefone)
-        buscaturnolista = self.busca_pessoa(turno)
-        buscaequipelista = self.busca_pessoa(equipe)
+
+        buscacpflista = self.busca_pessoa(pesquisa)
+
 
         for i in buscacpflista:
             self.view_frame2.insert("", END, values=i)
-        for i in buscanomelista:
-            self.view_frame2.insert("", END, values=i)
-        for i in buscatelefonelista:
-            self.view_frame2.insert("", END, values=i)
-        for i in buscaturnolista:
-            self.view_frame2.insert("", END, values=i)
-        for i in buscaequipelista:
-            self.view_frame2.insert("", END, values=i)
+
         self.limpar_dados()
 
     def atualizar(self):
@@ -130,10 +112,10 @@ class funcs(Csv):
         chave = 0
 
         cpf = self.vcpf.get()
-        valido = self.valida_digito(cpf)
+        self.valido = self.valida_digito(cpf)
         while True:
 
-            if len(cpf) == 11 and len(set(cpf)) != 1 and valido:
+            if len(cpf) == 11 and len(set(cpf)) != 1 and self.valido:
                 try:
                     cpf = int(cpf)
                 except (ValueError, TypeError):
@@ -142,7 +124,7 @@ class funcs(Csv):
                     self.res1 = cpf
                     chave += 1
             else:
-                messagebox.showerror("Erro", "CPF: Insira um cpf VALIDO de 11 dígitos")
+                messagebox.showerror("Erro", "CPF: Insira um CPF Valido de 11 dígitos")
             break
 
         nome = self.vnome.get()
@@ -194,6 +176,7 @@ class funcs(Csv):
             break
 
         while True:
+
             if chave == 5:
                     self.append(self.res1, self.res2, self.res3, self.res4, self.res5)
                     self.select_list()
@@ -204,6 +187,7 @@ class funcs(Csv):
                     self.limpar_dados()
                     chave = 0
             break
+
     def select_list(self):
         self.view_frame2.delete(*self.view_frame2.get_children())
         # self.view_frame2.selection(*self.view_frame2.get_children())
@@ -273,38 +257,45 @@ class TK(funcs):
             ## BOTÕES, LABELS, ENTRIES
             self.cpf = tk.Label(self.frame_1, text="CPF:", bg='#ffd', fg='#0D0D0D',
                                    font=('poppins', 19, 'bold'))
-            self.cpf.place(relx=0.05, rely=0.02, relwidth=0.15, relheight=0.12)
+            self.cpf.place(relx=0.05, rely=0.20, relwidth=0.15, relheight=0.12)
 
             self.vcpf = tk.Entry(self.frame_1, bd=3, font=('poppins', 16, 'bold'))
-            self.vcpf.place(relx=0.22, rely=0.03, relwidth=0.4, relheight=0.11)
+            self.vcpf.place(relx=0.22, rely=0.21, relwidth=0.4, relheight=0.11)
             ################################
             self.nome = tk.Label(self.frame_1, text='Nome:', bg='#ffd', fg='#0D0D0D',
                                    font=('poppins', 19, 'bold'))
-            self.nome.place(relx=0.05, rely=0.18, relwidth=0.15, relheight=0.12)
+            self.nome.place(relx=0.05, rely=0.36, relwidth=0.15, relheight=0.12)
 
             self.vnome = tk.Entry(self.frame_1, bd=3, font=('poppins', 16, 'bold'))
-            self.vnome.place(relx=0.22, rely=0.19, relwidth=0.5, relheight=0.11)
+            self.vnome.place(relx=0.22, rely=0.37, relwidth=0.4, relheight=0.11)
             # ####################################
             self.telefone = tk.Label(self.frame_1, text='Telefone:', bg='#ffd', fg='#0D0D0D',
                                    font=('poppins', 19, 'bold'))
-            self.telefone.place(relx=0.05, rely=0.35, relwidth=0.15, relheight=0.12)
+            self.telefone.place(relx=0.05, rely=0.52, relwidth=0.15, relheight=0.12)
 
             self.vtelefone = tk.Entry(self.frame_1, bd=3, font=('poppins', 16, 'bold'))
-            self.vtelefone.place(relx=0.22, rely=0.36, relwidth=0.4, relheight=0.11)
+            self.vtelefone.place(relx=0.22, rely=0.53, relwidth=0.4, relheight=0.11)
             # ####################################
             self.turno = tk.Label(self.frame_1, text='Turno:', bg='#ffd', fg='#0D0D0D',
                                    font=('poppins', 19, 'bold'))
-            self.turno.place(relx=0.05, rely=0.51, relwidth=0.15, relheight=0.12)
+            self.turno.place(relx=0.05, rely=0.67, relwidth=0.15, relheight=0.12)
 
             self.vturno = tk.Entry(self.frame_1, bd=3, font=('poppins', 16, 'bold'))
-            self.vturno.place(relx=0.22, rely=0.52, relwidth=0.4, relheight=0.11)
+            self.vturno.place(relx=0.22, rely=0.68, relwidth=0.15, relheight=0.11)
             # ####################################
             self.equipe = tk.Label(self.frame_1, text='Equipe:', bg='#ffd', fg='#0D0D0D',
                                    font=('poppins', 19, 'bold'))
-            self.equipe.place(relx=0.05, rely=0.67, relwidth=0.15, relheight=0.12)
+            self.equipe.place(relx=0.4, rely=0.67, relwidth=0.15, relheight=0.12)
 
             self.vequipe = tk.Entry(self.frame_1, bd=3, font=('poppins', 16, 'bold'))
-            self.vequipe.place(relx=0.22, rely=0.68, relwidth=0.4, relheight=0.11)
+            self.vequipe.place(relx=0.58, rely=0.68, relwidth=0.15, relheight=0.11)
+        ########################
+            self.pesquisa = tk.Label(self.frame_1, text='Pesquisar:', bg='#ffd', fg='#0D0D0D',
+                                   font=('poppins', 19, 'bold'))
+            self.pesquisa.place(relx=0.05, rely=0.02, relwidth=0.17, relheight=0.12)
+            self.vpesquisa = tk.Entry(self.frame_1, bd=3, font=('poppins', 16, 'bold'))
+            self.vpesquisa.place(relx=0.24, rely=0.03, relwidth=0.5, relheight=0.1)
+
 ####################   BUTTON
             self.bsalvar = tk.Button(self.frame_1, text='Salvar Cadastro', bd=5, command=self.add_cliente)
             self.bsalvar.place(relx=0.22, rely=0.85, relwidth=0.15, relheight=0.12)
@@ -313,7 +304,7 @@ class TK(funcs):
             self.blimpar.place(relx=0.05, rely=0.85, relwidth=0.15, relheight=0.12)
 
             self.bbusca = tk.Button(self.frame_1, text="Pesquisar", bd=5, command=self.busca)
-            self.bbusca.place(relx=0.46, rely=0.85, relwidth=0.15, relheight=0.12)
+            self.bbusca.place(relx=0.8, rely=0.01, relwidth=0.15, relheight=0.12)
 
             self.bup = tk.Button(self.frame_1, text="Atualizar", bd=5, command= self.atualizar)
             self.bup.place(relx=0.63, rely=0.85, relwidth=0.15, relheight=0.12)
