@@ -1,3 +1,5 @@
+import code
+from hmac import compare_digest
 from msilib.schema import ComboBox
 import tkinter as tk
 from tkinter import *
@@ -14,7 +16,6 @@ contador = 0
 
 global valida
 valida = False
-
 
 class funcs(Csv):
     def entrada(self):
@@ -129,16 +130,33 @@ class funcs(Csv):
         global chave
         chave = 0
 
-        codigo = self.vcodigo_ferramenta.get()
-        while True:
-            try:
-                codigo = int(codigo)
-            except (ValueError, TypeError):
-                messagebox.showerror("Erro", "Codigo: Digite apenas números")
-            else:
-                self.res1 = codigo
+        global codigo
+        codigo = 0
+
+        with open('./ferramenta.csv', encoding='utf-8') as self.file:
+            self.csv_reader = reader(self.file)
+            self.data = list(self.csv_reader)
+            for row in self.data:
+                print(row)
+            print((row[0]))
+            self.numero = row[0]
+
+            if self.numero == "codigo":
+                self.res1 = 101
                 chave += 1
-            break
+            else:
+                self.res1 = int(row[0]) + 1
+                chave += 1
+
+        #while True:
+        #    try:
+        #        codigo = int(codigo)
+        #    except (ValueError, TypeError):
+        #        messagebox.showerror("Erro", "Codigo: Digite apenas números")
+        #    else:
+        #        self.res1 = codigo
+        #        chave += 1
+        #    break
 
         descricao = self.vazio(self.vdescricao_ferramenta.get())
         self.res2 = descricao.capitalize()
