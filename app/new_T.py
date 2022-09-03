@@ -248,7 +248,7 @@ class TK(funcs):
             ##config
             self.cadastro_tecnicos = tk.Toplevel()
             self.cadastro_tecnicos.title('Janela de Cadastro de Técnicos')
-            self.cadastro_tecnicos.iconphoto(False, tk.PhotoImage(file='ico/worker.png'))
+            self.cadastro_tecnicos.iconphoto(False, tk.PhotoImage(file='../ico/worker.png'))
             self.cadastro_tecnicos.configure(background='#B9B7BD')
             self.cadastro_tecnicos.geometry('1380x780')
             self.cadastro_tecnicos.resizable(True, True)
