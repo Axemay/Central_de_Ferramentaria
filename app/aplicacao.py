@@ -1,8 +1,7 @@
 import tkinter as tk
 import time
-from t import *
+
 from r import *
-from f import *
 from new_T import *
 from new_f import *
 #nomedomodulo.nomedadef
