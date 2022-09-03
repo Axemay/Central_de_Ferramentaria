@@ -1,6 +1,5 @@
-codigo,descricao,fabricante,voltagem,partnumber,tamanho,unidade,tipo,material
-1,afafas,China up,220,oon847-r,Grande,cm,apertador da rebinboca da parafuseta,"metal, aço, borracha"
-2,rafafa,Asdfsd,120,5484asd55,pequena,cm,dod de tor��o,madeira
-2,rafafa,Asdfsd,120,5484asd55,pequena,cm,dod de tor��o,madeira
-1,afafas,China up,220,oon847-r,Grande,cm,apertador da rebinboca da parafuseta,"metal, aço, borracha"
-1,afafas,China up,220,oon847-r,Grande,cm,apertador da rebinboca da parafuseta,"metal, aço, borracha"
+codigo,descricao,fabricante,voltagem,partnumber,tamanho,unidade,tipo,material,tempo
+101,Asdfsdf,Asdfsd,111,asdfsd,asdfsd,asdfsd,asdfsd,asdfsd,2
+102,Adfasdfasdfas,Adfasdfasd,111,asdfasdf,asdfsdf,asdfsd,asdfasd,asdfsadfsd,3
+103,Adfasdfasdfas,Adfasdfasd,111,asdfasdf,asdfsdf,asdfsd,asdfasd,asdfsadfsd,3
+104,Adfasdfasdfas,Adfasdfasd,111,asdfasdf,asdfsdf,asdfsd,asdfasd,asdfsadfsd,3

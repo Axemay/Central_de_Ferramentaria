@@ -1,3 +1,5 @@
+import code
+from hmac import compare_digest
 from msilib.schema import ComboBox
 import tkinter as tk
 from tkinter import *
@@ -8,6 +10,12 @@ from tkinter import Scrollbar
 import csv
 from CRUD_F import *
 
+
+global fcontador
+fcontador = 0
+
+global fvalida
+fvalida = False
 
 class funcs(Csv):
     def entrada(self):
@@ -23,76 +31,140 @@ class funcs(Csv):
         self.unidade = self.vunidade_medida.get()
         self.tipo = self.vtipo_ferramenta.get()
         self.material = self.vmaterial_ferramenta.get()
-
+        self.tempo = self.vTemMax_ferramenta.get()
     def buscaf(self):
         self.view_frame2f.delete(*self.view_frame2f.get_children())
 
         # self.entry_nomeE.insert(END, '%')
-        cpf = self.vcpf.get()
-        nome = self.vnome.get()
-        telefone =  self.vtelefone.get()
-        turno = self.vturno.get()
-        equipe = self.vequipe.get()
+        codigo = self.vcodigo_ferramenta.get()
+        descricao = self.vdescricao_ferramenta.get()
+        fabricante = self.vfabricante.get()
+        voltagem = self.vvoltagem.get()
+        part_number = self.vpart_number.get()
+        tamanho = self.vtamanho.get()
+        unidade = self.vunidade_medida.get()
+        tipo = self.vtipo_ferramenta.get()
+        material = self.vmaterial_ferramenta.get()
+        tempo = self.vTemMax_ferramenta.get()
         # self.buscar(nome)
-        self.busca_pessoaf(cpf)
-        self.busca_pessoaf(nome)
-        self.busca_pessoaf(telefone)
-        self.busca_pessoaf(turno)
-        self.busca_pessoaf(equipe)
+        self.busca_pessoaf(codigo)
+        self.busca_pessoaf(descricao)
+        self.busca_pessoaf(fabricante)
+        self.busca_pessoaf(voltagem)
+        self.busca_pessoaf(part_number)
+        self.busca_pessoaf(tamanho)
+        self.busca_pessoaf(unidade)
+        self.busca_pessoaf(tipo)
+        self.busca_pessoaf(material)
+        self.busca_pessoaf(tempo)
 
         # self.search(nome)
 
-        buscacpflista = self.busca_pessoa(cpf)
-        buscanomelista = self.busca_pessoa(nome)
-        buscatelefonelista = self.busca_pessoa(telefone)
-        buscaturnolista = self.busca_pessoa(turno)
-        buscaequipelista = self.busca_pessoa(equipe)
+        buscacodigolista = self.busca_pessoaf(codigo)
+        buscadescricaolista = self.busca_pessoaf(descricao)
+        buscafabricantelista = self.busca_pessoaf(fabricante)
+        buscavoltagemlista = self.busca_pessoaf(voltagem)
+        buscapart_numberlista = self.busca_pessoaf(part_number)
+        buscatamanholista = self.busca_pessoaf(tamanho)
+        buscaunidadelista = self.busca_pessoaf(unidade)
+        buscatipolista = self.busca_pessoaf(tipo)
+        buscamateriallista = self.busca_pessoaf(material)
+        buscatempolista = self.busca_pessoaf(tempo)
 
-        for i in buscacpflista:
-            self.view_frame2.insert("", END, values=i)
-        for i in buscanomelista:
-            self.view_frame2.insert("", END, values=i)
-        for i in buscatelefonelista:
-            self.view_frame2.insert("", END, values=i)
-        for i in buscaturnolista:
-            self.view_frame2.insert("", END, values=i)
-        for i in buscaequipelista:
-            self.view_frame2.insert("", END, values=i)
+        for i in buscacodigolista:
+            self.view_frame2f.insert("", END, values=i)
+        for i in buscadescricaolista:
+            self.view_frame2f.insert("", END, values=i)
+        for i in buscafabricantelista:
+            self.view_frame2f.insert("", END, values=i)
+        for i in buscavoltagemlista:
+            self.view_frame2f.insert("", END, values=i)
+        for i in buscapart_numberlista:
+            self.view_frame2f.insert("", END, values=i)
+        for i in buscatamanholista:
+            self.view_frame2f.insert("", END, values=i)
+        for i in buscaunidadelista:
+            self.view_frame2f.insert("", END, values=i)
+        for i in buscatipolista:
+            self.view_frame2f.insert("", END, values=i)
+        for i in buscamateriallista:
+            self.view_frame2f.insert("", END, values=i)
+        for i in buscatempolista:
+            self.view_frame2f.insert("", END, values=i)
+
         self.limpar_dadosF()
 
     def atualizarf(self):
         self.variaveisf()
         # self.doubleclick(event='click')
 
-        self.updatef(self.codigo, self.descricao, self.fabricante, self.voltagem, self.part_number, self.tamanho, self.unidade, self.tipo, self.material )
+        self.updatef(self.codigo, self.descricao, self.fabricante, self.voltagem, self.part_number, self.tamanho, self.unidade, self.tipo, self.material, self.tempo )
 
         self.select_listf()
         self.limpar_dadosF()
 
     def deletef(self):
-        self.variaveisf()
-        # self.delete(self.codigo)
+        global fvalida
+        if fvalida == True:
+            self.variaveisf()
+            # self.delete(self.codigo)
 
-        self.deletf(self.codigo)
-        self.limpar_dadosF()
-        self.select_listf()
+            self.deletf(self.codigo)
+            self.limpar_dadosF()
+            self.select_listf()
+        
+            self.res = tk.Label(self.frame_2, text=f"Cadastro excluído  com sucesso!", bg="#B9B7BD", font=("poppins", 16, 'bold'))
+            self.res.place(relx=0.00, rely=0.14, relwidth=1, relheight=1)
+            fvalida = False
+        else:
+            messagebox.showerror("Erro", "Selecione um cadastro para deletar")
+
+    def vazio(self, msg):
+        if msg == "":
+            messagebox.showerror("Erro", "Todos os campos devem ser preenchidos")
+        else:
+            return msg
+
 
     def add_clientef(self):
-        codigo = self.vcodigo_ferramenta.get()
-        while True:
-            try:
-                codigo = int(codigo)
-            except (ValueError, TypeError):
-                messagebox.showerror("Erro", "Codigo: Digite apenas números")
+        global chave
+        chave = 0
+
+        global codigo
+        codigo = 0
+
+        with open('./ferramenta.csv', encoding='utf-8') as self.file:
+            self.csv_reader = reader(self.file)
+            self.data = list(self.csv_reader)
+            for row in self.data:
+                print(row)
+            print((row[0]))
+            self.numero = row[0]
+
+            if self.numero == "codigo":
+                self.res1 = 101
+                chave += 1
             else:
-                self.res1 = codigo
-            break
+                self.res1 = int(row[0]) + 1
+                chave += 1
 
-        descricao = self.vdescricao_ferramenta.get()
+        #while True:
+        #    try:
+        #        codigo = int(codigo)
+        #    except (ValueError, TypeError):
+        #        messagebox.showerror("Erro", "Codigo: Digite apenas números")
+        #    else:
+        #        self.res1 = codigo
+        #        chave += 1
+        #    break
+
+        descricao = self.vazio(self.vdescricao_ferramenta.get())
         self.res2 = descricao.capitalize()
+        chave += 1
 
-        fabricante = self.vfabricante.get()
+        fabricante = self.vazio(self.vfabricante.get())
         self.res3 = fabricante.capitalize()
+        chave += 1
 
         voltagem = self.vvoltagem.get()
         while True:
@@ -102,32 +174,48 @@ class funcs(Csv):
                 messagebox.showerror("Erro", "Voltagem: Digite apenas números")
             else:
                 self.res4 = voltagem
+                chave += 1
             break
 
-        part_number = self.vpart_number.get()
+        part_number = self.vazio(self.vpart_number.get())
         self.res5 = part_number.lower()
+        chave += 1
         # sugestões
 
-        tamanho = self.vtamanho.get()
+        tamanho = self.vazio(self.vtamanho.get())
         self.res6 = tamanho
+        chave += 1
         # sugestões
 
-        unidade_medida = self.vunidade_medida.get()
+        unidade_medida = self.vazio(self.vunidade_medida.get())
         self.res7 = unidade_medida.lower()
+        chave += 1
         # sugestões
 
-        tipo_ferramenta = self.vtipo_ferramenta.get()
+        tipo_ferramenta = self.vazio(self.vtipo_ferramenta.get())
         self.res8 = tipo_ferramenta.lower()
+        chave += 1
         # sugestões
-        material = self.vmaterial_ferramenta.get()
+        material = self.vazio(self.vmaterial_ferramenta.get())
         self.res9 = material.lower()
-        try:
-            self.appendf(self.res1, self.res2, self.res3, self.res4, self.res5, self.res6, self.res7, self.res8, self.res9)
-            self.select_listf()
+        chave += 1
 
-        except Exception as e:
-            print("error ao inserir", e)
-        self.limpar_dadosF()
+        tempo = self.vazio(self.vTemMax_ferramenta.get())
+        self.res10 = tempo
+        chave += 1
+
+        while True:
+            if chave == 10:
+                    self.appendf(self.res1, self.res2, self.res3, self.res4, self.res5, self.res6, self.res7, self.res8, self.res9, self.res10)
+                    self.select_listf()
+                    global fcontador
+                    fcontador += 1
+                    self.res = tk.Label(self.frame_2, text=f"{fcontador} Cadastro(s) efetuado(s) com sucesso!", bg="#B9B7BD", font=("poppins", 16, 'bold'))
+                    self.res.place(relx=0.00, rely=0.14, relwidth=1, relheight=1)
+                    self.limpar_dadosF()
+                    chave = 0
+            break
+
 
     def select_listf(self):
         self.view_frame2f.delete(*self.view_frame2f.get_children())
@@ -137,7 +225,7 @@ class funcs(Csv):
         # lista = self.leitura()
         lista = self.leitorf()
         for i in lista:
-            if i == ["codigo","descricao","fabricante","voltagem","partnumber","tamanho","unidade","tipo","material"]:
+            if i == ["codigo","descricao","fabricante","voltagem","partnumber","tamanho","unidade","tipo","material", "tempo"]:
                 continue
             self.view_frame2f.insert("", END, values=i)
 
@@ -151,13 +239,16 @@ class funcs(Csv):
         self.vunidade_medida.delete(0, END)
         self.vtipo_ferramenta.delete(0, END)
         self.vmaterial_ferramenta.delete(0, END)
+        self.vTemMax_ferramenta.delete(0, END)
 
     def doubleclickf(self, event):
         self.limpar_dadosF()
         self.view_frame2f.selection()
+        global fvalida
+        fvalida = True
 
         for n in self.view_frame2f.selection():
-            col1, col2, col3, col4, col5, col6, col7, col8, col9 = self.view_frame2f.item(n, 'values')
+            col1, col2, col3, col4, col5, col6, col7, col8, col9, col10 = self.view_frame2f.item(n, 'values')
             self.vcodigo_ferramenta.insert(END, col1)
             self.vdescricao_ferramenta.insert(END, col2)
             self.vfabricante.insert(END, col3)
@@ -167,6 +258,7 @@ class funcs(Csv):
             self.vunidade_medida.insert(END, col7)
             self.vtipo_ferramenta.insert(END, col8)
             self.vmaterial_ferramenta.insert(END, col9)
+            self.vTemMax_ferramenta.insert(END, col10)
 
 class front_Ferramentas(funcs):
     def janela_frontF(self):
@@ -179,23 +271,22 @@ class front_Ferramentas(funcs):
         self.cadastro_ferramentas.maxsize(width=1920, height=1080)  # dimensões máximas
         self.cadastro_ferramentas.minsize(width=600, height=400)  # dimensões mínimas
 ####------------------------FRAMES--------------------------------------------------------------------###############
-        self.frame_1 = Frame(self.cadastro_ferramentas, bd=4, bg="#868B8E", highlightbackground="#0D0D0D",
-                             highlightthickness=1)
+        self.frame_1 = Frame(self.cadastro_ferramentas, bd=4, bg="#868B8E", highlightbackground="#0D0D0D", highlightthickness=1)
         self.frame_1.place(relx=0.01, rely=0.006, relwidth=0.98, relheight=0.6)
-        self.frame_2 = Frame(self.cadastro_ferramentas, bd=4, bg="#ffd", highlightbackground="#0D0D0D",
-                             highlightthickness=1)
-        self.frame_2.place(relx=0.3, rely=0.6, relwidth=0.368, relheight=0.045)
+        self.frame_2 = Frame(self.cadastro_ferramentas)
+        #bd=4, bg="#ffd", highlightbackground="#0D0D0D",                           highlightthickness=1)
+        self.frame_2.place(relx=0.3, rely=0.6, relwidth=0.38, relheight=0.045)
 
-        self.frame_3 = Frame(self.cadastro_ferramentas, bd=4, bg="#868B8E", highlightbackground="#868B8E",
-                             highlightthickness=1)
+        self.frame_3 = Frame(self.cadastro_ferramentas, bd=4)
+        #bg="#868B8E", highlightbackground="#868B8E",                              highlightthickness=1)
         self.frame_3.place(relx=0.01, rely=0.65, relwidth=0.98, relheight=0.34)
 
-##############    ##### LABELS, ENTRYS
+##############    ##### LABELS, ENTRIES
         self.codigo_ferramenta = tk.Label(self.frame_1, text='Código da Ferramenta:', bg='#ffd', fg='#0D0D0D',
                                    font=('poppins', 17, 'bold'))
         self.codigo_ferramenta.place(relx=0.01, rely=0.01, relwidth=0.25, relheight=0.08)
         self.vcodigo_ferramenta = tk.Entry(self.frame_1, bd=3, font=('poppins', 14, 'bold'))
-        self.vcodigo_ferramenta.place(relx=0.28, rely=0.01, relwidth=0.7, relheight=0.07)
+        self.vcodigo_ferramenta.place(relx=0.28, rely=0.01, relwidth=0.25, relheight=0.07)
 
         self.descricao_ferramenta = tk.Label(self.frame_1, text='Descrição da Ferramenta:', bg='#ffd', fg='#0D0D0D',
                                    font=('poppins', 17, 'bold'))
@@ -245,61 +336,63 @@ class front_Ferramentas(funcs):
         self.vmaterial_ferramenta = tk.Entry(self.frame_1, bd=3, font=('poppins', 16, 'bold'))
         self.vmaterial_ferramenta.place(relx=0.28, rely=0.81, relwidth=0.7, relheight=0.07)
 
-        self.material_ferramenta = tk.Label(self.frame_1, text='Tempo MAX Reserva (H):', bg='#ffd', fg='#0D0D0D',
-                                            font=('poppins', 13, 'bold'))
-        self.material_ferramenta.place(relx=0.3, rely=0.89, relwidth=0.2, relheight=0.05)
-        self.vmaterial_ferramenta = tk.Entry(self.frame_1, bd=3, font=('poppins', 16, 'bold'))
-        self.vmaterial_ferramenta.place(relx=0.28, rely=0.81, relwidth=0.7, relheight=0.07)
+        self.TemMax_ferramenta = tk.Label(self.frame_1, text='Tempo MAX Reserva (D):', bg='#ffd', fg='#0D0D0D',
+                                            font=('poppins', 15, 'bold'))
+        self.TemMax_ferramenta.place(relx=0.545, rely=0.01, relwidth=0.22, relheight=0.07)
+        self.vTemMax_ferramenta = tk.Entry(self.frame_1, bd=3, font=('poppins', 16, 'bold'))
+        self.vTemMax_ferramenta.place(relx=0.78, rely=0.01, relwidth=0.2, relheight=0.07)
 
-# ################ -------------- BOTÕES    ####--------------------------------------------------------------------------------
-#
-        self.bsalvar = tk.Button(self.frame_1, text='Salvar Cadastro', command= self.add_clientef)
-        self.bsalvar.place(relx=0.15, rely=0.92, relwidth=0.1, relheight=0.07)
+################# -------------- BOTÕES    ####--------------------------------------------------------------------------------
 
-        self.blimpar = tk.Button(self.frame_1, text="Limpar Campos", command=self.limpar_dadosF)
-        self.blimpar.place(relx=0.01, rely=0.92, relwidth=0.1, relheight=0.07)
+        self.bsalvar = tk.Button(self.frame_1, text='Salvar Cadastro', bd=5, command= self.add_clientef)
+        self.bsalvar.place(relx=0.15, rely=0.92, relwidth=0.11, relheight=0.08)
+
+        self.blimpar = tk.Button(self.frame_1, text="Limpar Campos", bd=5, command=self.limpar_dadosF)
+        self.blimpar.place(relx=0.01, rely=0.92, relwidth=0.11, relheight=0.08)
 
         self.bbusca = tk.Button(self.frame_1, text="Pesquisar", bd=5, command=self.buscaf)
-        self.bbusca.place(relx=0.55, rely=0.92, relwidth=0.1, relheight=0.07)
+        self.bbusca.place(relx=0.55, rely=0.92, relwidth=0.11, relheight=0.08)
 
         self.bup = tk.Button(self.frame_1, text="Atualizar", bd=5, command= self.atualizarf)
-        self.bup.place(relx=0.69, rely=0.92, relwidth=0.13, relheight=0.07)
+        self.bup.place(relx=0.69, rely=0.92, relwidth=0.11, relheight=0.08)
 
         self.bdelet = tk.Button(self.frame_1, text="Deletar", bd=5, command= self.deletef)
-        self.bdelet.place(relx=0.83, rely=0.92, relwidth=0.13, relheight=0.07)
+        self.bdelet.place(relx=0.83, rely=0.92, relwidth=0.11, relheight=0.08)
 
-        # self.bat = tk.Button(self.cadastro_tecnicos, text="Atualizar Lista", bd=5, command=self.select_list)
-        # self.bat.place(relx=0.05, rely=0.45, relwidth=0.065, relheight=0.05)
+        #self.bat = tk.Button(self.cadastro_tecnicos, text="Atualizar Lista", bd=5, command=self.select_list)
+        #self.bat.place(relx=0.05, rely=0.45, relwidth=0.065, relheight=0.05)
 
-        res = tk.Label(self.frame_2, text="Insira acima os dados da ferramenta", bg="#ffd", font=("poppins", 18, 'bold'))
-        res.place(relx=0.01, rely=0.01, relwidth=0.98, relheight=0.98)
+        self.res = tk.Label(self.frame_2, text="Insira acima os dados da ferramenta", bg="#b9b7bd", font=("poppins", 16, 'bold'))
+        self.res.place(relx=0.00, rely=0.14, relwidth=1, relheight=1)
 
         ## TRUEE VIEW
 
-        self.dados_colunas = ("codigo","descricao","fabricante","voltagem","partnumber","tamanho","unidade","tipo","material")
+        self.dados_colunas = ("codigo","descricao","fabricante","voltagem","partnumber","tamanho","unidade","tipo","material", "tempo")
         self.view_frame2f = ttk.Treeview(self.frame_3, columns=self.dados_colunas, selectmode='browse')
 
         self.view_frame2f.heading("#0", text="")
-        self.view_frame2f.heading("codigo", text="Codigo", )
-        self.view_frame2f.heading("descricao", text="Descrição", )
-        self.view_frame2f.heading("fabricante", text="Fabricante", )
-        self.view_frame2f.heading("voltagem", text="Voltagem", )
-        self.view_frame2f.heading("partnumber", text="Partnumber", )
-        self.view_frame2f.heading("tamanho", text="Tamanho", )
-        self.view_frame2f.heading("unidade", text="Unidade")
-        self.view_frame2f.heading("tipo", text="Tipo")
-        self.view_frame2f.heading("material", text="Material")
+        self.view_frame2f.heading("codigo", text="CÓDIGO", )
+        self.view_frame2f.heading("descricao", text="DESCRIÇÃO", )
+        self.view_frame2f.heading("fabricante", text="FABRICANTE", )
+        self.view_frame2f.heading("voltagem", text="VOLTAGEM", )
+        self.view_frame2f.heading("partnumber", text="PARTNUMBER", )
+        self.view_frame2f.heading("tamanho", text="TAMANHO", )
+        self.view_frame2f.heading("unidade", text="UNIDADE")
+        self.view_frame2f.heading("tipo", text="TIPO")
+        self.view_frame2f.heading("material", text="MATERIAL")
+        self.view_frame2f.heading("tempo", text="TEMPO DE RESERVA")
 
-        self.view_frame2f.column("#0", width=1)
-        self.view_frame2f.column("codigo", minwidth=0, width=250)
-        self.view_frame2f.column("descricao", minwidth=0, width=250)
-        self.view_frame2f.column("fabricante", minwidth=0, width=250)
-        self.view_frame2f.column("voltagem", minwidth=0, width=250)
-        self.view_frame2f.column("partnumber", minwidth=0, width=249)
-        self.view_frame2f.column("tamanho", minwidth=0, width=249)
-        self.view_frame2f.column("unidade", minwidth=0, width=249)
-        self.view_frame2f.column("tipo", minwidth=0, width=249)
-        self.view_frame2f.column("material", minwidth=0, width=249)
+        self.view_frame2f.column("#0", width=0)
+        self.view_frame2f.column("codigo", minwidth=0, width=30, anchor=tk.CENTER)
+        self.view_frame2f.column("descricao", minwidth=0, width=350, anchor=tk.CENTER)
+        self.view_frame2f.column("fabricante", minwidth=0, width=120, anchor=tk.CENTER)
+        self.view_frame2f.column("voltagem", minwidth=0, width=50, anchor=tk.CENTER)
+        self.view_frame2f.column("partnumber", minwidth=0, width=120, anchor=tk.CENTER)
+        self.view_frame2f.column("tamanho", minwidth=0, width=100, anchor=tk.CENTER)
+        self.view_frame2f.column("unidade", minwidth=0, width=50, anchor=tk.CENTER)
+        self.view_frame2f.column("tipo", minwidth=0, width=120, anchor=tk.CENTER)
+        self.view_frame2f.column("material", minwidth=0, width=120, anchor=tk.CENTER)
+        self.view_frame2f.column("tempo", minwidth=0, width=120, anchor=tk.CENTER)
 
 
         self.view_frame2f.place(relx=0.005, rely=0.03, relwidth=0.98, relheight=0.90)
