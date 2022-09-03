@@ -264,7 +264,7 @@ class front_Ferramentas(funcs):
     def janela_frontF(self):
         self.cadastro_ferramentas = tk.Toplevel()
         self.cadastro_ferramentas.title('Janela de Cadastro de Ferramentas')
-        self.cadastro_ferramentas.iconphoto(False, tk.PhotoImage(file='ico/tools.png'))
+        self.cadastro_ferramentas.iconphoto(False, tk.PhotoImage(file='../ico/tools.png'))
         self.cadastro_ferramentas.configure(background='#B9B7BD')
         self.cadastro_ferramentas.geometry('1380x780')
         self.cadastro_ferramentas.resizable(True, True)
