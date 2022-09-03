@@ -53,6 +53,11 @@ class Aplicacao(TK, front_Ferramentas):
                                       highlightbackground='#868B8E',
                                       highlightthickness=2)
         self.frame_reserva.place(relx= 0.67, rely = 0.3, relwidth= 0.29, relheight = 0.5)
+        
+        self.frame_copyright = tk.Frame(self.janela, bd=4, bg='#B9B7BD',
+                                     highlightbackground='#B9B7BD',
+                                     highlightthickness=2)
+        self.frame_copyright.place(relx=0.05, rely=0.85, relwidth=0.5, relheight=0.1)
 
     def botoes(self):
 
@@ -89,6 +94,10 @@ class Aplicacao(TK, front_Ferramentas):
         self.label_reserva_Img = tk.Label(self.frame_reserva, image=self.img_reserva)
         self.label_reserva.place(relx=0.3, rely=0.55, relwidth=0.4, relheight=0.1)
         self.label_reserva_Img.place(relx=0.2, rely=0.05, relwidth=0.6, relheight=0.4)
+        
+        self.label_copyright = tk.Label(self.frame_copyright, text="copyright © 2022 - Todos os direitos reservados - DevTeam13", bg='#B9B7BD',
+                                     font=('poppins', 10, 'bold'))
+        self.label_copyright.place(relx=0.0, rely=0, relwidth=0.65, relheight=0.3)
 
 Aplicacao()
 
