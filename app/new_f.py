@@ -125,7 +125,6 @@ class funcs(Csv):
         else:
             return msg
 
-
     def add_clientef(self):
         global chave
         chave = 0
@@ -216,7 +215,6 @@ class funcs(Csv):
                     chave = 0
             break
 
-
     def select_listf(self):
         self.view_frame2f.delete(*self.view_frame2f.get_children())
         # self.view_frame2.selection(*self.view_frame2.get_children())
@@ -282,11 +280,11 @@ class front_Ferramentas(funcs):
         self.frame_3.place(relx=0.01, rely=0.65, relwidth=0.98, relheight=0.34)
 
 ##############    ##### LABELS, ENTRIES
-        self.codigo_ferramenta = tk.Label(self.frame_1, text='Código da Ferramenta:', bg='#ffd', fg='#0D0D0D',
+        self.codigo_ferramenta = tk.Label(self.frame_1, text='Pesquisa :', bg='#ffd', fg='#0D0D0D',
                                    font=('poppins', 17, 'bold'))
         self.codigo_ferramenta.place(relx=0.01, rely=0.01, relwidth=0.25, relheight=0.08)
         self.vcodigo_ferramenta = tk.Entry(self.frame_1, bd=3, font=('poppins', 14, 'bold'))
-        self.vcodigo_ferramenta.place(relx=0.28, rely=0.01, relwidth=0.25, relheight=0.07)
+        self.vcodigo_ferramenta.place(relx=0.28, rely=0.01, relwidth=0.4, relheight=0.07)
 
         self.descricao_ferramenta = tk.Label(self.frame_1, text='Descrição da Ferramenta:', bg='#ffd', fg='#0D0D0D',
                                    font=('poppins', 17, 'bold'))
@@ -334,13 +332,13 @@ class front_Ferramentas(funcs):
                                    font=('poppins', 17, 'bold'))
         self.material_ferramenta.place(relx=0.01, rely=0.81, relwidth=0.25, relheight=0.08)
         self.vmaterial_ferramenta = tk.Entry(self.frame_1, bd=3, font=('poppins', 16, 'bold'))
-        self.vmaterial_ferramenta.place(relx=0.28, rely=0.81, relwidth=0.7, relheight=0.07)
+        self.vmaterial_ferramenta.place(relx=0.28, rely=0.81, relwidth=0.35, relheight=0.07)
 
         self.TemMax_ferramenta = tk.Label(self.frame_1, text='Tempo MAX Reserva (D):', bg='#ffd', fg='#0D0D0D',
                                             font=('poppins', 15, 'bold'))
-        self.TemMax_ferramenta.place(relx=0.545, rely=0.01, relwidth=0.22, relheight=0.07)
+        self.TemMax_ferramenta.place(relx=0.65, rely=0.81, relwidth=0.22, relheight=0.07)
         self.vTemMax_ferramenta = tk.Entry(self.frame_1, bd=3, font=('poppins', 16, 'bold'))
-        self.vTemMax_ferramenta.place(relx=0.78, rely=0.01, relwidth=0.2, relheight=0.07)
+        self.vTemMax_ferramenta.place(relx=0.88, rely=0.81, relwidth=0.1, relheight=0.07)
 
 ################# -------------- BOTÕES    ####--------------------------------------------------------------------------------
 
@@ -351,7 +349,7 @@ class front_Ferramentas(funcs):
         self.blimpar.place(relx=0.01, rely=0.92, relwidth=0.11, relheight=0.08)
 
         self.bbusca = tk.Button(self.frame_1, text="Pesquisar", bd=5, command=self.buscaf)
-        self.bbusca.place(relx=0.55, rely=0.92, relwidth=0.11, relheight=0.08)
+        self.bbusca.place(relx=0.7, rely=0.01, relwidth=0.11, relheight=0.08)
 
         self.bup = tk.Button(self.frame_1, text="Atualizar", bd=5, command= self.atualizarf)
         self.bup.place(relx=0.69, rely=0.92, relwidth=0.11, relheight=0.08)
