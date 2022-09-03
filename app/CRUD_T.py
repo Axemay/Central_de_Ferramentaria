@@ -94,33 +94,24 @@ class Csv :
         for pessoa in self.data:
             col1, col2, col3, col4, col5 = pessoa
 
-            # if nome_buscado == f'{col1}':
-            #     yield (pessoa)
+            if nome_buscado == f'{col1}':
+                yield (pessoa)
             # if nome_buscado == f'{col2}':
             #     yield (pessoa)
-            # if nome_buscado == f'{col3}':
-            #     yield (pessoa)
+            if nome_buscado == f'{col3}':
+                yield (pessoa)
             if nome_buscado == f'{col4}':
                 yield (pessoa)
+            if nome_buscado == f'{col5}':
+                yield (pessoa)
             ###### pesquisa regex
-            regex = re.compile(fr'{col1}', flags=re.I)
-            regex2 = re.compile(fr'{col2}', flags=re.I)
-            regex3 = re.compile(fr'{col3}', flags=re.I)
-            regex4 = re.compile(fr'{col4}', flags=re.I)
-            regex5 = re.compile(fr'{col5}', flags=re.I)
+            regex = re.compile(fr'{col2}', flags=re.I)
+
 
             if regex.findall(nome_buscado):
                 yield (pessoa)
 
-            if regex2.findall(nome_buscado):
-                yield (pessoa)
 
-            if regex3.findall(nome_buscado):
-                yield (pessoa)
-
-
-            if regex5.findall(nome_buscado):
-                yield (pessoa)
 
         return {}
 
