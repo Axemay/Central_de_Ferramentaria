@@ -5,7 +5,7 @@ from typing import Dict
 
 
 
-class Csv :
+class Csvf :
 
     def leitorf(self):
         with open('./ferramenta.csv', encoding='utf-8') as self.file:
@@ -74,7 +74,7 @@ class Csv :
                 for row in self.data:
                     if row['codigo'] == codigo :
                             #or row['nome'] == nome or row['cpf'] == cpf or row['item'] == item:
-                        # row['codigo'] = codigo
+                        row['codigo'] = codigo
                         row['descricao'] = descricao
                         row['fabricante'] = fabricante
                         row['voltagem'] = voltagem

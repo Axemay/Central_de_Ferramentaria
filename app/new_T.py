@@ -89,8 +89,9 @@ class funcs(Csv):
         if valida == True:
             self.variaveis()
             # self.doubleclick(event='click')
-
-            tel = self.vtelefone.get()
+            nome = self.vazio(self.vnome.get())
+            self.res2 = nome.title()
+            tel = self.vazio(self.vtelefone.get())
 
             while True:
                 if len(tel) == 10 or len(tel) == 11:
@@ -106,7 +107,7 @@ class funcs(Csv):
                                          "TELEFONE: Insira 10 dígitos para telefone fixo e 11 dígitos para celular, incluindo prefixo")
                 break
 
-            turno = self.vturno.get()
+            turno = self.vazio(self.vturno.get())
             turno = turno.upper()
             while True:
                 if turno == "M":
@@ -122,7 +123,7 @@ class funcs(Csv):
                     messagebox.showerror("Erro", "TURNO: Os turnos disponíveis são: M, T ou N")
                 break
 
-            equipe = self.vequipe.get()
+            equipe = self.vazio(self.vequipe.get())
             while True:
                 try:
                     equipe = int(equipe)
@@ -133,7 +134,7 @@ class funcs(Csv):
 
                 break
 
-            self.update(self.cpf, self.nome, self.res3, self.res4, self.res5)
+            self.update(self.cpf, self.res2, self.res3, self.res4, self.res5)
             self.select_list()
             self.limpar_dados()
             self.res = tk.Label(self.frame_4, text=f" Cadastro(s) Atualizado(s) com sucesso!", bg="#868B8E", fg="#ffd", font=("poppins", 16, 'bold'))
@@ -158,12 +159,18 @@ class funcs(Csv):
             valida = False
         else:
             messagebox.showerror("Erro", "Selecione um cadastro para deletar")
-        
+
+    def vazio(self, msg):
+        if msg == "":
+            messagebox.showerror("Erro", "Todos os campos devem ser preenchidos")
+        else:
+            return msg
+
     def add_cliente(self):
         global chave
         chave = 0
 
-        cpf = self.vcpf.get()
+        cpf = self.vazio(self.vcpf.get())
         self.valido = self.valida_digito(cpf)
         while True:
             with open('./tecnico.csv', encoding='utf-8') as self.file:
@@ -185,12 +192,12 @@ class funcs(Csv):
                 messagebox.showerror("Erro", "CPF: Insira um CPF Valido de 11 dígitos")
             break
 
-        nome = self.vnome.get()
+        nome = self.vazio(self.vnome.get())
         self.res2 = nome.title()
         chave += 1
 
 
-        tel = self.vtelefone.get()
+        tel = self.vazio(self.vtelefone.get())
         
         while True:
             if len(tel) == 10 or len(tel) == 11:
@@ -206,7 +213,7 @@ class funcs(Csv):
                                     "TELEFONE: Insira 10 dígitos para telefone fixo e 11 dígitos para celular, incluindo prefixo")
             break
 
-        turno = self.vturno.get()
+        turno = self.vazio(self.vturno.get())
         turno = turno.upper()
         while True:
             if turno == "M":
@@ -222,7 +229,7 @@ class funcs(Csv):
                 messagebox.showerror("Erro", "TURNO: Os turnos disponíveis são: M, T ou N")
             break
 
-        equipe = self.vequipe.get()
+        equipe = self.vazio(self.vequipe.get())
         while True:
             try:
                 equipe = int(equipe)

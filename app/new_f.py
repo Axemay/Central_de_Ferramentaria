@@ -17,12 +17,12 @@ fcontador = 0
 global fvalida
 fvalida = False
 
-class funcs(Csv):
+class funcs(Csvf):
     def entrada(self):
-        Csv.__init__(self)
+        Csvf.__init__(self)
     #chamada do modulo herança multipla
     def variaveisf(self):
-        self.codigo = self.vcodigo_ferramenta.get()
+        self.codigo = self.vcodigo.get()
         self.descricao = self.vdescricao_ferramenta.get()
         self.fabricante = self.vfabricante.get()
         self.voltagem = self.vvoltagem.get()
@@ -52,9 +52,54 @@ class funcs(Csv):
         global fvalida
         if fvalida == True:
             self.variaveisf()
-            # self.doubleclick(event='click')
 
-            self.updatef(self.codigo, self.descricao, self.fabricante, self.voltagem, self.part_number, self.tamanho, self.unidade, self.tipo, self.material, self.tempo )
+            descricao = self.vaziof(self.vdescricao_ferramenta.get())
+            self.res2 = descricao.lower()
+
+
+            fabricante = self.vaziof(self.vfabricante.get())
+            self.res3 = fabricante.lower()
+
+
+            voltagem = self.vvoltagem.get()
+            while True:
+                try:
+                    voltagem = int(voltagem)
+                except (ValueError, TypeError):
+                    messagebox.showerror("Erro", "Voltagem: Digite apenas números")
+                else:
+                    self.res4 = voltagem
+
+                break
+
+            part_number = self.vaziof(self.vpart_number.get())
+            self.res5 = part_number.lower()
+
+            # sugestões
+
+            tamanho = self.vaziof(self.vtamanho.get())
+            self.res6 = tamanho.lower()
+
+            # sugestões
+
+            unidade_medida = self.vaziof(self.vunidade_medida.get())
+            self.res7 = unidade_medida.lower()
+
+            # sugestões
+
+            tipo_ferramenta = self.vaziof(self.vtipo_ferramenta.get())
+            self.res8 = tipo_ferramenta.lower()
+
+            # sugestões
+            material = self.vaziof(self.vmaterial_ferramenta.get())
+            self.res9 = material.lower()
+
+
+            tempo = self.vaziof(self.vTemMax_ferramenta.get())
+            self.res10 = tempo
+
+            # self.doubleclick(event='click')
+            self.updatef(self.codigo, self.res2, self.res3, self.res4, self.res5, self.res6, self.res7, self.res8, self.res9, self.res10 )
             self.select_listf()
             self.limpar_dadosF()
 
@@ -82,7 +127,7 @@ class funcs(Csv):
         else:
             messagebox.showerror("Erro", "Selecione um cadastro para deletar")
 
-    def vazio(self, msg):
+    def vaziof(self, msg):
         if msg == "":
             messagebox.showerror("Erro", "Todos os campos devem ser preenchidos")
         else:
@@ -120,11 +165,11 @@ class funcs(Csv):
         #        chave += 1
         #    break
 
-        descricao = self.vazio(self.vdescricao_ferramenta.get())
+        descricao = self.vaziof(self.vdescricao_ferramenta.get())
         self.res2 = descricao.lower()
         chave += 1
 
-        fabricante = self.vazio(self.vfabricante.get())
+        fabricante = self.vaziof(self.vfabricante.get())
         self.res3 = fabricante.lower()
         chave += 1
 
@@ -139,30 +184,30 @@ class funcs(Csv):
                 chave += 1
             break
 
-        part_number = self.vazio(self.vpart_number.get())
+        part_number = self.vaziof(self.vpart_number.get())
         self.res5 = part_number.lower()
         chave += 1
         # sugestões
 
-        tamanho = self.vazio(self.vtamanho.get())
+        tamanho = self.vaziof(self.vtamanho.get())
         self.res6 = tamanho.lower()
         chave += 1
         # sugestões
 
-        unidade_medida = self.vazio(self.vunidade_medida.get())
+        unidade_medida = self.vaziof(self.vunidade_medida.get())
         self.res7 = unidade_medida.lower()
         chave += 1
         # sugestões
 
-        tipo_ferramenta = self.vazio(self.vtipo_ferramenta.get())
+        tipo_ferramenta = self.vaziof(self.vtipo_ferramenta.get())
         self.res8 = tipo_ferramenta.lower()
         chave += 1
         # sugestões
-        material = self.vazio(self.vmaterial_ferramenta.get())
+        material = self.vaziof(self.vmaterial_ferramenta.get())
         self.res9 = material.lower()
         chave += 1
 
-        tempo = self.vazio(self.vTemMax_ferramenta.get())
+        tempo = self.vaziof(self.vTemMax_ferramenta.get())
         self.res10 = tempo
         chave += 1
 
@@ -210,7 +255,7 @@ class funcs(Csv):
 
         for n in self.view_frame2f.selection():
             col1, col2, col3, col4, col5, col6, col7, col8, col9, col10 = self.view_frame2f.item(n, 'values')
-
+            self.vcodigo.insert(END, col1)
             self.vdescricao_ferramenta.insert(END, col2)
             self.vfabricante.insert(END, col3)
             self.vvoltagem.insert(END, col4)
@@ -234,12 +279,11 @@ class front_Ferramentas(funcs):
 ####------------------------FRAMES--------------------------------------------------------------------###############
         self.frame_1 = Frame(self.cadastro_ferramentas, bd=4, bg="#868B8E", highlightbackground="#0D0D0D", highlightthickness=1)
         self.frame_1.place(relx=0.01, rely=0.006, relwidth=0.98, relheight=0.6)
+
         self.frame_2 = Frame(self.cadastro_ferramentas, bd=4, bg="#868B8E", highlightbackground="#0D0D0D", highlightthickness=0.4)
-        #bd=4, bg="#ffd", highlightbackground="#0D0D0D",                           highlightthickness=1)
         self.frame_2.place(relx=0.3, rely=0.608, relwidth=0.35, relheight=0.04)
 
         self.frame_3 = Frame(self.cadastro_ferramentas, bd=4, bg="#868B8E", highlightbackground="#0D0D0D", highlightthickness=1)
-        #bg="#868B8E", highlightbackground="#868B8E",                              highlightthickness=1)
         self.frame_3.place(relx=0.01, rely=0.65, relwidth=0.98, relheight=0.34)
 
 ##############    ##### LABELS, ENTRIES
@@ -248,6 +292,9 @@ class front_Ferramentas(funcs):
         self.codigo_ferramenta.place(relx=0.01, rely=0.01, relwidth=0.25, relheight=0.08)
         self.vcodigo_ferramenta = tk.Entry(self.frame_1, bd=3, font=('poppins', 14, 'bold'))
         self.vcodigo_ferramenta.place(relx=0.28, rely=0.01, relwidth=0.4, relheight=0.07)
+
+        self.vcodigo = tk.Entry(self.frame_1, bd=3, font=('poppins', 14, 'bold'))
+        self.vcodigo.place(relx=0., rely=0.0, relwidth=0.00, relheight=0.00)
 
         self.descricao_ferramenta = tk.Label(self.frame_1, text='Descrição da Ferramenta:', bg='#ffd', fg='#0D0D0D',
                                    font=('poppins', 17, 'bold'))

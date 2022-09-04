@@ -111,5 +111,20 @@ class Csv :
 
         return {}
 
+    def busca_cpf(self, nome_buscado):
+
+        with open('./tecnico.csv', encoding='utf-8') as self.file:
+
+            self.csv_Dreader = reader(self.file)
+            self.data = list(self.csv_Dreader)
+
+        for pessoa in self.data:
+            col1, col2, col3, col4, col5 = pessoa
+
+            if nome_buscado == f'{col1}':
+                yield (pessoa)
+
+        return {}
+
 if __name__ == '__main__':
     TEST = Csv()

@@ -1,9 +1,10 @@
 import tkinter as tk
 import time
 
-from r import *
+
 from new_T import *
 from new_f import *
+from r import *
 #nomedomodulo.nomedadef
 
 # criar tela
@@ -11,7 +12,7 @@ from new_f import *
 janela = tk.Tk()
 
 
-class Aplicacao(TK, front_Ferramentas):
+class Aplicacao(TK, front_Ferramentas, Reserva):
     def __init__(self):
         TK.__init__(self)
         front_Ferramentas.__init__(self)
@@ -67,7 +68,7 @@ class Aplicacao(TK, front_Ferramentas):
         self.bt_cadastrar_ferramenta = tk.Button(self.frame_ferramenta, text="Acessar", bd=3, font=('poppins', 19, 'bold'), command= self.janela_frontF)
         self.bt_cadastrar_ferramenta.place(relx=0.1, rely=0.8, relwidth=0.8, relheight=0.15)
 
-        self.bt_cadastrar_reserva = tk.Button(self.frame_reserva, text="Acessar", bd=3, font=('poppins', 19, 'bold'), command= janela_cadastro_reservas)
+        self.bt_cadastrar_reserva = tk.Button(self.frame_reserva, text="Acessar", bd=3, font=('poppins', 19, 'bold'), command= self.janela_cadastro_reservas)
         self.bt_cadastrar_reserva.place(relx=0.1, rely=0.8, relwidth=0.8, relheight=0.15)
 
     def labels(self):
