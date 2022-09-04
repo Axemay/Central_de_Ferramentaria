@@ -184,11 +184,24 @@ class Reserva (funcsRT, funcsRF) :
         self.vData_entrega = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
         self.vData_entrega.place(relx=0.7, rely=0.5, relwidth=0.12, relheight=0.04)
 
+        self.Hora_entrega = tk.Label(self.cadastro_reservas, text='Hora da Entrega :', bg='#ffd', fg='#0D0D0D',
+                                     font=('poppins', 14, 'bold'))
+        self.Hora_entrega.place(relx=0.55, rely=0.55, relwidth=0.14, relheight=0.04)
+        self.vHora_entrega = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
+        self.vHora_entrega.place(relx=0.7, rely=0.55, relwidth=0.12, relheight=0.04)
+#-------------------------------------------------------------------
         self.Data_retirada = tk.Label(self.cadastro_reservas, text='Data da Retirada :', bg='#ffd', fg='#0D0D0D',
                                           font=('poppins', 14, 'bold'))
         self.Data_retirada.place(relx=0.14, rely=0.5, relwidth=0.14, relheight=0.04)
         self.vData_retirada = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
         self.vData_retirada.place(relx=0.29, rely=0.5, relwidth=0.12, relheight=0.04)
+
+        self.Hora_retirada = tk.Label(self.cadastro_reservas, text='Hora da Retirada :', bg='#ffd', fg='#0D0D0D',
+                                     font=('poppins', 14, 'bold'))
+        self.Hora_retirada.place(relx=0.14, rely=0.55, relwidth=0.14, relheight=0.04)
+        self.Hora_retirada = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
+        self.Hora_retirada.place(relx=0.29, rely=0.55, relwidth=0.12, relheight=0.04)
+#--------------------------------------------------------------------
 
         self.bupF = tk.Button(self.cadastro_reservas, text="Reservar", bd=5)
         self.bupF.place(relx=0.43, rely=0.6, relwidth=0.1, relheight=0.05)
