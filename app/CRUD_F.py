@@ -118,6 +118,36 @@ class Csvf :
                 yield (pessoa)
         return {}
 
+    def busca_cod(self, nome_buscado: str) -> Dict[str, str]:
+
+        with open('./ferramenta.csv', encoding='utf-8') as self.file:
+
+            self.csv_Dreader = reader(self.file)
+            self.data = list(self.csv_Dreader)
+
+        for pessoa in self.data:
+            col1, col2, col3, col4, col5, col6, col7, col8, col9, col10 = pessoa
+
+            if nome_buscado == f'{col1}':
+                yield (pessoa)
+
+            # # if nome_buscado == f'{col2}':
+            # #     yield (pessoa)
+            # # if nome_buscado == f'{col3}':
+            # #     yield (pessoa)
+            # if nome_buscado == f'{col4}':
+            #     yield (pessoa)
+            # if nome_buscado == f'{col6}':
+            #     yield (pessoa)
+            # if nome_buscado == f'{col7}':
+            #     yield (pessoa)
+            # if nome_buscado == f'{col10}':
+            #     yield (pessoa)
+            # regex = re.compile(fr'{col2}|{col3}|{col5}|{col8}|{col9}', flags=re.I)
+            # if regex.findall(nome_buscado):
+            #     yield (pessoa)
+        return {}
+
 
 if __name__ == '__main__':
-    TEST = Csv()
+    TEST = Csvf()
