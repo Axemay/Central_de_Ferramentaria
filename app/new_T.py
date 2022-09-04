@@ -192,12 +192,12 @@ class funcs(Csv):
                 messagebox.showerror("Erro", "CPF: Insira um CPF Valido de 11 dígitos")
             break
 
-        nome = self.vnome.get()
+        nome = self.vazio(self.vnome.get())
         self.res2 = nome.title()
         chave += 1
 
 
-        tel = self.vtelefone.get()
+        tel = self.vazio(self.vtelefone.get())
         
         while True:
             if len(tel) == 10 or len(tel) == 11:
@@ -213,7 +213,7 @@ class funcs(Csv):
                                     "TELEFONE: Insira 10 dígitos para telefone fixo e 11 dígitos para celular, incluindo prefixo")
             break
 
-        turno = self.vturno.get()
+        turno = self.vazio(self.vturno.get())
         turno = turno.upper()
         while True:
             if turno == "M":
@@ -229,7 +229,7 @@ class funcs(Csv):
                 messagebox.showerror("Erro", "TURNO: Os turnos disponíveis são: M, T ou N")
             break
 
-        equipe = self.vequipe.get()
+        equipe = self.vazio(self.vequipe.get())
         while True:
             try:
                 equipe = int(equipe)
@@ -377,9 +377,6 @@ class TK(funcs):
 
             self.bat = tk.Button(self.cadastro_tecnicos, text="Atualizar Lista", bd=5, command=self.select_list)
             self.bat.place(relx=0.15, rely=0.44, relwidth=0.092, relheight=0.05)
-
-            self.bt_gerar_pdf = tk.Button(self.cadastro_tecnicos, text="Gerar PDF", bd=5)            
-            self.bt_gerar_pdf.place(relx=0.75, rely=0.44, relwidth=0.092, relheight=0.05)
 
             ########## MENSAGEM
             self.res = tk.Label(self.frame_4, text="Insira acima os dados do funcionário", bg="#868B8E", fg="#ffd", font=("poppins", 16, 'bold'))
