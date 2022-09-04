@@ -93,19 +93,12 @@ class funcs(Csv):
         turno = self.vturno.get()
         turno = turno.upper()
 
-
-
-
         self.update(self.cpf, self.nome, self.telefone, turno, self.equipe)
         self.select_list()
 
-        self.res = tk.Label(self.frame_4, text=f"{contador} Cadastro(s) efetuado(s) com sucesso!", bg="#B9B7BD", font=("poppins", 16, 'bold'))
+        self.res = tk.Label(self.frame_4, text=f" Cadastro(s) Atualizado(s) com sucesso!", bg="#B9B7BD", font=("poppins", 16, 'bold'))
         self.res.place(relx=0.01, rely=0.2, relwidth=0.98, relheight=0.7)
         self.limpar_dados()
-
-
-
-
 
     def delete(self):
         global valida

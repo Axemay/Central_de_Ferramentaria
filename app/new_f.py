@@ -32,10 +32,12 @@ class funcs(Csv):
         self.tipo = self.vtipo_ferramenta.get()
         self.material = self.vmaterial_ferramenta.get()
         self.tempo = self.vTemMax_ferramenta.get()
+
     def buscaf(self):
         self.view_frame2f.delete(*self.view_frame2f.get_children())
 
         codigo = self.vcodigo_ferramenta.get()
+        codigo =  codigo.lower()
 
         self.busca_pessoaf(codigo)
 
@@ -47,13 +49,22 @@ class funcs(Csv):
         self.limpar_dadosF()
 
     def atualizarf(self):
-        self.variaveisf()
-        # self.doubleclick(event='click')
+        global fvalida
+        if fvalida == True:
+            self.variaveisf()
+            # self.doubleclick(event='click')
 
-        self.updatef(self.codigo, self.descricao, self.fabricante, self.voltagem, self.part_number, self.tamanho, self.unidade, self.tipo, self.material, self.tempo )
+            self.updatef(self.codigo, self.descricao, self.fabricante, self.voltagem, self.part_number, self.tamanho, self.unidade, self.tipo, self.material, self.tempo )
+            self.select_listf()
+            self.limpar_dadosF()
 
-        self.select_listf()
-        self.limpar_dadosF()
+            self.res = tk.Label(self.frame_2, text=f"Cadastro atualizado com sucesso!", bg="#80806F", fg="#ffd",
+                                font=("poppins", 16, 'bold'))
+            self.res.place(relx=0.00, rely=0.00, relwidth=1, relheight=1)
+
+            fvalida = False
+        else:
+            messagebox.showerror("Erro", "Selecione um cadastro para atualizar")
 
     def deletef(self):
         global fvalida
@@ -65,8 +76,8 @@ class funcs(Csv):
             self.limpar_dadosF()
             self.select_listf()
         
-            self.res = tk.Label(self.frame_2, text=f"Cadastro excluído  com sucesso!", bg="#B9B7BD", font=("poppins", 16, 'bold'))
-            self.res.place(relx=0.00, rely=0.14, relwidth=1, relheight=1)
+            self.res = tk.Label(self.frame_2, text=f"Cadastro excluído  com sucesso!", bg="#80806F",fg= "#ffd", font=("poppins", 16, 'bold'))
+            self.res.place(relx=0.00, rely=0.00, relwidth=1, relheight=1)
             fvalida = False
         else:
             messagebox.showerror("Erro", "Selecione um cadastro para deletar")
@@ -110,11 +121,11 @@ class funcs(Csv):
         #    break
 
         descricao = self.vazio(self.vdescricao_ferramenta.get())
-        self.res2 = descricao.capitalize()
+        self.res2 = descricao.lower()
         chave += 1
 
         fabricante = self.vazio(self.vfabricante.get())
-        self.res3 = fabricante.capitalize()
+        self.res3 = fabricante.lower()
         chave += 1
 
         voltagem = self.vvoltagem.get()
@@ -134,7 +145,7 @@ class funcs(Csv):
         # sugestões
 
         tamanho = self.vazio(self.vtamanho.get())
-        self.res6 = tamanho
+        self.res6 = tamanho.lower()
         chave += 1
         # sugestões
 
@@ -161,8 +172,8 @@ class funcs(Csv):
                     self.select_listf()
                     global fcontador
                     fcontador += 1
-                    self.res = tk.Label(self.frame_2, text=f"{fcontador} Cadastro(s) efetuado(s) com sucesso!", bg="#B9B7BD", font=("poppins", 16, 'bold'))
-                    self.res.place(relx=0.00, rely=0.14, relwidth=1, relheight=1)
+                    self.res = tk.Label(self.frame_2, text=f"{fcontador} Cadastro(s) efetuado(s) com sucesso!", bg="#80806F",fg= "#ffd", font=("poppins", 16, 'bold'))
+                    self.res.place(relx=0.00, rely=0.00, relwidth=1, relheight=1)
                     self.limpar_dadosF()
                     chave = 0
             break
@@ -199,7 +210,7 @@ class funcs(Csv):
 
         for n in self.view_frame2f.selection():
             col1, col2, col3, col4, col5, col6, col7, col8, col9, col10 = self.view_frame2f.item(n, 'values')
-            self.vcodigo_ferramenta.insert(END, col1)
+
             self.vdescricao_ferramenta.insert(END, col2)
             self.vfabricante.insert(END, col3)
             self.vvoltagem.insert(END, col4)
@@ -221,13 +232,13 @@ class front_Ferramentas(funcs):
         self.cadastro_ferramentas.maxsize(width=1920, height=1080)  # dimensões máximas
         self.cadastro_ferramentas.minsize(width=600, height=400)  # dimensões mínimas
 ####------------------------FRAMES--------------------------------------------------------------------###############
-        self.frame_1 = Frame(self.cadastro_ferramentas, bd=4, bg="#868B8E", highlightbackground="#0D0D0D", highlightthickness=1)
+        self.frame_1 = Frame(self.cadastro_ferramentas, bd=4, bg="#80806F", highlightbackground="#0D0D0D", highlightthickness=1)
         self.frame_1.place(relx=0.01, rely=0.006, relwidth=0.98, relheight=0.6)
-        self.frame_2 = Frame(self.cadastro_ferramentas)
+        self.frame_2 = Frame(self.cadastro_ferramentas, bd=4, bg="#80806F", highlightbackground="#0D0D0D", highlightthickness=0.4)
         #bd=4, bg="#ffd", highlightbackground="#0D0D0D",                           highlightthickness=1)
-        self.frame_2.place(relx=0.3, rely=0.6, relwidth=0.38, relheight=0.045)
+        self.frame_2.place(relx=0.3, rely=0.608, relwidth=0.35, relheight=0.04)
 
-        self.frame_3 = Frame(self.cadastro_ferramentas, bd=4)
+        self.frame_3 = Frame(self.cadastro_ferramentas, bd=4, bg="#80806F", highlightbackground="#0D0D0D", highlightthickness=1)
         #bg="#868B8E", highlightbackground="#868B8E",                              highlightthickness=1)
         self.frame_3.place(relx=0.01, rely=0.65, relwidth=0.98, relheight=0.34)
 
@@ -312,11 +323,12 @@ class front_Ferramentas(funcs):
         self.bdelet = tk.Button(self.frame_1, text="Deletar", bd=5, command= self.deletef)
         self.bdelet.place(relx=0.83, rely=0.92, relwidth=0.11, relheight=0.08)
 
-        #self.bat = tk.Button(self.cadastro_tecnicos, text="Atualizar Lista", bd=5, command=self.select_list)
-        #self.bat.place(relx=0.05, rely=0.45, relwidth=0.065, relheight=0.05)
+        self.bat = tk.Button(self.cadastro_ferramentas, text="Atualizar Lista", bd=5, command=self.select_listf)
+        self.bat.place(relx=0.08, rely=0.608, relwidth=0.07, relheight=0.04)
 
-        self.res = tk.Label(self.frame_2, text="Insira acima os dados da ferramenta", bg="#b9b7bd", font=("poppins", 16, 'bold'))
-        self.res.place(relx=0.00, rely=0.14, relwidth=1, relheight=1)
+
+        self.res = tk.Label(self.frame_2, text="Insira acima os dados da ferramenta", bg="#80806F",fg= "#FFF6D1", font=("poppins", 18, 'bold'))
+        self.res.place(relx=0.00, rely=0.00, relwidth=1, relheight=1)
 
         ## TRUEE VIEW
 
