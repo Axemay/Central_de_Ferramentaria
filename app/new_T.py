@@ -331,15 +331,13 @@ class TK(funcs):
             self.bat = tk.Button(self.cadastro_tecnicos, text="Atualizar Lista", bd=5, command=self.select_list)
             self.bat.place(relx=0.15, rely=0.44, relwidth=0.092, relheight=0.05)
 
-            self.bt_gerar_pdf = tk.Button(self.cadastro_tecnicos, text="Gerar PDF", bd=5)            
-            self.bt_gerar_pdf.place(relx=0.75, rely=0.44, relwidth=0.092, relheight=0.05)
 
             ########## MENSAGEM
             self.res = tk.Label(self.frame_4, text="Insira acima os dados do funcionário", font=("poppins", 16, 'bold'))
             self.res.place(relx=0.01, rely=0.2, relwidth=0.98, relheight=0.7)
 
             self.op = tk.Label(self.frame_3,
-                          text="Para Atualizar : Não mude o cpf !\n\n      Salvar cadstro : \nCPF deve conter exatamente 11 dígitos\nTelefone deve conter 10 dígitos com prefixo incluso\nTURNO: Manhã (m), Tarde (t), Noite (n)\nTodos os campos devem ser preenchidos\n\n   Deletar :\nDe um Double click na Trueview",
+                          text="Para Atualizar : Não mude o cpf !\n\n      Salvar cadastro : \nCPF deve conter exatamente 11 dígitos\nTelefone deve conter 10 dígitos com prefixo incluso\nTURNO: Manhã (m), Tarde (t), Noite (n)\nTodos os campos devem ser preenchidos\n\n   Deletar :\nDe um Double click na Trueview",
                           bg="#ffd", font=("poppins", 11, 'bold'))
             self.op.place(relx=0.01, rely=0.01, relwidth=0.99, relheight=0.99)
 
