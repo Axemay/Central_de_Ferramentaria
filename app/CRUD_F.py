@@ -5,7 +5,7 @@ from typing import Dict
 
 
 
-class Csv :
+class Csvf :
 
     def leitorf(self):
         with open('./ferramenta.csv', encoding='utf-8') as self.file:

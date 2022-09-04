@@ -17,9 +17,9 @@ fcontador = 0
 global fvalida
 fvalida = False
 
-class funcs(Csv):
+class funcs(Csvf):
     def entrada(self):
-        Csv.__init__(self)
+        Csvf.__init__(self)
     #chamada do modulo herança multipla
     def variaveisf(self):
         self.codigo = self.vcodigo.get()
@@ -279,12 +279,11 @@ class front_Ferramentas(funcs):
 ####------------------------FRAMES--------------------------------------------------------------------###############
         self.frame_1 = Frame(self.cadastro_ferramentas, bd=4, bg="#868B8E", highlightbackground="#0D0D0D", highlightthickness=1)
         self.frame_1.place(relx=0.01, rely=0.006, relwidth=0.98, relheight=0.6)
+
         self.frame_2 = Frame(self.cadastro_ferramentas, bd=4, bg="#868B8E", highlightbackground="#0D0D0D", highlightthickness=0.4)
-        #bd=4, bg="#ffd", highlightbackground="#0D0D0D",                           highlightthickness=1)
         self.frame_2.place(relx=0.3, rely=0.608, relwidth=0.35, relheight=0.04)
 
         self.frame_3 = Frame(self.cadastro_ferramentas, bd=4, bg="#868B8E", highlightbackground="#0D0D0D", highlightthickness=1)
-        #bg="#868B8E", highlightbackground="#868B8E",                              highlightthickness=1)
         self.frame_3.place(relx=0.01, rely=0.65, relwidth=0.98, relheight=0.34)
 
 ##############    ##### LABELS, ENTRIES
