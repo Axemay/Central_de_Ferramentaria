@@ -84,12 +84,47 @@ class funcs(Csv):
         self.limpar_dados()
 
     def atualizar(self):
+        global chave
+        chave = 0
+
         self.variaveis()
         # self.doubleclick(event='click')
-        self.update(self.cpf, self.nome, self.telefone, self.turno, self.equipe)
+        cpf = self.vcpf.get()
+        self.valido = self.valida_digito(cpf)
+        while True:
+            with open('./tecnico.csv', encoding='utf-8') as self.file:
+                self.csv_Dreader = DictReader(self.file)
+                self.data = list(self.csv_Dreader)
+            for row in self.data:
+                if row['cpf'] == cpf:
+                    if len(cpf) == 11 and len(set(cpf)) != 1 and self.valido:
+                        try:
+                            cpf = int(cpf)
+                        except (ValueError, TypeError):
+                            continue
+                        else:
+                            self.res11 = cpf
+                            chave += 1
+                    else:
+                        messagebox.showerror("Erro", "CPF: Insira um CPF Valido de 11 dígitos")
+                        break
+            break
+        turno = self.vturno.get()
+        turno = turno.upper()
 
-        self.select_list()
-        self.limpar_dados()
+        while True:
+
+            if chave == 1:
+                    self.update(self.cpf, self.nome, self.telefone, turno, self.equipe)
+                    self.select_list()
+
+                    self.res = tk.Label(self.frame_4, text=f"{contador} Cadastro(s) efetuado(s) com sucesso!", bg="#B9B7BD", font=("poppins", 16, 'bold'))
+                    self.res.place(relx=0.01, rely=0.2, relwidth=0.98, relheight=0.7)
+                    self.limpar_dados()
+                    chave = 0
+            break
+
+
 
     def delete(self):
         global valida
@@ -114,7 +149,13 @@ class funcs(Csv):
         cpf = self.vcpf.get()
         self.valido = self.valida_digito(cpf)
         while True:
-
+            with open('./tecnico.csv', encoding='utf-8') as self.file:
+                self.csv_Dreader = DictReader(self.file)
+                self.data = list(self.csv_Dreader)
+            for row in self.data:
+                if row['cpf'] == cpf:
+                    messagebox.showerror("Erro", "CPF: Ja existe")
+                    return
             if len(cpf) == 11 and len(set(cpf)) != 1 and self.valido:
                 try:
                     cpf = int(cpf)
@@ -222,8 +263,6 @@ class funcs(Csv):
             self.vtelefone.insert(END, col3)
             self.vturno.insert(END, col4)
             self.vequipe.insert(END, col5)
-
-
 
 class TK(funcs):
 

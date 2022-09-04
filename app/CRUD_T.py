@@ -40,8 +40,6 @@ class Csv :
             self.csv_Dwriter.writerow(data)
             #self.csv_Dwriter.writerows(data)
 
-    
-
     def delet(self,cpf, nome):
         with open('./tecnico.csv', encoding='utf-8') as self.file:
             self.csv_Dreader = DictReader(self.file)
@@ -58,8 +56,6 @@ class Csv :
 
                 self.csv_Dwriter.writerow(row)
 
-
-
     def update(self, cpf, nome, telefone, turno, equipe):
         with open('./tecnico.csv', encoding='utf-8') as self.file:
             self.csv_Dreader = DictReader(self.file)
@@ -73,9 +69,9 @@ class Csv :
 
             try:
                 for row in self.data:
-                    if row['cpf'] == cpf or row['nome'] == nome:
+                    if row['cpf'] == cpf :
                             #or row['nome'] == nome or row['cpf'] == cpf or row['item'] == item:
-                        row['cpf'] = cpf
+                       #row['cpf'] = cpf
                         row['nome'] = nome
                         row['telefone'] = telefone
                         row['turno'] = turno
@@ -114,7 +110,6 @@ class Csv :
 
 
         return {}
-
 
 if __name__ == '__main__':
     TEST = Csv()
