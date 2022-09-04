@@ -58,6 +58,7 @@ class funcs(Csv):
             return True
         else:
             return False
+
     def variaveis(self):
         self.cpf = self.vcpf.get()
         self.nome = self.vnome.get()
