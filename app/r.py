@@ -283,32 +283,32 @@ class Reserva (funcsRT, funcsRF) :
 
 
     ## true view frame 3
-        self.dados_colunas = ("codigo","descricao","fabricante","voltagem","partnumber","tamanho","unidade","tipo","material", "tempo")
+        self.dados_colunas = ("cpf", "nome", "telefone", "codigo", "descricao", "voltagem", "tipo", "data", "hora")
         self.view_frame3 = ttk.Treeview(self.frame_3, columns=self.dados_colunas, selectmode='browse')
 
         self.view_frame3.heading("#0", text="")
+        self.view_frame3.heading("cpf", text="CPF")
+        self.view_frame3.heading("nome", text="NOME")
+        self.view_frame3.heading("telefone", text="TELEFONE")
         self.view_frame3.heading("codigo", text="CÓDIGO", )
         self.view_frame3.heading("descricao", text="DESCRIÇÃO", )
-        self.view_frame3.heading("fabricante", text="FABRICANTE", )
         self.view_frame3.heading("voltagem", text="VOLTAGEM", )
-        self.view_frame3.heading("partnumber", text="PARTNUMBER", )
-        self.view_frame3.heading("tamanho", text="TAMANHO", )
-        self.view_frame3.heading("unidade", text="UNIDADE")
         self.view_frame3.heading("tipo", text="TIPO")
-        self.view_frame3.heading("material", text="MATERIAL")
-        self.view_frame3.heading("tempo", text="TEMPO DE RESERVA")
+        self.view_frame3.heading("data", text="DATA")
+        self.view_frame3.heading("hora", text="HORA")
+
 
         self.view_frame3.column("#0", width=0)
-        self.view_frame3.column("codigo", minwidth=0, width=30, anchor=tk.CENTER)
-        self.view_frame3.column("descricao", minwidth=0, width=350, anchor=tk.CENTER)
-        self.view_frame3.column("fabricante", minwidth=0, width=120, anchor=tk.CENTER)
-        self.view_frame3.column("voltagem", minwidth=0, width=50, anchor=tk.CENTER)
-        self.view_frame3.column("partnumber", minwidth=0, width=120, anchor=tk.CENTER)
-        self.view_frame3.column("tamanho", minwidth=0, width=100, anchor=tk.CENTER)
-        self.view_frame3.column("unidade", minwidth=0, width=50, anchor=tk.CENTER)
+        self.view_frame3.column("cpf", minwidth=0, width=120, anchor=tk.CENTER)
+        self.view_frame3.column("nome", minwidth=0, width=170, anchor=tk.CENTER)
+        self.view_frame3.column("telefone", minwidth=0, width=150, anchor=tk.CENTER)
+        self.view_frame3.column("codigo", minwidth=0, width=120, anchor=tk.CENTER)
+        self.view_frame3.column("descricao", minwidth=0, width=200, anchor=tk.CENTER)
+        self.view_frame3.column("voltagem", minwidth=0, width=100, anchor=tk.CENTER)
         self.view_frame3.column("tipo", minwidth=0, width=120, anchor=tk.CENTER)
-        self.view_frame3.column("material", minwidth=0, width=120, anchor=tk.CENTER)
-        self.view_frame3.column("tempo", minwidth=0, width=120, anchor=tk.CENTER)
+        self.view_frame3.column("data", minwidth=0, width=120, anchor=tk.CENTER)
+        self.view_frame3.column("hora", minwidth=0, width=120, anchor=tk.CENTER)
+
 
 
         self.view_frame3.place(relx=0.005, rely=0.03, relwidth=0.98, relheight=0.90)
