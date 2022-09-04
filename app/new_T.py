@@ -90,10 +90,50 @@ class funcs(Csv):
             self.variaveis()
             # self.doubleclick(event='click')
 
+            tel = self.vtelefone.get()
+
+            while True:
+                if len(tel) == 10 or len(tel) == 11:
+                    try:
+                        tel = int(tel)
+                    except (ValueError, TypeError):
+                        messagebox.showerror("Erro", "TELEFONE: Digite apenas números")
+                    else:
+                        self.res3 = tel
+
+                else:
+                    messagebox.showerror("Erro",
+                                         "TELEFONE: Insira 10 dígitos para telefone fixo e 11 dígitos para celular, incluindo prefixo")
+                break
+
             turno = self.vturno.get()
             turno = turno.upper()
+            while True:
+                if turno == "M":
+                    self.res4 = turno
 
-            self.update(self.cpf, self.nome, self.telefone, turno, self.equipe)
+                elif turno == "T":
+                    self.res4 = turno
+
+                elif turno == "N":
+                    self.res4 = turno
+
+                else:
+                    messagebox.showerror("Erro", "TURNO: Os turnos disponíveis são: M, T ou N")
+                break
+
+            equipe = self.vequipe.get()
+            while True:
+                try:
+                    equipe = int(equipe)
+                except (ValueError, TypeError):
+                    messagebox.showerror("Erro", "EQUIPE: Digite apenas números")
+                else:
+                    self.res5 = equipe
+
+                break
+
+            self.update(self.cpf, self.nome, self.res3, self.res4, self.res5)
             self.select_list()
             self.limpar_dados()
             self.res = tk.Label(self.frame_4, text=f" Cadastro(s) Atualizado(s) com sucesso!", bg="#868B8E", fg="#ffd", font=("poppins", 16, 'bold'))
