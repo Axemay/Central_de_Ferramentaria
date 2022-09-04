@@ -1,5 +1,5 @@
 codigo,descricao,fabricante,voltagem,partnumber,tamanho,unidade,tipo,material,tempo
-104,gggggg,",k,mn,m,","mn,",",n,mn,n",asdfsdf,asdfsd,asdfasd,asdfsadfsd,3
+104,fafafa,",k,mn,m,",321,agaga,asdfsdf,asdfsd,asdfasd,asdfsadfsd,3
 106,asdfsdf,rafa,111,asdfsd,asdfsd,asdfsd,asdfsd,asdfsd,2
 107,rafinhaaa,adfasdfasd,111,asdfasdf,asdfsdf,asdfsd,asdfasd,asdfsadfsd,3
 108,adfasdfasdfas,adfasdfasd,111,asdfasdf,asdfsdf,asdfsd,asdfasd,asdfsadfsd,3
@@ -25,3 +25,5 @@ codigo,descricao,fabricante,voltagem,partnumber,tamanho,unidade,tipo,material,te
 128,adfasdfasdfas,adfasdfasd,111,asdfasdf,asdfsdf,asdfsd,asdfasd,asdfsadfsd,3
 129,adfasdfasdfas,adfasdfasd,111,asdfasdf,asdfsdf,asdfsd,asdfasd,asdfsadfsd,3
 130,asdfsdf,rafa,111,asdfsd,asdfsd,asdfsd,asdfsd,asdfsd,2
+131,crecreu,rafa,111,asdfsd,asdfsd,asdfsd,asdfsd,asdfsd,2
+132,crecreu,rafa,111,asdfsd,asdfsd,asdfsd,asdfsd,asdfsd,12 horas
