@@ -89,40 +89,21 @@ class funcs(Csv):
 
         self.variaveis()
         # self.doubleclick(event='click')
-        cpf = self.vcpf.get()
-        self.valido = self.valida_digito(cpf)
-        while True:
-            with open('./tecnico.csv', encoding='utf-8') as self.file:
-                self.csv_Dreader = DictReader(self.file)
-                self.data = list(self.csv_Dreader)
-            for row in self.data:
-                if row['cpf'] == cpf:
-                    if len(cpf) == 11 and len(set(cpf)) != 1 and self.valido:
-                        try:
-                            cpf = int(cpf)
-                        except (ValueError, TypeError):
-                            continue
-                        else:
-                            self.res11 = cpf
-                            chave += 1
-                    else:
-                        messagebox.showerror("Erro", "CPF: Insira um CPF Valido de 11 dígitos")
-                        break
-            break
+
         turno = self.vturno.get()
         turno = turno.upper()
 
-        while True:
 
-            if chave == 1:
-                    self.update(self.cpf, self.nome, self.telefone, turno, self.equipe)
-                    self.select_list()
 
-                    self.res = tk.Label(self.frame_4, text=f"{contador} Cadastro(s) efetuado(s) com sucesso!", bg="#B9B7BD", font=("poppins", 16, 'bold'))
-                    self.res.place(relx=0.01, rely=0.2, relwidth=0.98, relheight=0.7)
-                    self.limpar_dados()
-                    chave = 0
-            break
+
+        self.update(self.cpf, self.nome, self.telefone, turno, self.equipe)
+        self.select_list()
+
+        self.res = tk.Label(self.frame_4, text=f"{contador} Cadastro(s) efetuado(s) com sucesso!", bg="#B9B7BD", font=("poppins", 16, 'bold'))
+        self.res.place(relx=0.01, rely=0.2, relwidth=0.98, relheight=0.7)
+        self.limpar_dados()
+
+
 
 
 
@@ -362,8 +343,8 @@ class TK(funcs):
             self.res.place(relx=0.01, rely=0.2, relwidth=0.98, relheight=0.7)
 
             self.op = tk.Label(self.frame_3,
-                          text="TURNO: Manhã (m), Tarde (t), Noite (n)\n\nCPF deve conter exatamente 11 dígitos\n\nTelefone deve conter 10 dígitos com prefixo incluso\n\nTodos os campos devem ser preenchidos",
-                          bg="#ffd", font=("poppins", 13, 'bold'))
+                          text="Para Atualizar : Não mude o cpf !\n\n      Salvar cadstro : \nCPF deve conter exatamente 11 dígitos\nTelefone deve conter 10 dígitos com prefixo incluso\nTURNO: Manhã (m), Tarde (t), Noite (n)\nTodos os campos devem ser preenchidos\n\n   Deletar :\nDe um Double click na Trueview",
+                          bg="#ffd", font=("poppins", 11, 'bold'))
             self.op.place(relx=0.01, rely=0.01, relwidth=0.99, relheight=0.99)
 
             ## TREE VIEW
