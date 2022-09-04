@@ -7,6 +7,72 @@ from tkinter import messagebox
 from tkinter import Scrollbar
 from CRUD_F import *
 from CRUD_T import *
+from CRUD_R import *
+
+class funcsRR (CsvR):
+    def variaveisR(self):
+        self.reservat = self.vPesquisa_ReservaT.get()
+        self.reservaf = self.vPesquisa_ReservaF.get()
+
+        # self.dataentrega = self.vData_entrega.get()
+        # self.horaentrega = self.vHora_entrega.get()
+        # self.dataretirada = self.vData_retirada.get()
+        # self.horaretirada = self.vHora_retirada.get()
+    def limpar_dadosR(self):
+        self.vPesquisa_ReservaT.delete(0, END)
+        self.vPesquisa_ReservaF.delete(0, END)
+        self.vData_entrega.delete(0, END)
+        self.vHora_entrega.delete(0, END)
+        self.vData_retirada.delete(0, END)
+        self.vHora_retirada.delete(0, END)
+    def select_listR(self):
+        self.view_frame3.delete(*self.view_frame3.get_children())
+        # self.view_frame2.selection(*self.view_frame2.get_children())
+        # lista = self.query("SELECT * FROM teste1")
+        # lista = self.leitor_dict()
+        # lista = self.leitura()
+        lista = self.leitorR()
+
+        for i in lista:
+            if i == ["cpf", "nome", "telefone", "codigo", "descricao", "voltagem", "tipo"]:
+                continue
+
+            self.view_frame3.insert("", END, values = i)
+    def doubleclickR(self, event):
+        self.limpar_dadosR()
+        self.view_frame3.selection()
+        global fvalida
+        fvalida = True
+
+        for n in self.view_frame3.selection():
+            col1, col2, col3, col4, col5, col6, col7, col8, col9= self.view_frame3.item(n, 'values')
+
+            self.vPesquisa_ReservaT.insert(END, col1)
+            self.vPesquisa_ReservaT.insert(END, ",")
+            self.vPesquisa_ReservaT.insert(END, col2)
+            self.vPesquisa_ReservaT.insert(END, ",")
+            self.vPesquisa_ReservaT.insert(END, col3)
+            self.vPesquisa_ReservaF.insert(END, col4)
+            self.vPesquisa_ReservaF.insert(END, ",")
+            self.vPesquisa_ReservaF.insert(END, col5)
+            self.vPesquisa_ReservaF.insert(END, ",")
+            self.vPesquisa_ReservaF.insert(END, col6)
+            self.vPesquisa_ReservaF.insert(END, ",")
+            self.vPesquisa_ReservaF.insert(END, col7)
+            # self.vData_entrega.insert(END, col8)
+            # self.vPesquisa_ReservaF.insert(END, ",")
+            # self.vData_entrega.insert(END, col9)
+
+    def add_cliente(self):
+
+        self.appendR(self.reservat, self.reservaf, self.res3, self.res4, self.res5)
+        self.select_listR()
+
+        # self.res = tk.Label(self.frame_4, text=f"{contador} Cadastro(s) efetuado(s) com sucesso!", bg="#868B8E",
+        #                             fg="#ffd", font=("poppins", 16, 'bold'))
+        # self.res.place(relx=0.01, rely=0.2, relwidth=0.98, relheight=0.7)
+        self.limpar_dadosR()
+
 
 class funcsRF (Csvf):
     def vazioF(self, msg):
@@ -126,7 +192,7 @@ class funcsRT (Csv):
             self.vPesquisa_ReservaT.insert(END, ",")
             self.vPesquisa_ReservaT.insert(END, col3)
 
-class Reserva (funcsRT, funcsRF) :
+class Reserva (funcsRT, funcsRF, funcsRR) :
     def janela_cadastro_reservas(self):
         self.cadastro_reservas = tk.Toplevel()
         self.cadastro_reservas.title('Janela de Cadastro de Reservas')
@@ -199,8 +265,8 @@ class Reserva (funcsRT, funcsRF) :
         self.Hora_retirada = tk.Label(self.cadastro_reservas, text='Hora da Retirada :', bg='#ffd', fg='#0D0D0D',
                                      font=('poppins', 14, 'bold'))
         self.Hora_retirada.place(relx=0.14, rely=0.55, relwidth=0.14, relheight=0.04)
-        self.Hora_retirada = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
-        self.Hora_retirada.place(relx=0.29, rely=0.55, relwidth=0.12, relheight=0.04)
+        self.vHora_retirada = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
+        self.vHora_retirada.place(relx=0.29, rely=0.55, relwidth=0.12, relheight=0.04)
 #--------------------------------------------------------------------
 
         self.bupF = tk.Button(self.cadastro_reservas, text="Reservar", bd=5)
@@ -217,13 +283,10 @@ class Reserva (funcsRT, funcsRF) :
         self.view_frame1.heading("nome", text="NOME")
         self.view_frame1.heading("telefone", text="TELEFONE")
 
-
-
         self.view_frame1.column("#0", width=0)
         self.view_frame1.column("cpf", minwidth=0, width=300, anchor=tk.CENTER)
         self.view_frame1.column("nome", minwidth=0, width=350, anchor=tk.CENTER)
         self.view_frame1.column("telefone", minwidth=0, width=350, anchor=tk.CENTER)
-
 
         self.view_frame1.place(relx=0.005, rely=0.155, relwidth=0.98, relheight=0.8)
 
@@ -283,7 +346,7 @@ class Reserva (funcsRT, funcsRF) :
 
 
     ## true view frame 3
-        self.dados_colunas = ("cpf", "nome", "telefone", "codigo", "descricao", "voltagem", "tipo", "data", "hora")
+        self.dados_colunas = ("cpf", "nome", "telefone", "codigo", "descricao", "voltagem", "tipo")
         self.view_frame3 = ttk.Treeview(self.frame_3, columns=self.dados_colunas, selectmode='browse')
 
         self.view_frame3.heading("#0", text="")
@@ -294,8 +357,8 @@ class Reserva (funcsRT, funcsRF) :
         self.view_frame3.heading("descricao", text="DESCRIÇÃO", )
         self.view_frame3.heading("voltagem", text="VOLTAGEM", )
         self.view_frame3.heading("tipo", text="TIPO")
-        self.view_frame3.heading("data", text="DATA")
-        self.view_frame3.heading("hora", text="HORA")
+        # self.view_frame3.heading("data", text="DATA")
+        # self.view_frame3.heading("hora", text="HORA")
 
 
         self.view_frame3.column("#0", width=0)
@@ -306,10 +369,8 @@ class Reserva (funcsRT, funcsRF) :
         self.view_frame3.column("descricao", minwidth=0, width=200, anchor=tk.CENTER)
         self.view_frame3.column("voltagem", minwidth=0, width=100, anchor=tk.CENTER)
         self.view_frame3.column("tipo", minwidth=0, width=120, anchor=tk.CENTER)
-        self.view_frame3.column("data", minwidth=0, width=120, anchor=tk.CENTER)
-        self.view_frame3.column("hora", minwidth=0, width=120, anchor=tk.CENTER)
-
-
+        # self.view_frame3.column("data", minwidth=0, width=120, anchor=tk.CENTER)
+        # self.view_frame3.column("hora", minwidth=0, width=120, anchor=tk.CENTER)
 
         self.view_frame3.place(relx=0.005, rely=0.03, relwidth=0.98, relheight=0.90)
 
@@ -320,5 +381,5 @@ class Reserva (funcsRT, funcsRF) :
         self.scrolbar_lista2 = Scrollbar(self.frame_3, orient="horizontal", command=self.view_frame3.xview)
         self.view_frame3.configure(xscrollcommand=self.scrolbar_lista2.set)
         self.scrolbar_lista2.place(relx=0.005, rely=0.93, relwidth=0.97, relheight=0.07)
-        # self.view_frame2f.bind("<Double-1>", self.doubleclickf)
-        # self.select_listT()
+        self.view_frame3.bind("<Double-1>", self.doubleclickR)
+        self.select_listR()
