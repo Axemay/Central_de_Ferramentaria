@@ -58,7 +58,7 @@ class funcs(Csv):
             self.select_listf()
             self.limpar_dadosF()
 
-            self.res = tk.Label(self.frame_2, text=f"Cadastro atualizado com sucesso!", bg="#80806F", fg="#ffd",
+            self.res = tk.Label(self.frame_2, text=f"Cadastro atualizado com sucesso!", bg="#868B8E", fg="#ffd",
                                 font=("poppins", 16, 'bold'))
             self.res.place(relx=0.00, rely=0.00, relwidth=1, relheight=1)
 
@@ -76,7 +76,7 @@ class funcs(Csv):
             self.limpar_dadosF()
             self.select_listf()
         
-            self.res = tk.Label(self.frame_2, text=f"Cadastro excluído  com sucesso!", bg="#80806F",fg= "#ffd", font=("poppins", 16, 'bold'))
+            self.res = tk.Label(self.frame_2, text=f"Cadastro excluído  com sucesso!", bg="#868B8E",fg= "#ffd", font=("poppins", 16, 'bold'))
             self.res.place(relx=0.00, rely=0.00, relwidth=1, relheight=1)
             fvalida = False
         else:
@@ -172,7 +172,7 @@ class funcs(Csv):
                     self.select_listf()
                     global fcontador
                     fcontador += 1
-                    self.res = tk.Label(self.frame_2, text=f"{fcontador} Cadastro(s) efetuado(s) com sucesso!", bg="#80806F",fg= "#ffd", font=("poppins", 16, 'bold'))
+                    self.res = tk.Label(self.frame_2, text=f"{fcontador} Cadastro(s) efetuado(s) com sucesso!", bg="#868B8E",fg= "#ffd", font=("poppins", 16, 'bold'))
                     self.res.place(relx=0.00, rely=0.00, relwidth=1, relheight=1)
                     self.limpar_dadosF()
                     chave = 0
@@ -232,13 +232,13 @@ class front_Ferramentas(funcs):
         self.cadastro_ferramentas.maxsize(width=1920, height=1080)  # dimensões máximas
         self.cadastro_ferramentas.minsize(width=600, height=400)  # dimensões mínimas
 ####------------------------FRAMES--------------------------------------------------------------------###############
-        self.frame_1 = Frame(self.cadastro_ferramentas, bd=4, bg="#80806F", highlightbackground="#0D0D0D", highlightthickness=1)
+        self.frame_1 = Frame(self.cadastro_ferramentas, bd=4, bg="#868B8E", highlightbackground="#0D0D0D", highlightthickness=1)
         self.frame_1.place(relx=0.01, rely=0.006, relwidth=0.98, relheight=0.6)
-        self.frame_2 = Frame(self.cadastro_ferramentas, bd=4, bg="#80806F", highlightbackground="#0D0D0D", highlightthickness=0.4)
+        self.frame_2 = Frame(self.cadastro_ferramentas, bd=4, bg="#868B8E", highlightbackground="#0D0D0D", highlightthickness=0.4)
         #bd=4, bg="#ffd", highlightbackground="#0D0D0D",                           highlightthickness=1)
         self.frame_2.place(relx=0.3, rely=0.608, relwidth=0.35, relheight=0.04)
 
-        self.frame_3 = Frame(self.cadastro_ferramentas, bd=4, bg="#80806F", highlightbackground="#0D0D0D", highlightthickness=1)
+        self.frame_3 = Frame(self.cadastro_ferramentas, bd=4, bg="#868B8E", highlightbackground="#0D0D0D", highlightthickness=1)
         #bg="#868B8E", highlightbackground="#868B8E",                              highlightthickness=1)
         self.frame_3.place(relx=0.01, rely=0.65, relwidth=0.98, relheight=0.34)
 
@@ -327,7 +327,7 @@ class front_Ferramentas(funcs):
         self.bat.place(relx=0.08, rely=0.608, relwidth=0.07, relheight=0.04)
 
 
-        self.res = tk.Label(self.frame_2, text="Insira acima os dados da ferramenta", bg="#80806F",fg= "#FFF6D1", font=("poppins", 18, 'bold'))
+        self.res = tk.Label(self.frame_2, text="Insira acima os dados da ferramenta", bg="#868B8E",fg= "#FFF6D1", font=("poppins", 18, 'bold'))
         self.res.place(relx=0.00, rely=0.00, relwidth=1, relheight=1)
 
         ## TRUEE VIEW
