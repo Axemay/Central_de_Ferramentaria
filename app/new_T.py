@@ -84,21 +84,23 @@ class funcs(Csv):
         self.limpar_dados()
 
     def atualizar(self):
-        global chave
-        chave = 0
+        global valida
+        if valida == True:
+            self.variaveis()
+            # self.doubleclick(event='click')
 
-        self.variaveis()
-        # self.doubleclick(event='click')
+            turno = self.vturno.get()
+            turno = turno.upper()
 
-        turno = self.vturno.get()
-        turno = turno.upper()
+            self.update(self.cpf, self.nome, self.telefone, turno, self.equipe)
+            self.select_list()
+            self.limpar_dados()
+            self.res = tk.Label(self.frame_4, text=f" Cadastro(s) Atualizado(s) com sucesso!", font=("poppins", 16, 'bold'))
+            self.res.place(relx=0.01, rely=0.2, relwidth=0.98, relheight=0.7)
 
-        self.update(self.cpf, self.nome, self.telefone, turno, self.equipe)
-        self.select_list()
-
-        self.res = tk.Label(self.frame_4, text=f" Cadastro(s) Atualizado(s) com sucesso!", bg="#B9B7BD", font=("poppins", 16, 'bold'))
-        self.res.place(relx=0.01, rely=0.2, relwidth=0.98, relheight=0.7)
-        self.limpar_dados()
+            valida = False
+        else:
+            messagebox.showerror("Erro", "Selecione um cadastro para atualizar")
 
     def delete(self):
         global valida
@@ -110,7 +112,7 @@ class funcs(Csv):
             self.limpar_dados()
             self.select_list()
         
-            self.res = tk.Label(self.frame_4, text=f"Cadastro excluído  com sucesso!", bg="#B9B7BD", font=("poppins", 16, 'bold'))
+            self.res = tk.Label(self.frame_4, text=f"Cadastro excluído  com sucesso!", font=("poppins", 16, 'bold'))
             self.res.place(relx=0.01, rely=0.2, relwidth=0.98, relheight=0.7)
             valida = False
         else:
@@ -197,7 +199,7 @@ class funcs(Csv):
                     self.select_list()
                     global contador
                     contador += 1
-                    self.res = tk.Label(self.frame_4, text=f"{contador} Cadastro(s) efetuado(s) com sucesso!", bg="#B9B7BD", font=("poppins", 16, 'bold'))
+                    self.res = tk.Label(self.frame_4, text=f"{contador} Cadastro(s) efetuado(s) com sucesso!",  font=("poppins", 16, 'bold'))
                     self.res.place(relx=0.01, rely=0.2, relwidth=0.98, relheight=0.7)
                     self.limpar_dados()
                     chave = 0
@@ -332,7 +334,7 @@ class TK(funcs):
             self.bt_gerar_pdf.place(relx=0.75, rely=0.44, relwidth=0.092, relheight=0.05)
 
             ########## MENSAGEM
-            self.res = tk.Label(self.frame_4, text="Insira acima os dados do funcionário", bg="#b9b7bd", font=("poppins", 16, 'bold'))
+            self.res = tk.Label(self.frame_4, text="Insira acima os dados do funcionário", font=("poppins", 16, 'bold'))
             self.res.place(relx=0.01, rely=0.2, relwidth=0.98, relheight=0.7)
 
             self.op = tk.Label(self.frame_3,
