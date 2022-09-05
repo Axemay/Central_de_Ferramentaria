@@ -2,9 +2,9 @@ import tkinter as tk
 import time
 
 
-from new_T import *
-from new_f import *
-from r import *
+from tecnico import *
+from ferramenta import *
+from reserva import *
 #nomedomodulo.nomedadef
 
 # criar tela
