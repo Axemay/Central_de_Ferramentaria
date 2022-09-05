@@ -3,7 +3,7 @@ from csv import DictWriter, DictReader
 import re
 from tkinter import Tk
 from typing import Dict
-import new_T
+import tecnico
 
 
 class Csv :
