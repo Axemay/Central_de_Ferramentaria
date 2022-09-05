@@ -24,7 +24,6 @@ class Aplicacao(TK, front_Ferramentas, Reserva):
 
         janela.mainloop()
 
-
     def janela_config(self):
         self.janela.title('Central de Ferramentaria')
         self.janela.iconphoto(False, tk.PhotoImage(file='../ico/tools.png'))
