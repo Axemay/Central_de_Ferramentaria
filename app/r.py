@@ -7,6 +7,8 @@ from tkinter import messagebox
 from tkinter import Scrollbar
 from CRUD_F import *
 from CRUD_T import *
+from datetime import date, time, datetime, timedelta
+from dateutil.relativedelta import relativedelta
 
 class funcsRF (Csvf):
     def vazioF(self, msg):
@@ -126,6 +128,14 @@ class funcsRT (Csv):
             self.vPesquisa_ReservaT.insert(END, ",")
             self.vPesquisa_ReservaT.insert(END, col3)
 
+    def valida_data(self):
+        self.data = datetime.now()
+        self.dataent = self.vData_entrega.get()
+        self.horaent = self.vHora_entrega.get()
+        self.dataret = self.vData_retirada()
+        self.horaret = self.vHora_retirada()
+        
+
 class Reserva (funcsRT, funcsRF) :
     def janela_cadastro_reservas(self):
         self.cadastro_reservas = tk.Toplevel()
@@ -181,26 +191,55 @@ class Reserva (funcsRT, funcsRF) :
         self.Data_entrega = tk.Label(self.cadastro_reservas, text='Data da Entrega :', bg='#ffd', fg='#0D0D0D',
                                       font=('poppins', 14, 'bold'))
         self.Data_entrega.place(relx=0.55, rely=0.5, relwidth=0.14, relheight=0.04)
-        self.vData_entrega = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
-        self.vData_entrega.place(relx=0.7, rely=0.5, relwidth=0.12, relheight=0.04)
+        self.vData_entregaD = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
+        self.vData_entregaD.place(relx=0.7, rely=0.5, relwidth=0.04, relheight=0.04)
+        self.vData_entregaM = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
+        self.vData_entregaM.place(relx=0.74, rely=0.5, relwidth=0.04, relheight=0.04)
+        self.vData_entregaA = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
+        self.vData_entregaA.place(relx=0.78, rely=0.5, relwidth=0.04, relheight=0.04)
+        
+#------------------------------------------------------------------
+
 
         self.Hora_entrega = tk.Label(self.cadastro_reservas, text='Hora da Entrega :', bg='#ffd', fg='#0D0D0D',
                                      font=('poppins', 14, 'bold'))
         self.Hora_entrega.place(relx=0.55, rely=0.55, relwidth=0.14, relheight=0.04)
-        self.vHora_entrega = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
-        self.vHora_entrega.place(relx=0.7, rely=0.55, relwidth=0.12, relheight=0.04)
+        self.vHora_entregaD = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
+        self.vHora_entregaD.place(relx=0.7, rely=0.55, relwidth=0.04, relheight=0.04)
+        self.vHora_entregaM = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
+        self.vHora_entregaM.place(relx=0.74, rely=0.55, relwidth=0.04, relheight=0.04)
+        self.vHora_entregaA = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
+        self.vHora_entregaA.place(relx=0.78, rely=0.55, relwidth=0.04, relheight=0.04)
+
+        
 #-------------------------------------------------------------------
+
+        
         self.Data_retirada = tk.Label(self.cadastro_reservas, text='Data da Retirada :', bg='#ffd', fg='#0D0D0D',
                                           font=('poppins', 14, 'bold'))
         self.Data_retirada.place(relx=0.14, rely=0.5, relwidth=0.14, relheight=0.04)
-        self.vData_retirada = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
-        self.vData_retirada.place(relx=0.29, rely=0.5, relwidth=0.12, relheight=0.04)
+        self.vData_retiradaD = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
+        self.vData_retiradaD.place(relx=0.29, rely=0.5, relwidth=0.04, relheight=0.04)
+        self.vData_retiradaM = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
+        self.vData_retiradaM.place(relx=0.33, rely=0.5, relwidth=0.04, relheight=0.04)
+        self.vData_retiradaA = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
+        self.vData_retiradaA.place(relx=0.37, rely=0.5, relwidth=0.04, relheight=0.04)
 
+#-------------------------------------------------------------------
+
+        
         self.Hora_retirada = tk.Label(self.cadastro_reservas, text='Hora da Retirada :', bg='#ffd', fg='#0D0D0D',
                                      font=('poppins', 14, 'bold'))
         self.Hora_retirada.place(relx=0.14, rely=0.55, relwidth=0.14, relheight=0.04)
-        self.Hora_retirada = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
-        self.Hora_retirada.place(relx=0.29, rely=0.55, relwidth=0.12, relheight=0.04)
+        self.vHora_retiradaD = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
+        self.vHora_retiradaD.place(relx=0.29, rely=0.55, relwidth=0.04, relheight=0.04)
+        self.vHora_retiradaM = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
+        self.vHora_retiradaM.place(relx=0.33, rely=0.55, relwidth=0.04, relheight=0.04)
+        self.vHora_retiradaA = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
+        self.vHora_retiradaA.place(relx=0.37, rely=0.55, relwidth=0.04, relheight=0.04)
+
+
+        
 #--------------------------------------------------------------------
 
         self.bupF = tk.Button(self.cadastro_reservas, text="Reservar", bd=5)
@@ -240,6 +279,7 @@ class Reserva (funcsRT, funcsRF) :
 ## true view frame 2
         self.dados_colunas = ( "codigo","descricao","fabricante","voltagem","partnumber","tamanho","unidade","tipo","material", "tempo")
 
+
         self.view_frame2 = ttk.Treeview(self.frame_2, columns=self.dados_colunas, selectmode='browse')
 
         self.view_frame2.heading("#0", text="")
@@ -276,9 +316,15 @@ class Reserva (funcsRT, funcsRF) :
         self.scrolbar_lista2 = Scrollbar(self.frame_2, orient="horizontal", command=self.view_frame2.xview)
         self.view_frame2.configure(xscrollcommand=self.scrolbar_lista2.set)
         self.scrolbar_lista2.place(relx=0.005, rely=0.93, relwidth=0.97, relheight=0.07)
+
         self.view_frame2.bind("<Double-1>", self.doubleclickF)
         self.select_listF()
 
+
+
+        # self.view_frame1.bind("<Double-1>", self.doubleclickT)
+        # self.select_listT()
+        
 
 
 
