@@ -1,11 +1,12 @@
 from ferramenta import *
 from reserva import *
 from tecnico import *
+import webbrowser
 
 # criar tela
 
 janela = tk.Tk()
-
+webbrowser.open("manual.pdf")
 
 class Aplicacao(TK, front_Ferramentas, Reserva):
     def __init__(self):

@@ -339,13 +339,13 @@ class front_Ferramentas(funcs):
         self.vmaterial_ferramenta = tk.Entry(self.frame_1, bd=3, font=('poppins', 16, 'bold'))
         self.vmaterial_ferramenta.place(relx=0.28, rely=0.81, relwidth=0.35, relheight=0.07)
 
-        self.TemMax_ferramenta = tk.Label(self.frame_1, text='Tempo MAX Reserva (D):', bg='#ffd', fg='#0D0D0D',
+        self.TemMax_ferramenta = tk.Label(self.frame_1, text='Tempo MAX Reserva (H):', bg='#ffd', fg='#0D0D0D',
                                           font=('poppins', 15, 'bold'))
         self.TemMax_ferramenta.place(relx=0.65, rely=0.81, relwidth=0.22, relheight=0.07)
 
         #lista_horas = ("06 horas", "12 horas", "18 horas", "24 horas", "30 horas")
 
-        self.TemMax_ferramenta = tk.Label(self.frame_1, text='Tempo MAX Reserva (D):', bg='#ffd', fg='#0D0D0D',
+        self.TemMax_ferramenta = tk.Label(self.frame_1, text='Tempo MAX Reserva (H):', bg='#ffd', fg='#0D0D0D',
                                           font=('poppins', 15, 'bold'))
         self.TemMax_ferramenta.place(relx=0.65, rely=0.81, relwidth=0.22, relheight=0.07)
 
