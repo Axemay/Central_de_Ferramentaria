@@ -1,2 +1,2 @@
-cpf,nome,telefone,codigo,descricao,voltagem,tipo
-32141,rafa,555,142,fafafa,120,cobre
+cpf,nome,telefone,codigo,descricao,voltagem,tipo,dataretirada,horaretirada,dataentrega,horaentrega
+22222222222,Ze Do P,55555555555,106,asdfsdf,111,asdfsd,12,13,12,13
