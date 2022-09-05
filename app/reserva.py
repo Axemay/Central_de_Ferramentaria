@@ -287,6 +287,22 @@ class funcsRR (CsvR):
             self.vPesquisa_ReservaF.insert(END, col6)
             self.vPesquisa_ReservaF.insert(END, ",")
             self.vPesquisa_ReservaF.insert(END, col7)
+
+            
+
+    def limpar_entries(self):
+        self.vPesquisa_ReservaT.delete(0, END)
+        self.vPesquisa_ReservaF.delete(0, END)
+        self.vData_entregaD.delete(0, END)        
+        self.vData_entregaM.delete(0, END) 
+        self.vHora_entregaH.delete(0, END)
+        self.vData_retiradaD.delete(0, END)
+        self.vData_retiradaM.delete(0, END)
+        self.vHora_retiradaH.delete(0, END)
+        
+
+
+            
     def add_reserva(self):
         self.variaveisR()
         self.appendR(self.gcpf, self.gnome, self.gtel, self.gcod, self.gdes, self.gvolt, self.gtipo, self.dataretirada, self.horaretirada, self.dataentrega, self.horaentrega)
@@ -435,7 +451,7 @@ class Reserva (funcsRT, funcsRF, funcsRR) :
 #------------------------------------------------------------
         ##  OUTROS BOTÕES, ENTRYS E LEBELS
 
-        self.limpacamp = tk.Button(self.cadastro_reservas, text="Limpar Campos", bd=5)
+        self.limpacamp = tk.Button(self.cadastro_reservas, text="Limpar Campos", bd=5, command=self.limpar_entries)
         self.limpacamp.place(relx=0.10, rely=0.6, relwidth=0.1, relheight=0.05)
 
         self.btdel = tk.Button(self.cadastro_reservas, text="Delete", bd=5)
