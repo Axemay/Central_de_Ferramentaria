@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import tkinter as tk
 import time
 
@@ -7,11 +6,11 @@ from tecnico import *
 from ferramenta import *
 from reserva import *
 #nomedomodulo.nomedadef
-=======
+
 from ferramenta import *
 from reserva import *
 from tecnico import *
->>>>>>> 01df669638bf94977fe2ed50e8b5eb89e7f82163
+
 
 # criar tela
 

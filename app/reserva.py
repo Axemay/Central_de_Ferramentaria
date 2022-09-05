@@ -6,12 +6,12 @@ from tkinter import Scrollbar
 from tkinter import messagebox
 from CRUD_F import *
 from CRUD_R import *
-<<<<<<< HEAD
+
 from datetime import date, time, datetime, timedelta
 
-=======
+
 from CRUD_T import *
->>>>>>> 01df669638bf94977fe2ed50e8b5eb89e7f82163
+
 
 
 class funcsRF (Csvf):
@@ -346,7 +346,8 @@ class Reserva (funcsRT, funcsRF, funcsRR) :
 
         self.batualizarT = tk.Button(self.frame_2, text="Atualizar Lista", bd=5, command=self.select_listF)
         self.batualizarT.place(relx=0.79, rely=0.0, relwidth=0.1, relheight=0.15)
-    ##  OUTROS BOTÕES, ENTRYS E LEBELS
+
+        
 
 #------------------------------------------------------------------
 
@@ -418,7 +419,9 @@ class Reserva (funcsRT, funcsRF, funcsRR) :
         self.Gnome.place(relx=0.00, rely=0.00, relwidth=0.00, relheight=0.00)
         self.Gtel = tk.Entry(self.frame_1, bd=3, font=('poppins', 11, 'bold'))
         self.Gtel.place(relx=0.00, rely=0.00, relwidth=0.00, relheight=0.00)
+        
 #==========
+        
         self.Gcod = tk.Entry(self.frame_2, bd=3, font=('poppins', 11, 'bold'))
         self.Gcod.place(relx=0.00, rely=0.00, relwidth=0.00, relheight=0.00)
         self.Gdes = tk.Entry(self.frame_2, bd=3, font=('poppins', 11, 'bold'))
@@ -429,10 +432,20 @@ class Reserva (funcsRT, funcsRF, funcsRR) :
         self.Gtipo.place(relx=0.00, rely=0.00, relwidth=0.00, relheight=0.00)
 
 #------------------------------------------------------------
+        ##  OUTROS BOTÕES, ENTRYS E LEBELS
+
+        self.limpacamp = tk.Button(self.cadastro_reservas, text="Limpar Campos", bd=5)
+        self.limpacamp.place(relx=0.10, rely=0.6, relwidth=0.1, relheight=0.05)
+
+        self.btdel = tk.Button(self.cadastro_reservas, text="Delete", bd=5)
+        self.btdel.place(relx=0.30, rely=0.6, relwidth=0.1, relheight=0.05)
+
         self.bupR = tk.Button(self.cadastro_reservas, text="Reservar", bd=5, command= self.add_reserva)
         self.bupR.place(relx=0.43, rely=0.6, relwidth=0.1, relheight=0.05)
+
         self.batR = tk.Button(self.cadastro_reservas, text="Atualizar Lista", bd=5, command=self.select_listR)
-        self.batR.place(relx=0.6, rely=0.61, relwidth=0.1, relheight=0.04)
+        self.batR.place(relx=0.6, rely=0.6, relwidth=0.1, relheight=0.05)
+        
 ############################### TRUE VIEW ==============================================================================
     ## true view frame 1
         self.dados_colunas = ("cpf", "nome", "telefone")
