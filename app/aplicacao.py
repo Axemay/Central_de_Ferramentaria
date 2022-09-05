@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import tkinter as tk
 import time
 
@@ -6,6 +7,11 @@ from tecnico import *
 from ferramenta import *
 from reserva import *
 #nomedomodulo.nomedadef
+=======
+from ferramenta import *
+from reserva import *
+from tecnico import *
+>>>>>>> 01df669638bf94977fe2ed50e8b5eb89e7f82163
 
 # criar tela
 
@@ -38,7 +44,7 @@ class Aplicacao(TK, front_Ferramentas, Reserva):
                                       highlightbackground='#B9B7BD',
                                       highlightthickness=2)
         self.frame_titulo.place(relx=0.05, rely=0, relwidth=0.91, relheight=0.3)
-        
+
         self.frame_tecnico = tk.Frame(self.janela, bd= 4, bg='#fff',
                                       highlightbackground='#868B8E',
                                       highlightthickness=2)
@@ -53,7 +59,12 @@ class Aplicacao(TK, front_Ferramentas, Reserva):
                                       highlightbackground='#868B8E',
                                       highlightthickness=2)
         self.frame_reserva.place(relx= 0.67, rely = 0.3, relwidth= 0.29, relheight = 0.5)
-        
+
+        self.frame_manual = tk.Frame(self.janela, bd=4, bg='#B9B7BD',
+                                     highlightbackground='#B9B7BD',
+                                     highlightthickness=2)
+        self.frame_manual.place(relx=0.67, rely=0.8, relwidth=0.29, relheight=0.2)
+
         self.frame_copyright = tk.Frame(self.janela, bd=4, bg='#B9B7BD',
                                      highlightbackground='#B9B7BD',
                                      highlightthickness=2)
@@ -70,13 +81,15 @@ class Aplicacao(TK, front_Ferramentas, Reserva):
         self.bt_cadastrar_reserva = tk.Button(self.frame_reserva, text="Acessar", bd=3, font=('poppins', 19, 'bold'), command= self.janela_cadastro_reservas)
         self.bt_cadastrar_reserva.place(relx=0.1, rely=0.8, relwidth=0.8, relheight=0.15)
 
+
+
     def labels(self):
         self.label_titulo = tk.Label(self.frame_titulo, text="Central de Ferramentaria", bg='#B9B7BD', font=('poppins', 50, 'bold'))
         self.label_titulo.place(relx=0.0, rely=0.3, relwidth=1, relheight=0.3)
         self.label_versao = tk.Label(self.frame_titulo, text="Versão 1.0", bg='#B9B7BD',
                                      font=('poppins', 15))
         self.label_versao.place(relx=0.0, rely=0.56, relwidth=1, relheight=0.3)
-        
+
         self.label_tec = tk.Label(self.frame_tecnico, text="Técnico", bg='#fff', font=('poppins', 25, 'bold'))
         self.img_tec = tk.PhotoImage(file='../ico/worker.png')
         self.label_tec_Img = tk.Label(self.frame_tecnico, image=self.img_tec)
@@ -94,7 +107,7 @@ class Aplicacao(TK, front_Ferramentas, Reserva):
         self.label_reserva_Img = tk.Label(self.frame_reserva, image=self.img_reserva)
         self.label_reserva.place(relx=0.3, rely=0.55, relwidth=0.4, relheight=0.1)
         self.label_reserva_Img.place(relx=0.2, rely=0.05, relwidth=0.6, relheight=0.4)
-        
+
         self.label_copyright = tk.Label(self.frame_copyright, text="copyright © 2022 - Todos os direitos reservados - DevTeam13", bg='#B9B7BD',
                                      font=('poppins', 10, 'bold'))
         self.label_copyright.place(relx=0.0, rely=0, relwidth=0.65, relheight=0.3)

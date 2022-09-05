@@ -1,15 +1,17 @@
-from secrets import randbelow
+import datetime
 import tkinter as tk
-from tkinter import ttk
-from tkinter import Frame, ttk
 from tkinter import END
-from tkinter import messagebox
+from tkinter import Frame, ttk
 from tkinter import Scrollbar
+from tkinter import messagebox
 from CRUD_F import *
-from CRUD_T import *
 from CRUD_R import *
+<<<<<<< HEAD
 from datetime import date, time, datetime, timedelta
 
+=======
+from CRUD_T import *
+>>>>>>> 01df669638bf94977fe2ed50e8b5eb89e7f82163
 
 
 class funcsRF (Csvf):
@@ -295,7 +297,7 @@ class funcsRR (CsvR):
 class Reserva (funcsRT, funcsRF, funcsRR) :
     def janela_cadastro_reservas(self):
         self.cadastro_reservas = tk.Toplevel()
-        self.cadastro_reservas.title('Janela de Cadastro de Reservas')
+        self.cadastro_reservas.title('Reserva')
         self.cadastro_reservas.iconphoto(False, tk.PhotoImage(file='../ico/reserva.png'))
         self.cadastro_reservas.configure(background='#B9B7BD')
         self.cadastro_reservas.geometry('1380x780')
@@ -409,7 +411,7 @@ class Reserva (funcsRT, funcsRF, funcsRR) :
         self.vHora_retiradaS = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'), textvariable = textEntry, state="readonly")
         self.vHora_retiradaS.place(relx=0.37, rely=0.55, relwidth=0.04, relheight=0.04)
         
-#----------------------- GAMBIARRA-------------------------------------------------------------------------------
+#----------------------- SOLUCAO-------------------------------------------------------------------------------
         self.Gcpf = tk.Entry(self.frame_1, bd=3, font=('poppins', 11, 'bold'))
         self.Gcpf.place(relx=0.00, rely=0.00, relwidth=0.0, relheight=0.0)
         self.Gnome = tk.Entry(self.frame_1, bd=3, font=('poppins', 11, 'bold'))
