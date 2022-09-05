@@ -1,15 +1,12 @@
 import datetime
-from secrets import randbelow
 import tkinter as tk
-from tkinter import ttk
-from tkinter import Frame, ttk
 from tkinter import END
-from tkinter import messagebox
+from tkinter import Frame, ttk
 from tkinter import Scrollbar
+from tkinter import messagebox
 from CRUD_F import *
-from CRUD_T import *
 from CRUD_R import *
-
+from CRUD_T import *
 
 
 class funcsRF (Csvf):

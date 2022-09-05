@@ -1,16 +1,10 @@
-from contextlib import ContextDecorator
-from faulthandler import disable
 import tkinter as tk
-from tkinter import Frame, ttk
 from tkinter import END
-from tkinter import messagebox
+from tkinter import Frame, ttk
 from tkinter import Scrollbar
-import csv
-from wsgiref import validate
+from tkinter import messagebox
+
 from CRUD_T import *
-import CRUD_T
-
-
 
 tecnico = dict()
 global chave

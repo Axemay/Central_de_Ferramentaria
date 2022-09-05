@@ -1,15 +1,10 @@
-import code
-from hmac import compare_digest
-from msilib.schema import ComboBox
 import tkinter as tk
-from tkinter import *
-from tkinter import Frame, ttk
 from tkinter import END
-from tkinter import messagebox
+from tkinter import Frame, ttk
 from tkinter import Scrollbar
-import csv
-from CRUD_F import *
+from tkinter import messagebox
 
+from CRUD_F import *
 
 global fcontador
 fcontador = 0
