@@ -269,7 +269,7 @@ class funcs(Csvf):
 class front_Ferramentas(funcs):
     def janela_frontF(self):
         self.cadastro_ferramentas = tk.Toplevel()
-        self.cadastro_ferramentas.title('Janela de Cadastro de Ferramentas')
+        self.cadastro_ferramentas.title('Ferramenta')
         self.cadastro_ferramentas.iconphoto(False, tk.PhotoImage(file='../ico/tools.png'))
         self.cadastro_ferramentas.configure(background='#B9B7BD')
         self.cadastro_ferramentas.geometry('1380x780')
@@ -287,7 +287,7 @@ class front_Ferramentas(funcs):
         self.frame_3.place(relx=0.01, rely=0.65, relwidth=0.98, relheight=0.34)
 
 ##############    ##### LABELS, ENTRIES
-        self.codigo_ferramenta = tk.Label(self.frame_1, text='Pesquisa :', bg='#ffd', fg='#0D0D0D',
+        self.codigo_ferramenta = tk.Label(self.frame_1, text='Pesquisar :', bg='#ffd', fg='#0D0D0D',
                                    font=('poppins', 17, 'bold'))
         self.codigo_ferramenta.place(relx=0.01, rely=0.01, relwidth=0.25, relheight=0.08)
         self.vcodigo_ferramenta = tk.Entry(self.frame_1, bd=3, font=('poppins', 14, 'bold'))
