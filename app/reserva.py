@@ -6,7 +6,12 @@ from tkinter import Scrollbar
 from tkinter import messagebox
 from CRUD_F import *
 from CRUD_R import *
+<<<<<<< HEAD
+from datetime import date, time, datetime, timedelta
+
+=======
 from CRUD_T import *
+>>>>>>> 01df669638bf94977fe2ed50e8b5eb89e7f82163
 
 
 class funcsRF (Csvf):
@@ -95,7 +100,7 @@ class funcsRT (Csv):
         buscacpflista = self.busca_cpf(pesquisa)
 
         if pesquisa == "":
-            messagebox.showerror("Erro", "O campo deve ser preenchidos")
+            messagebox.showerror("Erro", "Os campos devem ser preenchidos")
         else:
             for i in buscacpflista:
                 self.view_frame1.insert("", END, values=i)
@@ -141,6 +146,10 @@ class funcsRT (Csv):
             self.Gtel.insert(END, col3)
 class funcsRR (CsvR):
     def variaveisR(self):
+
+        global data
+        data = datetime.now()
+
         self.gcpf = self.Gcpf.get()
         self.gnome = self.Gnome.get()
         self.gtel = self.Gtel.get()
@@ -148,26 +157,82 @@ class funcsRR (CsvR):
         self.gdes = self.Gdes.get()
         self.gvolt = self.Gvolt.get()
         self.gtipo = self.Gtipo.get()
-        self.dataentD = self.vData_entregaD.get()    
-        self.dataentM = self.vData_entregaM.get()
+
+        def validadh(msg):
+            try:
+                msg = int(msg)
+            except (ValueError, TypeError):
+                messagebox.showerror("Erro", "Digite apenas números")
+            else:
+                return str(msg)
+
+        def doisdigitos(msg):
+            if len(msg) > 2 or  len(msg) == 0:
+                messagebox.showerror("Erro", "Insira até 2 dígitos")
+            else:
+                return msg
+
+        def validahora(msg):
+            msg = int(msg)
+            if msg < 0 or msg > 24:
+                messagebox.showerror("Erro", "O horário de expediente para retirada e entrega\ndas ferramentas é de 08:00hs às 17:00hs")
+            else:
+                return str(msg)
+
+        def validames(msg):
+            msg = int(msg)
+            if msg < 1 or msg > 12:
+                messagebox.showerror("Erro", "O ano deve estar compatível com o calendário")
+            else:
+                return str(msg)
+
+        def validadia(msg):
+             try:
+                res = msg
+             except (ValueError, TypeError):
+                messagebox.showerror("Erro", "Esse dia não consta no calendário")
+             else:
+                return res
+                    
+        self.dataentD = doisdigitos(validadh(self.vData_entregaD.get()))        
+        self.dataentM = validames(doisdigitos(validadh(self.vData_entregaM.get())))
         self.dataentA = self.vData_entregaA.get()
-        
-        self.horaentH = self.vHora_entregaD.get()
+        self.horaentH = validahora(doisdigitos(validadh(self.vHora_entregaH.get())))
         self.horaentM = self.vHora_entregaM.get()
-        self.horaentS = self.vHora_entregaA.get()
-        
-        self.dataretD = self.vData_retiradaD.get()
-        self.dataretM = self.vData_retiradaM.get()
+        self.horaentS = self.vHora_entregaS.get()
+        self.dataretD = doisdigitos(validadh(self.vData_retiradaD.get()))
+        self.dataretM = validames(doisdigitos(validadh(self.vData_retiradaM.get())))
         self.dataretA = self.vData_retiradaA.get()
-        
-        self.horaretH = self.vHora_retiradaD.get()
+        self.horaretH = validahora(doisdigitos(validadh(self.vHora_retiradaH.get())))
         self.horaretM = self.vHora_retiradaM.get()
-        self.horaretS = self.vHora_retiradaA.get()
+        self.horaretS = self.vHora_retiradaS.get()
+
         
-        self.dataentrega = f"{self.dataentD}/{self.dataentM}/{self.dataentA}"
-        self.horaentrega = f"{self.horaentH}:{self.horaentM}:{self.horaentS}"
-        self.dataretirada = f"{self.dataretD}/{self.dataretM}/{self.dataretA}"
-        self.horaretirada = f"{self.horaretH}:{self.horaretM}:{self.horaretS}"
+        self.retira = validadia(datetime(int(self.dataretA), int(self.dataretM), int(self.dataretD), int(self.horaretH),
+                               int(self.horaretM), int(self.horaretS)))
+
+        self.entrega = validadia(datetime(int(self.dataentA), int(self.dataentM), int(self.dataentD), int(self.horaentH),
+                               int(self.horaentM), int(self.horaentS)))
+        
+        self.diferenca = self.retira - data
+        self.string=str(self.diferenca)
+        self.output=self.string.split()
+        if "-" in self.output[0]:
+            messagebox.showerror("Erro", "Você não pode reservar com uma data ou hora passada")
+        else:        
+            self.dataretirada = f"{self.dataretD}/{self.dataretM}/{self.dataretA}"
+            self.horaretirada = f"{self.horaretH}:{self.horaretM}:{self.horaretS}"
+
+        self.diferenca2 = self.entrega - self.retira
+        self.string2=str(self.diferenca2)
+        self.output2=self.string2.split()
+        if "-" in self.output2[0]:
+            messagebox.showerror("Erro", "Você não pode entregar com  data e hora anterior a reserva")
+        else: 
+            self.dataentrega = f"{self.dataentD}/{self.dataentM}/{self.dataentA}"   
+            self.horaentrega = f"{self.horaentH}:{self.horaentM}:{self.horaentS}"
+        
+        
         
     def limpar_dadosR(self):
         self.Gcpf.delete(0, END)
@@ -213,6 +278,7 @@ class funcsRR (CsvR):
             self.vHora_retirada.insert(END, col9)
             self.vData_entrega.insert(END, col10)
             self.vHora_entrega.insert(END, col11)
+            
     def add_reserva(self):
         self.variaveisR()
         self.appendR(self.gcpf, self.gnome, self.gtel, self.gcod, self.gdes, self.gvolt, self.gtipo, self.dataretirada, self.horaretirada, self.dataentrega, self.horaentrega)
@@ -222,15 +288,11 @@ class funcsRR (CsvR):
         #                             fg="#ffd", font=("poppins", 16, 'bold'))
         # self.res.place(relx=0.01, rely=0.2, relwidth=0.98, relheight=0.7)
         self.limpar_dadosR()
+            
+    
 
-
-
-    def valida_data(self):
-        self.data = datetime.now()
-        self.dataent = self.vData_entrega.get()
-        self.horaent = self.vHora_entrega.get()
-        self.dataret = self.vData_retirada()
-        self.horaret = self.vHora_retirada()
+        
+#----------------------------------------------------------------------
     
 class Reserva (funcsRT, funcsRF, funcsRR) :
     def janela_cadastro_reservas(self):
@@ -256,6 +318,7 @@ class Reserva (funcsRT, funcsRF, funcsRR) :
         self.frame_3 = Frame(self.cadastro_reservas, bd=4, bg="#868B8E", highlightbackground="#0D0D0D",
                              highlightthickness=1)
         self.frame_3.place(relx=0.01, rely=0.65, relwidth=0.98, relheight=0.34)
+        
 ###################################  ENTRY LABELS BOTOES ===============================================
 
         self.Pesquisa_ReservaT = tk.Label(self.frame_1, text='Pesquisa por CPF:', bg='#ffd', fg='#0D0D0D',
@@ -285,6 +348,17 @@ class Reserva (funcsRT, funcsRF, funcsRR) :
         self.batualizarT.place(relx=0.79, rely=0.0, relwidth=0.1, relheight=0.15)
     ##  OUTROS BOTÕES, ENTRYS E LEBELS
 
+#------------------------------------------------------------------
+
+        ano = date.today().year
+
+        text2Entry = tk.StringVar()
+        text2Entry.set(ano)
+    
+        textEntry = tk.StringVar()
+        textEntry.set("00")
+        
+                     
         
         self.Data_entrega = tk.Label(self.cadastro_reservas, text='Data da Entrega :', bg='#ffd', fg='#0D0D0D',
                                       font=('poppins', 14, 'bold'))
@@ -293,7 +367,7 @@ class Reserva (funcsRT, funcsRF, funcsRR) :
         self.vData_entregaD.place(relx=0.7, rely=0.5, relwidth=0.04, relheight=0.04)
         self.vData_entregaM = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
         self.vData_entregaM.place(relx=0.74, rely=0.5, relwidth=0.04, relheight=0.04)
-        self.vData_entregaA = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
+        self.vData_entregaA = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'), textvariable = text2Entry, state="readonly")
         self.vData_entregaA.place(relx=0.78, rely=0.5, relwidth=0.04, relheight=0.04)
         
 #------------------------------------------------------------------
@@ -302,12 +376,12 @@ class Reserva (funcsRT, funcsRF, funcsRR) :
         self.Hora_entrega = tk.Label(self.cadastro_reservas, text='Hora da Entrega :', bg='#ffd', fg='#0D0D0D',
                                      font=('poppins', 14, 'bold'))
         self.Hora_entrega.place(relx=0.55, rely=0.55, relwidth=0.14, relheight=0.04)
-        self.vHora_entregaD = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
-        self.vHora_entregaD.place(relx=0.7, rely=0.55, relwidth=0.04, relheight=0.04)
-        self.vHora_entregaM = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
+        self.vHora_entregaH = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
+        self.vHora_entregaH.place(relx=0.7, rely=0.55, relwidth=0.04, relheight=0.04)
+        self.vHora_entregaM = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'), textvariable = textEntry, state="readonly")
         self.vHora_entregaM.place(relx=0.74, rely=0.55, relwidth=0.04, relheight=0.04)
-        self.vHora_entregaA = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
-        self.vHora_entregaA.place(relx=0.78, rely=0.55, relwidth=0.04, relheight=0.04)
+        self.vHora_entregaS = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'), textvariable = textEntry, state="readonly")
+        self.vHora_entregaS.place(relx=0.78, rely=0.55, relwidth=0.04, relheight=0.04)
 
         
 #-------------------------------------------------------------------
@@ -320,7 +394,7 @@ class Reserva (funcsRT, funcsRF, funcsRR) :
         self.vData_retiradaD.place(relx=0.29, rely=0.5, relwidth=0.04, relheight=0.04)
         self.vData_retiradaM = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
         self.vData_retiradaM.place(relx=0.33, rely=0.5, relwidth=0.04, relheight=0.04)
-        self.vData_retiradaA = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
+        self.vData_retiradaA = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'), textvariable = text2Entry, state="readonly")
         self.vData_retiradaA.place(relx=0.37, rely=0.5, relwidth=0.04, relheight=0.04)
 
 #-------------------------------------------------------------------
@@ -330,12 +404,12 @@ class Reserva (funcsRT, funcsRF, funcsRR) :
                                      font=('poppins', 14, 'bold'))
         self.Hora_retirada.place(relx=0.14, rely=0.55, relwidth=0.14, relheight=0.04)
 
-        self.vHora_retiradaD = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
-        self.vHora_retiradaD.place(relx=0.29, rely=0.55, relwidth=0.04, relheight=0.04)
-        self.vHora_retiradaM = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
+        self.vHora_retiradaH = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
+        self.vHora_retiradaH.place(relx=0.29, rely=0.55, relwidth=0.04, relheight=0.04)
+        self.vHora_retiradaM = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'), textvariable = textEntry, state="readonly")
         self.vHora_retiradaM.place(relx=0.33, rely=0.55, relwidth=0.04, relheight=0.04)
-        self.vHora_retiradaA = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
-        self.vHora_retiradaA.place(relx=0.37, rely=0.55, relwidth=0.04, relheight=0.04)
+        self.vHora_retiradaS = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'), textvariable = textEntry, state="readonly")
+        self.vHora_retiradaS.place(relx=0.37, rely=0.55, relwidth=0.04, relheight=0.04)
         
 #----------------------- SOLUCAO-------------------------------------------------------------------------------
         self.Gcpf = tk.Entry(self.frame_1, bd=3, font=('poppins', 11, 'bold'))
