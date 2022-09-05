@@ -150,10 +150,27 @@ class funcsRR (CsvR):
         self.gdes = self.Gdes.get()
         self.gvolt = self.Gvolt.get()
         self.gtipo = self.Gtipo.get()
-        self.dataentrega = self.vData_entrega.get()
-        self.horaentrega = self.vHora_entrega.get()
-        self.dataretirada = self.vData_retirada.get()
-        self.horaretirada = self.vHora_retirada.get()
+        self.dataentD = self.vData_entregaD.get()    
+        self.dataentM = self.vData_entregaM.get()
+        self.dataentA = self.vData_entregaA.get()
+        
+        self.horaentH = self.vHora_entregaD.get()
+        self.horaentM = self.vHora_entregaM.get()
+        self.horaentS = self.vHora_entregaA.get()
+        
+        self.dataretD = self.vData_retiradaD.get()
+        self.dataretM = self.vData_retiradaM.get()
+        self.dataretA = self.vData_retiradaA.get()
+        
+        self.horaretH = self.vHora_retiradaD.get()
+        self.horaretM = self.vHora_retiradaM.get()
+        self.horaretS = self.vHora_retiradaA.get()
+        
+        self.dataentrega = f"{self.dataentD}/{self.dataentM}/{self.dataentA}"
+        self.horaentrega = f"{self.horaentH}:{self.horaentM}:{self.horaentS}"
+        self.dataretirada = f"{self.dataretD}/{self.dataretM}/{self.dataretA}"
+        self.horaretirada = f"{self.horaretH}:{self.horaretM}:{self.horaretS}"
+        
     def limpar_dadosR(self):
         self.Gcpf.delete(0, END)
         self.Gnome.delete(0, END)
@@ -216,8 +233,6 @@ class funcsRR (CsvR):
         self.horaent = self.vHora_entrega.get()
         self.dataret = self.vData_retirada()
         self.horaret = self.vHora_retirada()
-
-#---------------------------------------------------------------------        
     
 class Reserva (funcsRT, funcsRF, funcsRR) :
     def janela_cadastro_reservas(self):
