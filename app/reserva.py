@@ -8,7 +8,7 @@ from CRUD_F import *
 from CRUD_R import *
 from tkcalendar import Calendar
 from datetime import date, time, datetime, timedelta
-
+from time import strptime
 
 from CRUD_T import *
 
@@ -180,18 +180,31 @@ class funcsRR (CsvR):
             conta_hora = 30
         return conta_hora
 
-    def verifica_data(self, *args):
-
+    def verifica_data(self, datare, datade):
         data_valida = False
-        if datar < datad:
+        datar = datare
+        datad = datade
+        datar_formatada = strptime(datar, "%d/%m/%Y")
+        datad_formatada = strptime(datad, "%d/%m/%Y")
+        if datar_formatada <  datad_formatada:
             data_valida = True
+
         return data_valida
 
-    def verifica_tempo(self, *args):
+    def verifica_tempo(self, tempo, dataretirada, datadevolucao, horaretirada, horadevolucao):
+        tempo = tempo
+        datar = dataretirada
+        datad = datadevolucao
+        horar = horaretirada
+        horad = horadevolucao
         self.tempo_max = self.cont_horas(tempo)
         aux = 0
         tempo_reserva = 0
         tempo_max_ok = False
+        horas_valores = ("00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00",
+                         "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00",
+                         "20:00", "21:00", "22:00", "23:00")
+
         for i in range(len(horas_valores)):
             if horas_valores[i] == horar:
                 hora_ret_int = i
@@ -281,20 +294,19 @@ class funcsRR (CsvR):
 
     def add_reserva(self):
         self.variaveisR()
-        tempo_valido = self.verifica_tempo(self.Gtempo, self.dataretirada, self.datadevolucao, self.horaretirada, self.horadevolucao)
+        # tempo_valido = self.verifica_tempo("12 horas", self.dataretirada, self.datadevolucao, self.horaretirada, self.horadevolucao)
         data_valido = self.verifica_data(self.dataretirada, self.datadevolucao)
         while True:
-            if  data_valido:
-                try:
-                    if tempo_valido:
-                        try:
-                            self.appendR(self.gcpf, self.gnome, self.gtel, self.gcod, self.gdes, self.gvolt, self.gtipo, self.dataretirada, self.horaretirada, self.horadevolucao, self.horadevolucao)
-                            self.select_listR()
-                        except (ValueError, TypeError):
-                            messagebox.showerror("Erro", "O tempo de reserva excede o permitido para a ferramenta")
-                except (ValueError, TypeError):
-                    messagebox.showerror("Erro", "A data de devolução não pode ser superior a de retirada.")
+            if data_valido:
+                self.appendR(self.gcpf, self.gnome, self.gtel, self.gcod, self.gdes, self.gvolt, self.gtipo,
+                             self.dataretirada, self.horaretirada, self.datadevolucao, self.horadevolucao)
+                self.select_listR()
 
+            else:
+                messagebox.showerror("Erro", "A data de devolução não pode ser superior a de retirada.")
+
+
+            break
         # self.res = tk.Label(self.frame_4, text=f"{contador} Cadastro(s) efetuado(s) com sucesso!", bg="#868B8E",
         #                             fg="#ffd", font=("poppins", 16, 'bold'))
         # self.res.place(relx=0.01, rely=0.2, relwidth=0.98, relheight=0.7)
