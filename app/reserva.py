@@ -161,7 +161,7 @@ class funcsRR (CsvR):
         self.gdes = self.Gdes.get()
         self.gvolt = self.Gvolt.get()
         self.gtipo = self.Gtipo.get()
-
+        self.gtempo = self.Gtempo.get()
         self.dataretirada = self.data_retirada.get()
         self.datadevolucao = self.data_devolucao.get()
         self.horaretirada = self.horas_ret.get()
