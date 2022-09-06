@@ -1,10 +1,25 @@
+<<<<<<< HEAD
 
+=======
+import tkinter as tk
+import time
+
+
+from tecnico import *
+from ferramenta import *
+from reserva import *
+#nomedomodulo.nomedadef
+
+>>>>>>> a26a09fd5cba95b090faece81e5ea3fd17f4e2ca
 from ferramenta import *
 from reserva import *
 from tecnico import *
 
+<<<<<<< HEAD
 import webbrowser
 
+=======
+>>>>>>> a26a09fd5cba95b090faece81e5ea3fd17f4e2ca
 
 # criar tela
 

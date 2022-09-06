@@ -1,12 +1,10 @@
 import re
-<<<<<<< HEAD
 from tkinter import Tk
 from typing import Dict
 import tecnico
-=======
+
 from csv import DictWriter, DictReader
 from csv import reader
->>>>>>> 01df669638bf94977fe2ed50e8b5eb89e7f82163
 
 
 class Csv():

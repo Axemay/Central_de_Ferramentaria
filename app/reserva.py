@@ -6,12 +6,12 @@ from tkinter import Scrollbar
 from tkinter import messagebox
 from CRUD_F import *
 from CRUD_R import *
-<<<<<<< HEAD
+
 from datetime import date, time, datetime, timedelta
 
-=======
+
 from CRUD_T import *
->>>>>>> 01df669638bf94977fe2ed50e8b5eb89e7f82163
+
 
 
 class funcsRF (Csvf):
@@ -61,6 +61,7 @@ class funcsRF (Csvf):
         self.Gdes.delete(0, END)
         self.Gvolt.delete(0, END)
         self.Gtipo.delete(0, END)
+
     def doubleclickF(self, event):
         self.limpar_dadosFF()
         self.view_frame2.selection()
@@ -127,6 +128,7 @@ class funcsRT (Csv):
         self.Gcpf.delete(0, END)
         self.Gnome.delete(0, END)
         self.Gtel.delete(0, END)
+
     def doubleclickT(self, event):
         self.limpar_dadosT()
         self.view_frame1.selection()
@@ -232,8 +234,6 @@ class funcsRR (CsvR):
             self.dataentrega = f"{self.dataentD}/{self.dataentM}/{self.dataentA}"   
             self.horaentrega = f"{self.horaentH}:{self.horaentM}:{self.horaentS}"
         
-        
-        
     def limpar_dadosR(self):
         self.Gcpf.delete(0, END)
         self.Gnome.delete(0, END)
@@ -242,10 +242,9 @@ class funcsRR (CsvR):
         self.Gdes.delete(0, END)
         self.Gvolt.delete(0, END)
         self.Gtipo.delete(0, END)
-        self.vData_entrega.delete(0, END)
-        self.vHora_entrega.delete(0, END)
-        self.vData_retirada.delete(0, END)
-        self.vHora_retirada.delete(0, END)
+        self.vPesquisa_ReservaT.delete(0, END)
+        self.vPesquisa_ReservaF.delete(0, END)
+
     def select_listR(self):
         self.view_frame3.delete(*self.view_frame3.get_children())
         # self.view_frame2.selection(*self.view_frame2.get_children())
@@ -274,10 +273,35 @@ class funcsRR (CsvR):
             self.Gdes.insert(END, col5)
             self.Gvolt.insert(END, col6)
             self.Gtipo.insert(END, col7)
-            self.vData_retirada.insert(END, col8)
-            self.vHora_retirada.insert(END, col9)
-            self.vData_entrega.insert(END, col10)
-            self.vHora_entrega.insert(END, col11)
+
+            self.vPesquisa_ReservaT.insert(END, col1)
+            self.vPesquisa_ReservaT.insert(END, ",")
+            self.vPesquisa_ReservaT.insert(END, col2)
+            self.vPesquisa_ReservaT.insert(END, ",")
+            self.vPesquisa_ReservaT.insert(END, col3)
+
+            self.vPesquisa_ReservaF.insert(END, col4)
+            self.vPesquisa_ReservaF.insert(END, ",")
+            self.vPesquisa_ReservaF.insert(END, col5)
+            self.vPesquisa_ReservaF.insert(END, ",")
+            self.vPesquisa_ReservaF.insert(END, col6)
+            self.vPesquisa_ReservaF.insert(END, ",")
+            self.vPesquisa_ReservaF.insert(END, col7)
+
+            
+
+    def limpar_entries(self):
+        self.vPesquisa_ReservaT.delete(0, END)
+        self.vPesquisa_ReservaF.delete(0, END)
+        self.vData_entregaD.delete(0, END)        
+        self.vData_entregaM.delete(0, END) 
+        self.vHora_entregaH.delete(0, END)
+        self.vData_retiradaD.delete(0, END)
+        self.vData_retiradaM.delete(0, END)
+        self.vHora_retiradaH.delete(0, END)
+        
+
+
             
     def add_reserva(self):
         self.variaveisR()
@@ -288,12 +312,7 @@ class funcsRR (CsvR):
         #                             fg="#ffd", font=("poppins", 16, 'bold'))
         # self.res.place(relx=0.01, rely=0.2, relwidth=0.98, relheight=0.7)
         self.limpar_dadosR()
-            
-    
-
-        
-#----------------------------------------------------------------------
-    
+#----------------------------------------------------------------------------------------------------------------------
 class Reserva (funcsRT, funcsRF, funcsRR) :
     def janela_cadastro_reservas(self):
         self.cadastro_reservas = tk.Toplevel()
@@ -346,7 +365,6 @@ class Reserva (funcsRT, funcsRF, funcsRR) :
 
         self.batualizarT = tk.Button(self.frame_2, text="Atualizar Lista", bd=5, command=self.select_listF)
         self.batualizarT.place(relx=0.79, rely=0.0, relwidth=0.1, relheight=0.15)
-    ##  OUTROS BOTÕES, ENTRYS E LEBELS
 
 #------------------------------------------------------------------
 
@@ -418,7 +436,9 @@ class Reserva (funcsRT, funcsRF, funcsRR) :
         self.Gnome.place(relx=0.00, rely=0.00, relwidth=0.00, relheight=0.00)
         self.Gtel = tk.Entry(self.frame_1, bd=3, font=('poppins', 11, 'bold'))
         self.Gtel.place(relx=0.00, rely=0.00, relwidth=0.00, relheight=0.00)
+        
 #==========
+        
         self.Gcod = tk.Entry(self.frame_2, bd=3, font=('poppins', 11, 'bold'))
         self.Gcod.place(relx=0.00, rely=0.00, relwidth=0.00, relheight=0.00)
         self.Gdes = tk.Entry(self.frame_2, bd=3, font=('poppins', 11, 'bold'))
@@ -429,10 +449,20 @@ class Reserva (funcsRT, funcsRF, funcsRR) :
         self.Gtipo.place(relx=0.00, rely=0.00, relwidth=0.00, relheight=0.00)
 
 #------------------------------------------------------------
+        ##  OUTROS BOTÕES, ENTRYS E LEBELS
+
+        self.limpacamp = tk.Button(self.cadastro_reservas, text="Limpar Campos", bd=5, command=self.limpar_entries)
+        self.limpacamp.place(relx=0.10, rely=0.6, relwidth=0.1, relheight=0.05)
+
+        self.btdel = tk.Button(self.cadastro_reservas, text="Delete", bd=5)
+        self.btdel.place(relx=0.30, rely=0.6, relwidth=0.1, relheight=0.05)
+
         self.bupR = tk.Button(self.cadastro_reservas, text="Reservar", bd=5, command= self.add_reserva)
         self.bupR.place(relx=0.43, rely=0.6, relwidth=0.1, relheight=0.05)
+
         self.batR = tk.Button(self.cadastro_reservas, text="Atualizar Lista", bd=5, command=self.select_listR)
-        self.batR.place(relx=0.6, rely=0.61, relwidth=0.1, relheight=0.04)
+        self.batR.place(relx=0.6, rely=0.6, relwidth=0.1, relheight=0.05)
+        
 ############################### TRUE VIEW ==============================================================================
     ## true view frame 1
         self.dados_colunas = ("cpf", "nome", "telefone")
@@ -502,9 +532,6 @@ class Reserva (funcsRT, funcsRF, funcsRR) :
         self.scrolbar_lista2.place(relx=0.005, rely=0.93, relwidth=0.97, relheight=0.07)
         self.view_frame2.bind("<Double-1>", self.doubleclickF)
         self.select_listF()
-
-
-
 
     ## true view frame 3
         self.dados_colunas = ("cpf", "nome", "telefone", "codigo", "descricao", "voltagem", "tipo", "dataretirada", "horaretirada", "dataentrega", "horaentrega")
