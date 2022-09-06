@@ -39,3 +39,18 @@ class CsvR:
             #self.csv_Dwriter.writerows(self.data2)
             self.csv_Dwriter.writerow(data)
             #self.csv_Dwriter.writerows(data)
+    def deletR(self, cpf):
+        with open('./reserva.csv', encoding='utf-8') as self.file:
+            self.csv_Dreader = DictReader(self.file)
+            self.data = list(self.csv_Dreader)
+        with open('./reserva.csv', 'w', encoding='utf-8') as self.file:
+            header = ("cpf", "nome", "telefone", "codigo", "descricao", "voltagem", "tipo", "dataretirada", "horaretirada", "dataentrega", "horaentrega")
+
+            self.csv_Dwriter = DictWriter(self.file, fieldnames=header, lineterminator='\n')
+
+            self.csv_Dwriter.writeheader()
+            for row in self.data:
+                if row['cpf'] == cpf:
+                    continue
+
+                self.csv_Dwriter.writerow(row)

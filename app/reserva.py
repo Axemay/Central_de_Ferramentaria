@@ -12,6 +12,8 @@ from datetime import date, time, datetime, timedelta
 
 from CRUD_T import *
 
+global validaR
+validaR = False
 
 
 class funcsRF (Csvf):
@@ -148,10 +150,6 @@ class funcsRT (Csv):
             self.Gtel.insert(END, col3)
 class funcsRR (CsvR):
     def variaveisR(self):
-
-        global data
-        data = datetime.now()
-
         self.gcpf = self.Gcpf.get()
         self.gnome = self.Gnome.get()
         self.gtel = self.Gtel.get()
@@ -161,9 +159,8 @@ class funcsRR (CsvR):
         self.gtipo = self.Gtipo.get()
         self.dataretirada = self.data_retirada.get()
         self.datadevolucao = self.data_devolucao.get()
-        self.horatirada = self.hora_retirada.get()
-        self.horadevolucao = self.hora_devolucao.get()
-
+        self.horaretirada = self.hora_menu_retirada.get()
+        self.horadevolucao = self.hora_menu_devolucao.get()
 
         # def validadh(msg):
         #     try:
@@ -238,7 +235,6 @@ class funcsRR (CsvR):
         # else:
         #     self.dataentrega = f"{self.dataentD}/{self.dataentM}/{self.dataentA}"
         #     self.horaentrega = f"{self.horaentH}:{self.horaentM}:{self.horaentS}"
-        
     def limpar_dadosR(self):
         self.Gcpf.delete(0, END)
         self.Gnome.delete(0, END)
@@ -259,15 +255,14 @@ class funcsRR (CsvR):
         lista = self.leitorR()
 
         for i in lista:
-            if i == ["cpf", "nome", "telefone", "codigo", "descricao", "voltagem", "tipo", "dataretirada", "horaretirada", "datadevolucao", "horaentrega"]:
+            if i == ["cpf", "nome", "telefone", "codigo", "descricao", "voltagem", "tipo", "dataretirada", "horaretirada", "dataentrega", "horaentrega"]:
                 continue
 
             self.view_frame3.insert("", END, values = i)
     def doubleclickR(self, event):
         self.limpar_dadosR()
         self.view_frame3.selection()
-        global fvalida
-        fvalida = True
+
 
         for n in self.view_frame3.selection():
             col1, col2, col3, col4, col5, col6, col7, col8, col9, col10, col11= self.view_frame3.item(n, 'values')
@@ -293,7 +288,13 @@ class funcsRR (CsvR):
             self.vPesquisa_ReservaF.insert(END, ",")
             self.vPesquisa_ReservaF.insert(END, col7)
 
-            
+    def deleteR(self):
+        self.variaveisR()
+        # self.delete(self.codigo)
+
+        self.deletR(self.gcpf)
+        self.limpar_dadosR()
+        self.select_listR()
 
     def limpar_entries(self):
         self.vPesquisa_ReservaT.delete(0, END)
@@ -303,20 +304,15 @@ class funcsRR (CsvR):
         self.vData_retirada.delete(0, END)
         self.vHora_retirada.delete(0, END)
 
-        
-
-
-            
     def add_reserva(self):
         self.variaveisR()
-        self.appendR(self.gcpf, self.gnome, self.gtel, self.gcod, self.gdes, self.gvolt, self.gtipo, self.dataretirada, self.horaretirada, self.dataentrega, self.horadevolucao)
+        self.appendR(self.gcpf, self.gnome, self.gtel, self.gcod, self.gdes, self.gvolt, self.gtipo, self.dataretirada, self.horaretirada, self.horadevolucao, self.horadevolucao)
         self.select_listR()
 
         # self.res = tk.Label(self.frame_4, text=f"{contador} Cadastro(s) efetuado(s) com sucesso!", bg="#868B8E",
         #                             fg="#ffd", font=("poppins", 16, 'bold'))
         # self.res.place(relx=0.01, rely=0.2, relwidth=0.98, relheight=0.7)
         self.limpar_dadosR()
-
     # funções do calendário
     def calendario(self):
         self.calendario1 = Calendar(self.cadastro_reservas, fg="gray75", bg="blue", font=("poppins", "9", "bold"), locale="pt_br")
@@ -436,7 +432,7 @@ class Reserva (funcsRT, funcsRF, funcsRR) :
         
 #----------------------- SOLUCAO-------------------------------------------------------------------------------
         self.Gcpf = tk.Entry(self.frame_1, bd=3, font=('poppins', 11, 'bold'))
-        self.Gcpf.place(relx=0.00, rely=0.00, relwidth=0.0, relheight=0.0)
+        self.Gcpf.place(relx=0.00, rely=0.00, relwidth=0.2, relheight=0.2)
         self.Gnome = tk.Entry(self.frame_1, bd=3, font=('poppins', 11, 'bold'))
         self.Gnome.place(relx=0.00, rely=0.00, relwidth=0.00, relheight=0.00)
         self.Gtel = tk.Entry(self.frame_1, bd=3, font=('poppins', 11, 'bold'))
@@ -456,10 +452,10 @@ class Reserva (funcsRT, funcsRF, funcsRR) :
 #------------------------------------------------------------
         ##  OUTROS BOTÕES, ENTRYS E LEBELS
 
-        self.limpacamp = tk.Button(self.cadastro_reservas, text="Limpar Campos", bd=5, command=self.limpar_entries)
-        self.limpacamp.place(relx=0.10, rely=0.6, relwidth=0.1, relheight=0.05)
+        # self.limpacamp = tk.Button(self.cadastro_reservas, text="Limpar Campos", bd=5, command=self.limpar_entries)
+        # self.limpacamp.place(relx=0.10, rely=0.6, relwidth=0.1, relheight=0.05)
 
-        self.btdel = tk.Button(self.cadastro_reservas, text="Delete", bd=5)
+        self.btdel = tk.Button(self.cadastro_reservas, text="Delete", bd=5, command=self.deleteR)
         self.btdel.place(relx=0.30, rely=0.6, relwidth=0.1, relheight=0.05)
 
         self.bupR = tk.Button(self.cadastro_reservas, text="Reservar", bd=5, command= self.add_reserva)
