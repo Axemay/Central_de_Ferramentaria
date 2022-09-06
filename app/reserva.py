@@ -411,14 +411,16 @@ class Reserva (funcsRT, funcsRF, funcsRR) :
         self.data_devolucao.place(relx=0.70, rely=0.5, relwidth=0.08, relheight=0.04)
 
 
-        self.horas = tk.StringVar(self.cadastro_reservas)
+        self.horas_ret = tk.StringVar(self.cadastro_reservas)
+        self.horas_dev = tk.StringVar(self.cadastro_reservas)
         self.horas_valores = ("00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00",
                               "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00",
                               "20:00", "21:00","22:00", "23:00")
-        self.horas.set("00:00")
-        self.hora_menu_retirada = tk.OptionMenu(self.cadastro_reservas, self.horas, *self.horas_valores)
+        self.horas_ret.set("00:00")
+        self.horas_dev.set("00:00")
+        self.hora_menu_retirada = tk.OptionMenu(self.cadastro_reservas, self.horas_ret, *self.horas_valores)
         self.hora_menu_retirada.place(relx=0.29, rely=0.55, relwidth=0.07, relheight=0.04)
-        self.hora_menu_devolucao = tk.OptionMenu(self.cadastro_reservas, self.horas, *self.horas_valores)
+        self.hora_menu_devolucao = tk.OptionMenu(self.cadastro_reservas, self.horas_dev, *self.horas_valores)
         self.hora_menu_devolucao.place(relx=0.7, rely=0.55, relwidth=0.07, relheight=0.04)
 
         self.hora_menu_retirada_label = tk.Label(self.cadastro_reservas, text='Hora da Retirada:', bg='#ffd', fg='#0D0D0D',
