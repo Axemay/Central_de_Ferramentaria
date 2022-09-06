@@ -17,6 +17,8 @@ validaR = False
 
 
 class funcsRF (Csvf):
+
+
     def vazioF(self, msg):
         if msg == "":
             messagebox.showerror("Erro", "Todos os campos devem ser preenchidos")
@@ -63,6 +65,7 @@ class funcsRF (Csvf):
         self.Gdes.delete(0, END)
         self.Gvolt.delete(0, END)
         self.Gtipo.delete(0, END)
+        self.Gtempo.delete(0, END)
 
     def doubleclickF(self, event):
         self.limpar_dadosFF()
@@ -157,84 +160,54 @@ class funcsRR (CsvR):
         self.gdes = self.Gdes.get()
         self.gvolt = self.Gvolt.get()
         self.gtipo = self.Gtipo.get()
+        self.gtempo = self.Gtempo.get()
         self.dataretirada = self.data_retirada.get()
         self.datadevolucao = self.data_devolucao.get()
         self.horaretirada = self.horas_ret.get()
         self.horadevolucao = self.horas_dev.get()
 
-        # def validadh(msg):
-        #     try:
-        #         msg = int(msg)
-        #     except (ValueError, TypeError):
-        #         messagebox.showerror("Erro", "Digite apenas números")
-        #     else:
-        #         return str(msg)
-        #
-        # def doisdigitos(msg):
-        #     if len(msg) > 2 or  len(msg) == 0:
-        #         messagebox.showerror("Erro", "Insira até 2 dígitos")
-        #     else:
-        #         return msg
-        #
-        # def validahora(msg):
-        #     msg = int(msg)
-        #     if msg < 0 or msg > 24:
-        #         messagebox.showerror("Erro", "O horário de expediente para retirada e entrega\ndas ferramentas é de 08:00hs às 17:00hs")
-        #     else:
-        #         return str(msg)
+    def cont_horas(self, tempo="12 horas"):
+        conta_hora = 0
+        if tempo == "06 horas":
+            conta_hora = 6
+        elif tempo == "12 horas":
+            conta_hora = 12
+        elif tempo == "18 horas":
+            conta_hora = 18
+        elif tempo == "24 horas":
+            conta_hora = 24
+        elif tempo == "30 horas":
+            conta_hora = 30
+        return conta_hora
 
-        # def validames(msg):
-        #     msg = int(msg)
-        #     if msg < 1 or msg > 12:
-        #         messagebox.showerror("Erro", "O ano deve estar compatível com o calendário")
-        #     else:
-        #         return str(msg)
+    def verifica_data(self, *args):
 
-        # def validadia(msg):
-        #      try:
-        #         res = msg
-        #      except (ValueError, TypeError):
-        #         messagebox.showerror("Erro", "Esse dia não consta no calendário")
-        #      else:
-        #         return res
-        #
-        # self.dataentD = doisdigitos(validadh(self.vData_entregaD.get()))
-        # # self.dataentM = validames(doisdigitos(validadh(self.vData_entregaM.get())))
-        # self.dataentA = self.vData_entregaA.get()
-        # self.horaentH = validahora(doisdigitos(validadh(self.vHora_entregaH.get())))
-        # self.horaentM = self.vHora_entregaM.get()
-        # self.horaentS = self.vHora_entregaS.get()
-        # self.dataretD = doisdigitos(validadh(self.vData_retiradaD.get()))
-        # self.dataretM = validames(doisdigitos(validadh(self.vData_retiradaM.get())))
-        # self.dataretA = self.vData_retiradaA.get()
-        # self.horaretH = validahora(doisdigitos(validadh(self.vHora_retiradaH.get())))
-        # self.horaretM = self.vHora_retiradaM.get()
-        # self.horaretS = self.vHora_retiradaS.get()
-        #
-        #
-        # self.retira = validadia(datetime(int(self.dataretA), int(self.dataretM), int(self.dataretD), int(self.horaretH),
-        #                        int(self.horaretM), int(self.horaretS)))
-        #
-        # self.entrega = validadia(datetime(int(self.dataentA), int(self.dataentM), int(self.dataentD), int(self.horaentH),
-        #                        int(self.horaentM), int(self.horaentS)))
-        #
-        # self.diferenca = self.retira - data
-        # self.string=str(self.diferenca)
-        # self.output=self.string.split()
-        # if "-" in self.output[0]:
-        #     messagebox.showerror("Erro", "Você não pode reservar com uma data ou hora passada")
-        # else:
-        #     self.dataretirada = f"{self.dataretD}/{self.dataretM}/{self.dataretA}"
-        #     self.horaretirada = f"{self.horaretH}:{self.horaretM}:{self.horaretS}"
-        #
-        # self.diferenca2 = self.entrega - self.retira
-        # self.string2=str(self.diferenca2)
-        # self.output2=self.string2.split()
-        # if "-" in self.output2[0]:
-        #     messagebox.showerror("Erro", "Você não pode entregar com  data e hora anterior a reserva")
-        # else:
-        #     self.dataentrega = f"{self.dataentD}/{self.dataentM}/{self.dataentA}"
-        #     self.horaentrega = f"{self.horaentH}:{self.horaentM}:{self.horaentS}"
+        data_valida = False
+        if datar < datad:
+            data_valida = True
+        return data_valida
+
+    def verifica_tempo(self, *args):
+        self.tempo_max = self.cont_horas(tempo)
+        aux = 0
+        tempo_reserva = 0
+        tempo_max_ok = False
+        for i in range(len(horas_valores)):
+            if horas_valores[i] == horar:
+                hora_ret_int = i
+            if horas_valores[i] == horad:
+                hora_dev_int = i
+        if datar != datad:
+            aux = 24 - hora_ret_int
+            tempo_reserva =  aux +  hora_dev_int
+        else:
+            tempo_reserva = hora_dev_int - hora_ret_int
+
+        if tempo_reserva <= self.tempo_max:
+            tempo_max_ok = True
+        return tempo_max_ok
+
+
     def limpar_dadosR(self):
         self.Gcpf.delete(0, END)
         self.Gnome.delete(0, END)
@@ -243,6 +216,7 @@ class funcsRR (CsvR):
         self.Gdes.delete(0, END)
         self.Gvolt.delete(0, END)
         self.Gtipo.delete(0, END)
+        self.Gtempo.delete(0, END)
         self.vPesquisa_ReservaT.delete(0, END)
         self.vPesquisa_ReservaF.delete(0, END)
 
@@ -273,6 +247,7 @@ class funcsRR (CsvR):
             self.Gdes.insert(END, col5)
             self.Gvolt.insert(END, col6)
             self.Gtipo.insert(END, col7)
+            self.Gtempo.insert(END, col10)
 
             self.vPesquisa_ReservaT.insert(END, col1)
             self.vPesquisa_ReservaT.insert(END, ",")
@@ -306,8 +281,19 @@ class funcsRR (CsvR):
 
     def add_reserva(self):
         self.variaveisR()
-        self.appendR(self.gcpf, self.gnome, self.gtel, self.gcod, self.gdes, self.gvolt, self.gtipo, self.dataretirada, self.horaretirada, self.horadevolucao, self.horadevolucao)
-        self.select_listR()
+        tempo_valido = self.verifica_tempo(self.Gtempo, self.dataretirada, self.datadevolucao, self.horaretirada, self.horadevolucao)
+        data_valido = self.verifica_data(self.dataretirada, self.datadevolucao)
+        while True:
+            if  data_valido:
+                try:
+                    if tempo_valido:
+                        try:
+                            self.appendR(self.gcpf, self.gnome, self.gtel, self.gcod, self.gdes, self.gvolt, self.gtipo, self.dataretirada, self.horaretirada, self.horadevolucao, self.horadevolucao)
+                            self.select_listR()
+                        except (ValueError, TypeError):
+                            messagebox.showerror("Erro", "O tempo de reserva excede o permitido para a ferramenta")
+                except (ValueError, TypeError):
+                    messagebox.showerror("Erro", "A data de devolução não pode ser superior a de retirada.")
 
         # self.res = tk.Label(self.frame_4, text=f"{contador} Cadastro(s) efetuado(s) com sucesso!", bg="#868B8E",
         #                             fg="#ffd", font=("poppins", 16, 'bold'))
@@ -448,7 +434,8 @@ class Reserva (funcsRT, funcsRF, funcsRR) :
         self.Gvolt.place(relx=0.00, rely=0.00, relwidth=0.00, relheight=0.00)
         self.Gtipo = tk.Entry(self.frame_2, bd=3, font=('poppins', 11, 'bold'))
         self.Gtipo.place(relx=0.00, rely=0.00, relwidth=0.00, relheight=0.00)
-
+        self.Gtempo = tk.Entry(self.frame_2, bd=3, font=('poppins', 11, 'bold'))
+        self.Gtempo.place(relx=0.00, rely=0.00, relwidth=0.00, relheight=0.00)
 #------------------------------------------------------------
         ##  OUTROS BOTÕES, ENTRYS E LEBELS
 
