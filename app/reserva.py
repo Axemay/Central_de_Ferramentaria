@@ -313,12 +313,12 @@ class funcsRR (CsvR):
         self.limpar_dadosR()
     # funções do calendário
     def calendario(self):
-        self.calendario1 = Calendar(self.cadastro_reservas, fg="gray75", bg="blue", font=("poppins", "9", "bold"), locale="pt_br")
+        self.calendario1 = Calendar(self.cadastro_reservas, fg="gray75", bg="blue", font=("poppins", "9", "bold"), locale="pt_br", mindate=datetime.today())
         self.calendario1.place(relx=0.28, rely=0.25)
         self.cal_data_retirada = tk.Button(self.cadastro_reservas, text="Inserir data", command=self.puxar_data_ret)
         self.cal_data_retirada.place(relx=0.38, rely=0.5, height=25, width=100)
         self.calendario2 = Calendar(self.cadastro_reservas, fg="gray75", bg="blue", font=("poppins", "9", "bold"),
-                                    locale="pt_br")
+                                    locale="pt_br", mindate=datetime.today())
         self.calendario2.place(relx=0.50, rely=0.25)
         self.cal_data_devolucao = tk.Button(self.cadastro_reservas, text="Inserir data", command=self.puxar_data_dev)
         self.cal_data_devolucao.place(relx=0.47, rely=0.5, height=25, width=100)
