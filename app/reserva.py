@@ -159,8 +159,8 @@ class funcsRR (CsvR):
         self.gtipo = self.Gtipo.get()
         self.dataretirada = self.data_retirada.get()
         self.datadevolucao = self.data_devolucao.get()
-        self.horaretirada = self.hora_menu_retirada.get()
-        self.horadevolucao = self.hora_menu_devolucao.get()
+        self.horaretirada = self.horas_ret.get()
+        self.horadevolucao = self.horas_dev.get()
 
         # def validadh(msg):
         #     try:
