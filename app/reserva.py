@@ -6,7 +6,7 @@ from tkinter import Scrollbar
 from tkinter import messagebox
 from CRUD_F import *
 from CRUD_R import *
-
+from tkcalendar import Calendar
 from datetime import date, time, datetime, timedelta
 
 
@@ -312,6 +312,32 @@ class funcsRR (CsvR):
         #                             fg="#ffd", font=("poppins", 16, 'bold'))
         # self.res.place(relx=0.01, rely=0.2, relwidth=0.98, relheight=0.7)
         self.limpar_dadosR()
+
+
+    def calendario(self):
+        self.calendario1 = Calendar(self.cadastro_reservas, fg="gray75", bg="blue", font=("poppins", "9", "bold"), locale="pt_br")
+        self.calendario1.place(relx=0.28, rely=0.25)
+        self.cal_data = tk.Button(self.cadastro_reservas, text="Inserir data", command=self.puxar_data_ret)
+        self.cal_data.place(relx=0.38, rely=0.5, height=25, width=100)
+        self.calendario2 = Calendar(self.cadastro_reservas, fg="gray75", bg="blue", font=("poppins", "9", "bold"),
+                                    locale="pt_br")
+        self.calendario2.place(relx=0.50, rely=0.25)
+        self.cal_data_dev = tk.Button(self.cadastro_reservas, text="Inserir data", command=self.puxar_data_dev)
+        self.cal_data_dev.place(relx=0.47, rely=0.5, height=25, width=100)
+
+    def puxar_data_ret(self):
+        data_inicial = self.calendario1.get_date()
+        self.entry_data_retirada.delete(0, END)
+        self.entry_data_retirada.insert(END, data_inicial)
+        self.calendario1.destroy()
+        self.cal_data.destroy()
+
+    def puxar_data_dev(self):
+        data_final = self.calendario2.get_date()
+        self.entry_data_dev.delete(0, END)
+        self.entry_data_dev.insert(END, data_final)
+        self.calendario2.destroy()
+        self.cal_data_dev.destroy()
 #----------------------------------------------------------------------------------------------------------------------
 class Reserva (funcsRT, funcsRF, funcsRR) :
     def janela_cadastro_reservas(self):
@@ -368,66 +394,74 @@ class Reserva (funcsRT, funcsRF, funcsRR) :
 
 #------------------------------------------------------------------
 
-        ano = date.today().year
-
-        text2Entry = tk.StringVar()
-        text2Entry.set(ano)
-    
-        textEntry = tk.StringVar()
-        textEntry.set("00")
+        # ano = date.today().year
+        #
+        # text2Entry = tk.StringVar()
+        # text2Entry.set(ano)
+        #
+        # textEntry = tk.StringVar()
+        # textEntry.set("00")
         
-                     
-        
-        self.Data_entrega = tk.Label(self.cadastro_reservas, text='Data da Entrega :', bg='#ffd', fg='#0D0D0D',
-                                      font=('poppins', 14, 'bold'))
-        self.Data_entrega.place(relx=0.55, rely=0.5, relwidth=0.14, relheight=0.04)
-        self.vData_entregaD = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
-        self.vData_entregaD.place(relx=0.7, rely=0.5, relwidth=0.04, relheight=0.04)
-        self.vData_entregaM = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
-        self.vData_entregaM.place(relx=0.74, rely=0.5, relwidth=0.04, relheight=0.04)
-        self.vData_entregaA = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'), textvariable = text2Entry, state="readonly")
-        self.vData_entregaA.place(relx=0.78, rely=0.5, relwidth=0.04, relheight=0.04)
-        
-#------------------------------------------------------------------
+        self.bt_calendario = tk.Button(self.cadastro_reservas, text='Data da Retirada', command=self.calendario)
+        self.bt_calendario.place(relx=0.14, rely=0.5, relwidth=0.14, relheight=0.04)
+        self.entry_data_retirada = tk.Entry(self.cadastro_reservas, width=4)
+        self.entry_data_retirada.place(relx=0.29, rely=0.5, relwidth=0.08, relheight=0.04)
 
-
-        self.Hora_entrega = tk.Label(self.cadastro_reservas, text='Hora da Entrega :', bg='#ffd', fg='#0D0D0D',
-                                     font=('poppins', 14, 'bold'))
-        self.Hora_entrega.place(relx=0.55, rely=0.55, relwidth=0.14, relheight=0.04)
-        self.vHora_entregaH = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
-        self.vHora_entregaH.place(relx=0.7, rely=0.55, relwidth=0.04, relheight=0.04)
-        self.vHora_entregaM = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'), textvariable = textEntry, state="readonly")
-        self.vHora_entregaM.place(relx=0.74, rely=0.55, relwidth=0.04, relheight=0.04)
-        self.vHora_entregaS = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'), textvariable = textEntry, state="readonly")
-        self.vHora_entregaS.place(relx=0.78, rely=0.55, relwidth=0.04, relheight=0.04)
+        self.bt_calendario_entrega = tk.Button(self.cadastro_reservas, text='Data da Devolução', command=self.calendario)
+        self.bt_calendario_entrega.place(relx=0.55, rely=0.5, relwidth=0.14, relheight=0.04)
+        self.entry_data_dev = tk.Entry(self.cadastro_reservas, width=4)
+        self.entry_data_dev.place(relx=0.70, rely=0.5, relwidth=0.08, relheight=0.04)
+        
+#         self.Data_entrega = tk.Label(self.cadastro_reservas, text='Data da Entrega :', bg='#ffd', fg='#0D0D0D',
+#                                       font=('poppins', 14, 'bold'))
+#         self.Data_entrega.place(relx=0.55, rely=0.5, relwidth=0.14, relheight=0.04)
+#         self.vData_entregaD = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
+#         self.vData_entregaD.place(relx=0.7, rely=0.5, relwidth=0.04, relheight=0.04)
+#         self.vData_entregaM = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
+#         self.vData_entregaM.place(relx=0.74, rely=0.5, relwidth=0.04, relheight=0.04)
+#         self.vData_entregaA = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'), textvariable = text2Entry, state="readonly")
+#         self.vData_entregaA.place(relx=0.78, rely=0.5, relwidth=0.04, relheight=0.04)
+#
+# #------------------------------------------------------------------
+#
+#
+#         self.Hora_entrega = tk.Label(self.cadastro_reservas, text='Hora da Entrega :', bg='#ffd', fg='#0D0D0D',
+#                                      font=('poppins', 14, 'bold'))
+#         self.Hora_entrega.place(relx=0.55, rely=0.55, relwidth=0.14, relheight=0.04)
+#         self.vHora_entregaH = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
+#         self.vHora_entregaH.place(relx=0.7, rely=0.55, relwidth=0.04, relheight=0.04)
+#         self.vHora_entregaM = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'), textvariable = textEntry, state="readonly")
+#         self.vHora_entregaM.place(relx=0.74, rely=0.55, relwidth=0.04, relheight=0.04)
+#         self.vHora_entregaS = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'), textvariable = textEntry, state="readonly")
+#         self.vHora_entregaS.place(relx=0.78, rely=0.55, relwidth=0.04, relheight=0.04)
 
         
 #-------------------------------------------------------------------
 
         
-        self.Data_retirada = tk.Label(self.cadastro_reservas, text='Data da Retirada :', bg='#ffd', fg='#0D0D0D',
-                                          font=('poppins', 14, 'bold'))
-        self.Data_retirada.place(relx=0.14, rely=0.5, relwidth=0.14, relheight=0.04)
-        self.vData_retiradaD = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
-        self.vData_retiradaD.place(relx=0.29, rely=0.5, relwidth=0.04, relheight=0.04)
-        self.vData_retiradaM = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
-        self.vData_retiradaM.place(relx=0.33, rely=0.5, relwidth=0.04, relheight=0.04)
-        self.vData_retiradaA = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'), textvariable = text2Entry, state="readonly")
-        self.vData_retiradaA.place(relx=0.37, rely=0.5, relwidth=0.04, relheight=0.04)
-
-#-------------------------------------------------------------------
-
-        
-        self.Hora_retirada = tk.Label(self.cadastro_reservas, text='Hora da Retirada :', bg='#ffd', fg='#0D0D0D',
-                                     font=('poppins', 14, 'bold'))
-        self.Hora_retirada.place(relx=0.14, rely=0.55, relwidth=0.14, relheight=0.04)
-
-        self.vHora_retiradaH = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
-        self.vHora_retiradaH.place(relx=0.29, rely=0.55, relwidth=0.04, relheight=0.04)
-        self.vHora_retiradaM = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'), textvariable = textEntry, state="readonly")
-        self.vHora_retiradaM.place(relx=0.33, rely=0.55, relwidth=0.04, relheight=0.04)
-        self.vHora_retiradaS = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'), textvariable = textEntry, state="readonly")
-        self.vHora_retiradaS.place(relx=0.37, rely=0.55, relwidth=0.04, relheight=0.04)
+#         self.Data_retirada = tk.Label(self.cadastro_reservas, text='Data da Retirada :', bg='#ffd', fg='#0D0D0D',
+#                                           font=('poppins', 14, 'bold'))
+#         self.Data_retirada.place(relx=0.14, rely=0.5, relwidth=0.14, relheight=0.04)
+#         self.vData_retiradaD = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
+#         self.vData_retiradaD.place(relx=0.29, rely=0.5, relwidth=0.04, relheight=0.04)
+#         self.vData_retiradaM = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
+#         self.vData_retiradaM.place(relx=0.33, rely=0.5, relwidth=0.04, relheight=0.04)
+#         self.vData_retiradaA = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'), textvariable = text2Entry, state="readonly")
+#         self.vData_retiradaA.place(relx=0.37, rely=0.5, relwidth=0.04, relheight=0.04)
+#
+# #-------------------------------------------------------------------
+#
+#
+#         self.Hora_retirada = tk.Label(self.cadastro_reservas, text='Hora da Retirada :', bg='#ffd', fg='#0D0D0D',
+#                                      font=('poppins', 14, 'bold'))
+#         self.Hora_retirada.place(relx=0.14, rely=0.55, relwidth=0.14, relheight=0.04)
+#
+#         self.vHora_retiradaH = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
+#         self.vHora_retiradaH.place(relx=0.29, rely=0.55, relwidth=0.04, relheight=0.04)
+#         self.vHora_retiradaM = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'), textvariable = textEntry, state="readonly")
+#         self.vHora_retiradaM.place(relx=0.33, rely=0.55, relwidth=0.04, relheight=0.04)
+#         self.vHora_retiradaS = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'), textvariable = textEntry, state="readonly")
+#         self.vHora_retiradaS.place(relx=0.37, rely=0.55, relwidth=0.04, relheight=0.04)
         
 #----------------------- SOLUCAO-------------------------------------------------------------------------------
         self.Gcpf = tk.Entry(self.frame_1, bd=3, font=('poppins', 11, 'bold'))

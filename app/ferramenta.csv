@@ -1,5 +1,4 @@
 codigo,descricao,fabricante,voltagem,partnumber,tamanho,unidade,tipo,material,tempo
-<<<<<<< HEAD
 101,furadeira industrial de impacto ,bosch,110, gsb450re,80,cm,elétrica,concreto,12 horas
 102,alicate,dexter,0,ytrv5677xcf,20,cm,descascador,metal,12 horas
 103,torquês,dexter,0,erfd56490,10,cm,armador,metal,06 horas
@@ -10,6 +9,3 @@ codigo,descricao,fabricante,voltagem,partnumber,tamanho,unidade,tipo,material,te
 108,esmerilhadeira ang,makita,127,asw5678rt,115,mm,elétrica,metal,12 horas
 109,pistola pulverizadora,dexter,220,dfe5684gf,"313,5x275x230",mm,elétrica,plástico,18 horas
 110,serra tico-tico,black+decker,127,qwe4543rt,200,mm,elétrica,metal,24 horas
-=======
-a,a,a,a,a,a,a,a,a,a
->>>>>>> a26a09fd5cba95b090faece81e5ea3fd17f4e2ca
