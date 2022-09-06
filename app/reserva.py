@@ -167,7 +167,7 @@ class funcsRR (CsvR):
         self.horadevolucao = self.horas_dev.get()
 
     def cont_horas(self, tempo="12 horas"):
-        conta_hora = 0
+        self.conta_hora = 0
         if tempo == "06 horas":
             conta_hora = 6
         elif tempo == "12 horas":
@@ -178,7 +178,7 @@ class funcsRR (CsvR):
             conta_hora = 24
         elif tempo == "30 horas":
             conta_hora = 30
-        return conta_hora
+        return self.conta_hora
 
     def verifica_data(self, datare, datade):
         data_valida = False
@@ -197,7 +197,7 @@ class funcsRR (CsvR):
         datad = datadevolucao
         horar = horaretirada
         horad = horadevolucao
-        self.tempo_max = self.cont_horas(tempo)
+        tempo_max = self.cont_horas(tempo)
         aux = 0
         tempo_reserva = 0
         tempo_max_ok = False
@@ -216,7 +216,7 @@ class funcsRR (CsvR):
         else:
             tempo_reserva = hora_dev_int - hora_ret_int
 
-        if tempo_reserva <= self.tempo_max:
+        if tempo_reserva <= tempo_max:
             tempo_max_ok = True
         return tempo_max_ok
 
@@ -294,16 +294,18 @@ class funcsRR (CsvR):
 
     def add_reserva(self):
         self.variaveisR()
-        # tempo_valido = self.verifica_tempo("12 horas", self.dataretirada, self.datadevolucao, self.horaretirada, self.horadevolucao)
+        tempo_valido = self.verifica_tempo(self.Gtempo, self.dataretirada, self.datadevolucao, self.horaretirada, self.horadevolucao)
         data_valido = self.verifica_data(self.dataretirada, self.datadevolucao)
         while True:
             if data_valido:
-                self.appendR(self.gcpf, self.gnome, self.gtel, self.gcod, self.gdes, self.gvolt, self.gtipo,
-                             self.dataretirada, self.horaretirada, self.datadevolucao, self.horadevolucao)
-                self.select_listR()
-
+                if tempo_valido:
+                    self.appendR(self.gcpf, self.gnome, self.gtel, self.gcod, self.gdes, self.gvolt, self.gtipo,
+                                 self.dataretirada, self.horaretirada, self.datadevolucao, self.horadevolucao)
+                    self.select_listR()
+                else:
+                    messagebox.showerror("Erro", "O tempo total da reserva excede o permitido para essa ferramenta.")
             else:
-                messagebox.showerror("Erro", "A data de devolução não pode ser superior a de retirada.")
+                messagebox.showerror("Erro", "A data de devolução não pode ser inferior a de retirada.")
 
 
             break
