@@ -73,8 +73,6 @@ class Aplicacao(TK, front_Ferramentas, Reserva):
         self.bt_cadastrar_reserva = tk.Button(self.frame_reserva, text="Acessar", bd=3, font=('poppins', 19, 'bold'), command= self.janela_cadastro_reservas)
         self.bt_cadastrar_reserva.place(relx=0.1, rely=0.8, relwidth=0.8, relheight=0.15)
 
-
-
     def labels(self):
         self.label_titulo = tk.Label(self.frame_titulo, text="Central de Ferramentaria", bg='#B9B7BD', font=('poppins', 50, 'bold'))
         self.label_titulo.place(relx=0.0, rely=0.3, relwidth=1, relheight=0.3)

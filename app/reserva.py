@@ -87,6 +87,7 @@ class funcsRF (Csvf):
             self.Gdes.insert(END, col2)
             self.Gvolt.insert(END, col4)
             self.Gtipo.insert(END, col8)
+            self.Gtempo.insert(END, col10)
 class funcsRT (Csv):
     def vazio(self, msg):
         if msg == "":
@@ -220,7 +221,6 @@ class funcsRR (CsvR):
             tempo_max_ok = True
         return tempo_max_ok
 
-
     def limpar_dadosR(self):
         self.Gcpf.delete(0, END)
         self.Gnome.delete(0, END)
@@ -229,7 +229,6 @@ class funcsRR (CsvR):
         self.Gdes.delete(0, END)
         self.Gvolt.delete(0, END)
         self.Gtipo.delete(0, END)
-        self.Gtempo.delete(0, END)
         self.vPesquisa_ReservaT.delete(0, END)
         self.vPesquisa_ReservaF.delete(0, END)
 
@@ -260,7 +259,7 @@ class funcsRR (CsvR):
             self.Gdes.insert(END, col5)
             self.Gvolt.insert(END, col6)
             self.Gtipo.insert(END, col7)
-            self.Gtempo.insert(END, col10)
+
 
             self.vPesquisa_ReservaT.insert(END, col1)
             self.vPesquisa_ReservaT.insert(END, ",")
@@ -432,7 +431,7 @@ class Reserva (funcsRT, funcsRF, funcsRR) :
         
 #----------------------- SOLUCAO-------------------------------------------------------------------------------
         self.Gcpf = tk.Entry(self.frame_1, bd=3, font=('poppins', 11, 'bold'))
-        self.Gcpf.place(relx=0.00, rely=0.00, relwidth=0.2, relheight=0.2)
+        self.Gcpf.place(relx=0.00, rely=0.00, relwidth=0.0, relheight=0.0)
         self.Gnome = tk.Entry(self.frame_1, bd=3, font=('poppins', 11, 'bold'))
         self.Gnome.place(relx=0.00, rely=0.00, relwidth=0.00, relheight=0.00)
         self.Gtel = tk.Entry(self.frame_1, bd=3, font=('poppins', 11, 'bold'))
@@ -449,7 +448,8 @@ class Reserva (funcsRT, funcsRF, funcsRR) :
         self.Gtipo = tk.Entry(self.frame_2, bd=3, font=('poppins', 11, 'bold'))
         self.Gtipo.place(relx=0.00, rely=0.00, relwidth=0.00, relheight=0.00)
         self.Gtempo = tk.Entry(self.frame_2, bd=3, font=('poppins', 11, 'bold'))
-        self.Gtempo.place(relx=0.00, rely=0.00, relwidth=0.00, relheight=0.00)
+        self.Gtempo.place(relx=0.00, rely=0.00, relwidth=0.0, relheight=0.0)
+
 #------------------------------------------------------------
         ##  OUTROS BOTÕES, ENTRYS E LEBELS
 
