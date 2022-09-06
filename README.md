@@ -5,10 +5,10 @@
 <p>Grupo: DevTeam13</p>
 <p>Participantes:</p>
 <ul>
-<li><a href="https://github.com/Axemay">Maiara Accacio Machado</a></li>
-<li><a href="https://github.com/fneto1723">Francisco Ferreira de Queiroz Neto</a></li>
-<li><a href="https://github.com/dpsndroid">Danie  Nepomucenol</a></li>
-<li><a href="https://github.com/Rafa1a">Rafael Leal Altero</a></li>
+<li><a href="https://github.com/Axemay">Maiara Accacio Machado</a> - 202204268183</li>
+<li><a href="https://github.com/fneto1723">Francisco Ferreira de Queiroz Neto</a> - 202205164951</li>
+<li><a href="https://github.com/dpsndroid">Daniel Portella de Souza Nepomuceno</a> - 202205063186</li>
+<li><a href="https://github.com/Rafa1a">Rafael Leal Altero</a> - 202205021882</li>
 <li>Paulo</li>
 </ul>
 
