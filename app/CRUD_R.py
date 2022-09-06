@@ -14,12 +14,12 @@ class CsvR:
                 return self.data
 
             #     return row
-    def appendR(self, cpf, nome, telefone, codigo, descricao, voltagem, tipo, dataretirada, horaretirada, dataentrega, horaentrega):
+    def appendR(self, cpf, nome, telefone, codigo, descricao, voltagem, tipo, dataretirada, horaretirada, datadevolucao, horaentrega):
         # with open('./appcsv.csv') as self.file:
         #     self.csv_Dreader = DictReader(self.file)
         #     self.data2 = list(self.csv_Dreader)
         with open('./reserva.csv', 'a', newline="", encoding='utf-8') as self.file:
-            header = ("cpf", "nome", "telefone", "codigo", "descricao", "voltagem", "tipo", "dataretirada", "horaretirada", "dataentrega", "horaentrega")
+            header = ("cpf", "nome", "telefone", "codigo", "descricao", "voltagem", "tipo", "dataretirada", "horaretirada", "datadevolucao", "horaentrega")
             #pulo = "\n"
             self.csv_Dwriter = DictWriter(self.file, fieldnames=header, lineterminator="\n" )
 
@@ -32,7 +32,7 @@ class CsvR:
                     'tipo': tipo,
                     'dataretirada' : dataretirada,
             'horaretirada': horaretirada,
-            'dataentrega': dataentrega,
+            'datadevolucao': datadevolucao,
             'horaentrega': horaentrega})
 
 

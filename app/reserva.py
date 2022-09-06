@@ -159,80 +159,85 @@ class funcsRR (CsvR):
         self.gdes = self.Gdes.get()
         self.gvolt = self.Gvolt.get()
         self.gtipo = self.Gtipo.get()
+        self.dataretirada = self.data_retirada.get()
+        self.datadevolucao = self.data_devolucao.get()
+        self.horatirada = self.hora_retirada.get()
+        self.horadevolucao = self.hora_devolucao.get()
 
-        def validadh(msg):
-            try:
-                msg = int(msg)
-            except (ValueError, TypeError):
-                messagebox.showerror("Erro", "Digite apenas números")
-            else:
-                return str(msg)
 
-        def doisdigitos(msg):
-            if len(msg) > 2 or  len(msg) == 0:
-                messagebox.showerror("Erro", "Insira até 2 dígitos")
-            else:
-                return msg
+        # def validadh(msg):
+        #     try:
+        #         msg = int(msg)
+        #     except (ValueError, TypeError):
+        #         messagebox.showerror("Erro", "Digite apenas números")
+        #     else:
+        #         return str(msg)
+        #
+        # def doisdigitos(msg):
+        #     if len(msg) > 2 or  len(msg) == 0:
+        #         messagebox.showerror("Erro", "Insira até 2 dígitos")
+        #     else:
+        #         return msg
+        #
+        # def validahora(msg):
+        #     msg = int(msg)
+        #     if msg < 0 or msg > 24:
+        #         messagebox.showerror("Erro", "O horário de expediente para retirada e entrega\ndas ferramentas é de 08:00hs às 17:00hs")
+        #     else:
+        #         return str(msg)
 
-        def validahora(msg):
-            msg = int(msg)
-            if msg < 0 or msg > 24:
-                messagebox.showerror("Erro", "O horário de expediente para retirada e entrega\ndas ferramentas é de 08:00hs às 17:00hs")
-            else:
-                return str(msg)
+        # def validames(msg):
+        #     msg = int(msg)
+        #     if msg < 1 or msg > 12:
+        #         messagebox.showerror("Erro", "O ano deve estar compatível com o calendário")
+        #     else:
+        #         return str(msg)
 
-        def validames(msg):
-            msg = int(msg)
-            if msg < 1 or msg > 12:
-                messagebox.showerror("Erro", "O ano deve estar compatível com o calendário")
-            else:
-                return str(msg)
-
-        def validadia(msg):
-             try:
-                res = msg
-             except (ValueError, TypeError):
-                messagebox.showerror("Erro", "Esse dia não consta no calendário")
-             else:
-                return res
-                    
-        self.dataentD = doisdigitos(validadh(self.vData_entregaD.get()))        
-        self.dataentM = validames(doisdigitos(validadh(self.vData_entregaM.get())))
-        self.dataentA = self.vData_entregaA.get()
-        self.horaentH = validahora(doisdigitos(validadh(self.vHora_entregaH.get())))
-        self.horaentM = self.vHora_entregaM.get()
-        self.horaentS = self.vHora_entregaS.get()
-        self.dataretD = doisdigitos(validadh(self.vData_retiradaD.get()))
-        self.dataretM = validames(doisdigitos(validadh(self.vData_retiradaM.get())))
-        self.dataretA = self.vData_retiradaA.get()
-        self.horaretH = validahora(doisdigitos(validadh(self.vHora_retiradaH.get())))
-        self.horaretM = self.vHora_retiradaM.get()
-        self.horaretS = self.vHora_retiradaS.get()
-
-        
-        self.retira = validadia(datetime(int(self.dataretA), int(self.dataretM), int(self.dataretD), int(self.horaretH),
-                               int(self.horaretM), int(self.horaretS)))
-
-        self.entrega = validadia(datetime(int(self.dataentA), int(self.dataentM), int(self.dataentD), int(self.horaentH),
-                               int(self.horaentM), int(self.horaentS)))
-        
-        self.diferenca = self.retira - data
-        self.string=str(self.diferenca)
-        self.output=self.string.split()
-        if "-" in self.output[0]:
-            messagebox.showerror("Erro", "Você não pode reservar com uma data ou hora passada")
-        else:        
-            self.dataretirada = f"{self.dataretD}/{self.dataretM}/{self.dataretA}"
-            self.horaretirada = f"{self.horaretH}:{self.horaretM}:{self.horaretS}"
-
-        self.diferenca2 = self.entrega - self.retira
-        self.string2=str(self.diferenca2)
-        self.output2=self.string2.split()
-        if "-" in self.output2[0]:
-            messagebox.showerror("Erro", "Você não pode entregar com  data e hora anterior a reserva")
-        else: 
-            self.dataentrega = f"{self.dataentD}/{self.dataentM}/{self.dataentA}"   
-            self.horaentrega = f"{self.horaentH}:{self.horaentM}:{self.horaentS}"
+        # def validadia(msg):
+        #      try:
+        #         res = msg
+        #      except (ValueError, TypeError):
+        #         messagebox.showerror("Erro", "Esse dia não consta no calendário")
+        #      else:
+        #         return res
+        #
+        # self.dataentD = doisdigitos(validadh(self.vData_entregaD.get()))
+        # # self.dataentM = validames(doisdigitos(validadh(self.vData_entregaM.get())))
+        # self.dataentA = self.vData_entregaA.get()
+        # self.horaentH = validahora(doisdigitos(validadh(self.vHora_entregaH.get())))
+        # self.horaentM = self.vHora_entregaM.get()
+        # self.horaentS = self.vHora_entregaS.get()
+        # self.dataretD = doisdigitos(validadh(self.vData_retiradaD.get()))
+        # self.dataretM = validames(doisdigitos(validadh(self.vData_retiradaM.get())))
+        # self.dataretA = self.vData_retiradaA.get()
+        # self.horaretH = validahora(doisdigitos(validadh(self.vHora_retiradaH.get())))
+        # self.horaretM = self.vHora_retiradaM.get()
+        # self.horaretS = self.vHora_retiradaS.get()
+        #
+        #
+        # self.retira = validadia(datetime(int(self.dataretA), int(self.dataretM), int(self.dataretD), int(self.horaretH),
+        #                        int(self.horaretM), int(self.horaretS)))
+        #
+        # self.entrega = validadia(datetime(int(self.dataentA), int(self.dataentM), int(self.dataentD), int(self.horaentH),
+        #                        int(self.horaentM), int(self.horaentS)))
+        #
+        # self.diferenca = self.retira - data
+        # self.string=str(self.diferenca)
+        # self.output=self.string.split()
+        # if "-" in self.output[0]:
+        #     messagebox.showerror("Erro", "Você não pode reservar com uma data ou hora passada")
+        # else:
+        #     self.dataretirada = f"{self.dataretD}/{self.dataretM}/{self.dataretA}"
+        #     self.horaretirada = f"{self.horaretH}:{self.horaretM}:{self.horaretS}"
+        #
+        # self.diferenca2 = self.entrega - self.retira
+        # self.string2=str(self.diferenca2)
+        # self.output2=self.string2.split()
+        # if "-" in self.output2[0]:
+        #     messagebox.showerror("Erro", "Você não pode entregar com  data e hora anterior a reserva")
+        # else:
+        #     self.dataentrega = f"{self.dataentD}/{self.dataentM}/{self.dataentA}"
+        #     self.horaentrega = f"{self.horaentH}:{self.horaentM}:{self.horaentS}"
         
     def limpar_dadosR(self):
         self.Gcpf.delete(0, END)
@@ -254,7 +259,7 @@ class funcsRR (CsvR):
         lista = self.leitorR()
 
         for i in lista:
-            if i == ["cpf", "nome", "telefone", "codigo", "descricao", "voltagem", "tipo", "dataretirada", "horaretirada", "dataentrega", "horaentrega"]:
+            if i == ["cpf", "nome", "telefone", "codigo", "descricao", "voltagem", "tipo", "dataretirada", "horaretirada", "datadevolucao", "horaentrega"]:
                 continue
 
             self.view_frame3.insert("", END, values = i)
@@ -293,19 +298,18 @@ class funcsRR (CsvR):
     def limpar_entries(self):
         self.vPesquisa_ReservaT.delete(0, END)
         self.vPesquisa_ReservaF.delete(0, END)
-        self.vData_entregaD.delete(0, END)        
-        self.vData_entregaM.delete(0, END) 
-        self.vHora_entregaH.delete(0, END)
-        self.vData_retiradaD.delete(0, END)
-        self.vData_retiradaM.delete(0, END)
-        self.vHora_retiradaH.delete(0, END)
+        self.vData_devolucao.delete(0, END)
+        self.vHora_devolucao.delete(0, END)
+        self.vData_retirada.delete(0, END)
+        self.vHora_retirada.delete(0, END)
+
         
 
 
             
     def add_reserva(self):
         self.variaveisR()
-        self.appendR(self.gcpf, self.gnome, self.gtel, self.gcod, self.gdes, self.gvolt, self.gtipo, self.dataretirada, self.horaretirada, self.dataentrega, self.horaentrega)
+        self.appendR(self.gcpf, self.gnome, self.gtel, self.gcod, self.gdes, self.gvolt, self.gtipo, self.dataretirada, self.horaretirada, self.dataentrega, self.horadevolucao)
         self.select_listR()
 
         # self.res = tk.Label(self.frame_4, text=f"{contador} Cadastro(s) efetuado(s) com sucesso!", bg="#868B8E",
@@ -317,27 +321,27 @@ class funcsRR (CsvR):
     def calendario(self):
         self.calendario1 = Calendar(self.cadastro_reservas, fg="gray75", bg="blue", font=("poppins", "9", "bold"), locale="pt_br")
         self.calendario1.place(relx=0.28, rely=0.25)
-        self.cal_data = tk.Button(self.cadastro_reservas, text="Inserir data", command=self.puxar_data_ret)
-        self.cal_data.place(relx=0.38, rely=0.5, height=25, width=100)
+        self.cal_data_retirada = tk.Button(self.cadastro_reservas, text="Inserir data", command=self.puxar_data_ret)
+        self.cal_data_retirada.place(relx=0.38, rely=0.5, height=25, width=100)
         self.calendario2 = Calendar(self.cadastro_reservas, fg="gray75", bg="blue", font=("poppins", "9", "bold"),
                                     locale="pt_br")
         self.calendario2.place(relx=0.50, rely=0.25)
-        self.cal_data_dev = tk.Button(self.cadastro_reservas, text="Inserir data", command=self.puxar_data_dev)
-        self.cal_data_dev.place(relx=0.47, rely=0.5, height=25, width=100)
+        self.cal_data_devolucao = tk.Button(self.cadastro_reservas, text="Inserir data", command=self.puxar_data_dev)
+        self.cal_data_devolucao.place(relx=0.47, rely=0.5, height=25, width=100)
 
     def puxar_data_ret(self):
         data_inicial = self.calendario1.get_date()
-        self.entry_data_retirada.delete(0, END)
-        self.entry_data_retirada.insert(END, data_inicial)
+        self.data_retirada.delete(0, END)
+        self.data_retirada.insert(END, data_inicial)
         self.calendario1.destroy()
-        self.cal_data.destroy()
+        self.cal_data_retirada.destroy()
 
     def puxar_data_dev(self):
         data_final = self.calendario2.get_date()
-        self.entry_data_dev.delete(0, END)
-        self.entry_data_dev.insert(END, data_final)
+        self.data_devolucao.delete(0, END)
+        self.data_devolucao.insert(END, data_final)
         self.calendario2.destroy()
-        self.cal_data_dev.destroy()
+        self.cal_data_devolucao.destroy()
 #----------------------------------------------------------------------------------------------------------------------
 class Reserva (funcsRT, funcsRF, funcsRR) :
     def janela_cadastro_reservas(self):
@@ -399,32 +403,39 @@ class Reserva (funcsRT, funcsRF, funcsRR) :
         # text2Entry = tk.StringVar()
         # text2Entry.set(ano)
         #
-        # textEntry = tk.StringVar()
-        # textEntry.set("00")
+        textEntry = tk.StringVar()
+        textEntry.set("00")
         
         self.bt_calendario = tk.Button(self.cadastro_reservas, text='Data da Retirada', command=self.calendario)
         self.bt_calendario.place(relx=0.14, rely=0.5, relwidth=0.14, relheight=0.04)
-        self.entry_data_retirada = tk.Entry(self.cadastro_reservas, width=4)
-        self.entry_data_retirada.place(relx=0.29, rely=0.5, relwidth=0.08, relheight=0.04)
+        self.data_retirada = tk.Entry(self.cadastro_reservas, width=4)
+        self.data_retirada.place(relx=0.29, rely=0.5, relwidth=0.08, relheight=0.04)
 
         self.bt_calendario_entrega = tk.Button(self.cadastro_reservas, text='Data da Devolução', command=self.calendario)
         self.bt_calendario_entrega.place(relx=0.55, rely=0.5, relwidth=0.14, relheight=0.04)
-        self.entry_data_dev = tk.Entry(self.cadastro_reservas, width=4)
-        self.entry_data_dev.place(relx=0.70, rely=0.5, relwidth=0.08, relheight=0.04)
-        
-#         self.Data_entrega = tk.Label(self.cadastro_reservas, text='Data da Entrega :', bg='#ffd', fg='#0D0D0D',
-#                                       font=('poppins', 14, 'bold'))
-#         self.Data_entrega.place(relx=0.55, rely=0.5, relwidth=0.14, relheight=0.04)
-#         self.vData_entregaD = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
-#         self.vData_entregaD.place(relx=0.7, rely=0.5, relwidth=0.04, relheight=0.04)
-#         self.vData_entregaM = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'))
-#         self.vData_entregaM.place(relx=0.74, rely=0.5, relwidth=0.04, relheight=0.04)
-#         self.vData_entregaA = tk.Entry(self.cadastro_reservas, bd=3, font=('poppins', 11, 'bold'), textvariable = text2Entry, state="readonly")
-#         self.vData_entregaA.place(relx=0.78, rely=0.5, relwidth=0.04, relheight=0.04)
+        self.data_devolucao = tk.Entry(self.cadastro_reservas, width=4)
+        self.data_devolucao.place(relx=0.70, rely=0.5, relwidth=0.08, relheight=0.04)
+
+
+        self.horas = tk.StringVar(self.cadastro_reservas)
+        self.horas_valores = ("00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00",
+                              "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00",
+                              "20:00", "21:00","22:00", "23:00")
+        self.horas.set("00:00")
+        self.hora_menu_retirada = tk.OptionMenu(self.cadastro_reservas, self.horas, *self.horas_valores)
+        self.hora_menu_retirada.place(relx=0.29, rely=0.55, relwidth=0.07, relheight=0.04)
+        self.hora_menu_devolucao = tk.OptionMenu(self.cadastro_reservas, self.horas, *self.horas_valores)
+        self.hora_menu_devolucao.place(relx=0.7, rely=0.55, relwidth=0.07, relheight=0.04)
+
+        self.hora_menu_retirada_label = tk.Label(self.cadastro_reservas, text='Hora da Retirada:', bg='#ffd', fg='#0D0D0D',
+                                          font=('poppins', 12, 'bold'))
+        self.hora_menu_retirada_label.place(relx=0.14, rely=0.55, relwidth=0.14, relheight=0.04)
 #
-# #------------------------------------------------------------------
-#
-#
+        self.hora_menu_devolucao_label = tk.Label(self.cadastro_reservas, text='Hora da Devolução:', bg='#ffd', fg='#0D0D0D',
+                                          font=('poppins', 12, 'bold'))
+        self.hora_menu_devolucao_label.place(relx=0.55, rely=0.55, relwidth=0.14, relheight=0.04)
+
+
 #         self.Hora_entrega = tk.Label(self.cadastro_reservas, text='Hora da Entrega :', bg='#ffd', fg='#0D0D0D',
 #                                      font=('poppins', 14, 'bold'))
 #         self.Hora_entrega.place(relx=0.55, rely=0.55, relwidth=0.14, relheight=0.04)
