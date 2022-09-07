@@ -3,6 +3,7 @@ from tkinter import END
 from tkinter import Frame, ttk
 from tkinter import Scrollbar
 from tkinter import messagebox
+import conversor_csv_xls as ccx
 
 from CRUD_T import *
 
@@ -371,6 +372,10 @@ class TK(funcs):
 
             self.bat = tk.Button(self.cadastro_tecnicos, text="Atualizar Lista", bd=5, command=self.select_list)
             self.bat.place(relx=0.15, rely=0.44, relwidth=0.092, relheight=0.05)
+
+            self.bat = tk.Button(self.cadastro_tecnicos, text="Gerar Arquivo XLSX", bd=5, command=ccx.exportxls)
+            self.bat.place(relx=0.73, rely=0.44, relwidth=0.12, relheight=0.05)
+
 
 
             ########## MENSAGEM
