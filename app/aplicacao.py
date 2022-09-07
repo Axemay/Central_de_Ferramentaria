@@ -3,6 +3,7 @@ import time
 from tecnico import *
 from ferramenta import *
 from reserva import *
+from sobre import *
 import webbrowser
 
 # criar tela
@@ -79,7 +80,7 @@ class Aplicacao(TK, front_Ferramentas, Reserva):
         self.bt_manual = tk.Button(self.janela, text="Consultar Manual", bd=5, command=self.abrir_manual)
         self.bt_manual.place(relx=0.82, rely=0.90, relwidth=0.13, relheight=0.05)
 
-        self.bt_sobre = tk.Button(self.janela, text="Sobre", bd=5, command=self.abrir_manual)
+        self.bt_sobre = tk.Button(self.janela, text="Sobre", bd=5, command=janela_sobre)
         self.bt_sobre.place(relx=0.68, rely=0.90, relwidth=0.13, relheight=0.05)
 
     def labels(self):
