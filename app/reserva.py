@@ -557,11 +557,11 @@ class Reserva (funcsRT, funcsRF, funcsRR) :
         self.limpacamp = tk.Button(self.cadastro_reservas, text="Limpar Campos", bd=5, command=self.limpar_entries)
         self.limpacamp.place(relx=0.31, rely=0.56, relwidth=0.08, relheight=0.04)
 
-        self.btdel = tk.Button(self.cadastro_reservas, text="Delete", bd=5, command=self.confirma)
-        self.btdel.place(relx=0.41, rely=0.56, relwidth=0.08, relheight=0.04)
-
         self.bupR = tk.Button(self.cadastro_reservas, text="Reservar", bd=5, command= self.add_reserva)
-        self.bupR.place(relx=0.51, rely=0.56, relwidth=0.08, relheight=0.04)
+        self.bupR.place(relx=0.41, rely=0.56, relwidth=0.08, relheight=0.04)
+
+        self.btdel = tk.Button(self.cadastro_reservas, text="Delete", bd=5, command=self.confirma)
+        self.btdel.place(relx=0.51, rely=0.56, relwidth=0.08, relheight=0.04)
 
         self.batR = tk.Button(self.cadastro_reservas, text="Atualizar Lista", bd=5, command=self.select_listR)
         self.batR.place(relx=0.61, rely=0.56, relwidth=0.08, relheight=0.04)
