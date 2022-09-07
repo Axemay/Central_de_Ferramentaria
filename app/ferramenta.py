@@ -3,6 +3,7 @@ from tkinter import END
 from tkinter import Frame, ttk
 from tkinter import Scrollbar
 from tkinter import messagebox
+import conversor_csv_xls as ccx
 
 from CRUD_F import *
 
@@ -277,7 +278,7 @@ class front_Ferramentas(funcs):
         self.frame_1.place(relx=0.01, rely=0.006, relwidth=0.98, relheight=0.6)
 
         self.frame_2 = Frame(self.cadastro_ferramentas, bd=4, bg="#868B8E", highlightbackground="#0D0D0D", highlightthickness=0.4)
-        self.frame_2.place(relx=0.3, rely=0.608, relwidth=0.35, relheight=0.04)
+        self.frame_2.place(relx=0.33, rely=0.608, relwidth=0.35, relheight=0.04)
 
         self.frame_3 = Frame(self.cadastro_ferramentas, bd=4, bg="#868B8E", highlightbackground="#0D0D0D", highlightthickness=1)
         self.frame_3.place(relx=0.01, rely=0.65, relwidth=0.98, relheight=0.34)
@@ -358,22 +359,25 @@ class front_Ferramentas(funcs):
 ################# -------------- BOTÕES    ####--------------------------------------------------------------------------------
 
         self.bsalvar = tk.Button(self.frame_1, text='Salvar Cadastro', bd=5, command= self.add_clientef)
-        self.bsalvar.place(relx=0.15, rely=0.92, relwidth=0.11, relheight=0.08)
+        self.bsalvar.place(relx=0.39, rely=0.91, relwidth=0.11, relheight=0.08)
 
         self.blimpar = tk.Button(self.frame_1, text="Limpar Campos", bd=5, command=self.limpar_dadosF)
-        self.blimpar.place(relx=0.01, rely=0.92, relwidth=0.11, relheight=0.08)
+        self.blimpar.place(relx=0.26, rely=0.91, relwidth=0.11, relheight=0.08)
 
         self.bbusca = tk.Button(self.frame_1, text="Pesquisar", bd=5, command=self.buscaf)
         self.bbusca.place(relx=0.7, rely=0.01, relwidth=0.11, relheight=0.08)
 
         self.bup = tk.Button(self.frame_1, text="Atualizar", bd=5, command= self.atualizarf)
-        self.bup.place(relx=0.69, rely=0.92, relwidth=0.11, relheight=0.08)
+        self.bup.place(relx=0.52, rely=0.91, relwidth=0.11, relheight=0.08)
 
         self.bdelet = tk.Button(self.frame_1, text="Deletar", bd=5, command= self.deletef)
-        self.bdelet.place(relx=0.83, rely=0.92, relwidth=0.11, relheight=0.08)
+        self.bdelet.place(relx=0.65, rely=0.91, relwidth=0.11, relheight=0.08)
 
         self.bat = tk.Button(self.cadastro_ferramentas, text="Atualizar Lista", bd=5, command=self.select_listf)
-        self.bat.place(relx=0.08, rely=0.608, relwidth=0.07, relheight=0.04)
+        self.bat.place(relx=0.12, rely=0.608, relwidth=0.11, relheight=0.04)
+
+        self.butxls = tk.Button(self.cadastro_ferramentas, text="Gerar Arquivo XLSX", bd=5, command=ccx.exportxlsF)
+        self.butxls.place(relx=0.79, rely=0.608, relwidth=0.11, relheight=0.04)
 
 
         self.res = tk.Label(self.frame_2, text="Insira acima os dados da ferramenta", bg="#868B8E",fg= "#FFF6D1", font=("poppins", 18, 'bold'))

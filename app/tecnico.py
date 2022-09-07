@@ -315,57 +315,57 @@ class TK(funcs):
             ## BOTÕES, LABELS, ENTRIES
             self.cpf = tk.Label(self.frame_1, text="CPF:", bg='#ffd', fg='#0D0D0D',
                                    font=('poppins', 19, 'bold'))
-            self.cpf.place(relx=0.05, rely=0.20, relwidth=0.15, relheight=0.12)
+            self.cpf.place(relx=0.05, rely=0.20, relwidth=0.17, relheight=0.12)
 
             self.vcpf = tk.Entry(self.frame_1, bd=3, font=('poppins', 16, 'bold'))
-            self.vcpf.place(relx=0.22, rely=0.21, relwidth=0.4, relheight=0.11)
+            self.vcpf.place(relx=0.24, rely=0.21, relwidth=0.4, relheight=0.11)
             ################################
             self.nome = tk.Label(self.frame_1, text='Nome:', bg='#ffd', fg='#0D0D0D',
                                    font=('poppins', 19, 'bold'))
-            self.nome.place(relx=0.05, rely=0.36, relwidth=0.15, relheight=0.12)
+            self.nome.place(relx=0.05, rely=0.36, relwidth=0.17, relheight=0.12)
 
             self.vnome = tk.Entry(self.frame_1, bd=3, font=('poppins', 16, 'bold'))
-            self.vnome.place(relx=0.22, rely=0.37, relwidth=0.4, relheight=0.11)
+            self.vnome.place(relx=0.24, rely=0.37, relwidth=0.4, relheight=0.11)
             # ####################################
             self.telefone = tk.Label(self.frame_1, text='Telefone:', bg='#ffd', fg='#0D0D0D',
                                    font=('poppins', 19, 'bold'))
-            self.telefone.place(relx=0.05, rely=0.52, relwidth=0.15, relheight=0.12)
+            self.telefone.place(relx=0.05, rely=0.52, relwidth=0.17, relheight=0.12)
 
             self.vtelefone = tk.Entry(self.frame_1, bd=3, font=('poppins', 16, 'bold'))
-            self.vtelefone.place(relx=0.22, rely=0.53, relwidth=0.4, relheight=0.11)
+            self.vtelefone.place(relx=0.24, rely=0.53, relwidth=0.4, relheight=0.11)
             # ####################################
             self.turno = tk.Label(self.frame_1, text='Turno:', bg='#ffd', fg='#0D0D0D',
                                    font=('poppins', 19, 'bold'))
-            self.turno.place(relx=0.05, rely=0.67, relwidth=0.15, relheight=0.12)
+            self.turno.place(relx=0.05, rely=0.68, relwidth=0.17, relheight=0.12)
 
             self.vturno = tk.Entry(self.frame_1, bd=3, font=('poppins', 16, 'bold'))
-            self.vturno.place(relx=0.22, rely=0.68, relwidth=0.15, relheight=0.11)
+            self.vturno.place(relx=0.24, rely=0.68, relwidth=0.15, relheight=0.11)
             # ####################################
             self.equipe = tk.Label(self.frame_1, text='Equipe:', bg='#ffd', fg='#0D0D0D',
                                    font=('poppins', 19, 'bold'))
-            self.equipe.place(relx=0.4, rely=0.67, relwidth=0.15, relheight=0.12)
+            self.equipe.place(relx=0.42, rely=0.68, relwidth=0.17, relheight=0.12)
 
             self.vequipe = tk.Entry(self.frame_1, bd=3, font=('poppins', 16, 'bold'))
-            self.vequipe.place(relx=0.58, rely=0.68, relwidth=0.15, relheight=0.11)
+            self.vequipe.place(relx=0.62, rely=0.68, relwidth=0.15, relheight=0.11)
         ########################
             self.pesquisa = tk.Label(self.frame_1, text='Pesquisar:', bg='#ffd', fg='#0D0D0D',
                                    font=('poppins', 19, 'bold'))
-            self.pesquisa.place(relx=0.05, rely=0.02, relwidth=0.17, relheight=0.12)
+            self.pesquisa.place(relx=0.05, rely=0.03, relwidth=0.17, relheight=0.12)
             self.vpesquisa = tk.Entry(self.frame_1, bd=3, font=('poppins', 16, 'bold'))
-            self.vpesquisa.place(relx=0.24, rely=0.03, relwidth=0.5, relheight=0.1)
+            self.vpesquisa.place(relx=0.24, rely=0.04, relwidth=0.5, relheight=0.1)
 
 ####################   BUTTON
             self.bsalvar = tk.Button(self.frame_1, text='Salvar Cadastro', bd=5, command=self.add_cliente)
-            self.bsalvar.place(relx=0.22, rely=0.85, relwidth=0.15, relheight=0.12)
+            self.bsalvar.place(relx=0.29, rely=0.85, relwidth=0.15, relheight=0.12)
 
             self.blimpar = tk.Button(self.frame_1, text="Limpar Campos",bd=5, command=self.limpar_dados)
             self.blimpar.place(relx=0.05, rely=0.85, relwidth=0.15, relheight=0.12)
 
             self.bbusca = tk.Button(self.frame_1, text="Pesquisar", bd=5, command=self.busca)
-            self.bbusca.place(relx=0.8, rely=0.01, relwidth=0.15, relheight=0.12)
+            self.bbusca.place(relx=0.8, rely=0.04, relwidth=0.15, relheight=0.12)
 
             self.bup = tk.Button(self.frame_1, text="Atualizar", bd=5, command= self.atualizar)
-            self.bup.place(relx=0.63, rely=0.85, relwidth=0.15, relheight=0.12)
+            self.bup.place(relx=0.56, rely=0.85, relwidth=0.15, relheight=0.12)
 
             self.bdelet = tk.Button(self.frame_1, text="Deletar", bd=5, command= self.delete)
             self.bdelet.place(relx=0.80, rely=0.85, relwidth=0.15, relheight=0.12)
@@ -373,7 +373,7 @@ class TK(funcs):
             self.bat = tk.Button(self.cadastro_tecnicos, text="Atualizar Lista", bd=5, command=self.select_list)
             self.bat.place(relx=0.15, rely=0.44, relwidth=0.092, relheight=0.05)
 
-            self.bat = tk.Button(self.cadastro_tecnicos, text="Gerar Arquivo XLSX", bd=5, command=ccx.exportxls)
+            self.bat = tk.Button(self.cadastro_tecnicos, text="Gerar Arquivo XLSX", bd=5, command=ccx.exportxlsT)
             self.bat.place(relx=0.73, rely=0.44, relwidth=0.12, relheight=0.05)
 
 

@@ -10,6 +10,7 @@ from CRUD_R import *
 from tkcalendar import Calendar
 from datetime import date, time, datetime, timedelta
 from time import strptime
+import conversor_csv_xls as ccx
 
 from CRUD_T import *
 
@@ -565,6 +566,9 @@ class Reserva (funcsRT, funcsRF, funcsRR) :
 
         self.batR = tk.Button(self.cadastro_reservas, text="Atualizar Lista", bd=5, command=self.select_listR)
         self.batR.place(relx=0.61, rely=0.56, relwidth=0.08, relheight=0.04)
+
+        self.butxls = tk.Button(self.cadastro_reservas, text="Gerar Arquivo XLSX", bd=5, command=ccx.exportxlsR)
+        self.butxls.place(relx=0.73, rely=0.56, relwidth=0.12, relheight=0.04)
         
 ############################### TRUE VIEW ==============================================================================
     ## true view frame 1
