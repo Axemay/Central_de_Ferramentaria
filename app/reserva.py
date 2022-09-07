@@ -4,6 +4,7 @@ from tkinter import END
 from tkinter import Frame, ttk
 from tkinter import Scrollbar
 from tkinter import messagebox
+from tkinter.messagebox import askyesno
 from CRUD_F import *
 from CRUD_R import *
 from tkcalendar import Calendar
@@ -335,9 +336,9 @@ class funcsRR (CsvR):
         self.limpar_dadosR()
         
     def confirma(self):
-    resposta = askyesno(title="Exclusão de reserva",  message="Confirma a exclusão da reserva selecionada?")
-    if resposta:
-        self.deleteR()
+        resposta = askyesno(title="Exclusão de reserva",  message="Confirma a exclusão da reserva selecionada?")
+        if resposta:
+            self.deleteR()
         
         
     # funções do calendário
