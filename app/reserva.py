@@ -170,13 +170,12 @@ class funcsRR (CsvR):
 
 
 
-#############################Verifica Data e hora de retirada e devolução ###############################################
-    def verifica_data(self, datare, datade, horare, horade):
-        mesmo_dia_ok = False
-        dia_diferete_ok = False
+
+    def verifica_data(self, datare, datade):
         data_valida = False
         datar = datare
         datad = datade
+
         horare_str = horare[:2]
         horade_str = horade[:2]
         horar = int(horare_str)
@@ -185,14 +184,10 @@ class funcsRR (CsvR):
         datar_formatada = strptime(datar, "%d/%m/%Y")
         datad_formatada = strptime(datad, "%d/%m/%Y")
         if datar_formatada <=  datad_formatada:
-            dia_diferete_ok = True
-        if horad != horar:
-            if horad > horar:
-                mesmo_dia_ok = True
-        if mesmo_dia_ok and dia_diferete_ok:
             data_valida = True
 
         return data_valida
+
 
 #############################Verifica disponibilidade da ferramenta na data##########################################
     def valida_disp(self, codg, datare):
@@ -223,6 +218,17 @@ class funcsRR (CsvR):
     def conta_tempo(self, temp):
         tempo = temp
         conta_hora = 0
+
+    def verifica_tempo(self, tempo, dataretirada, datadevolucao, horaretirada, horadevolucao):
+        tempo = tempo
+        print(f"tempo {tempo}")
+        datar = dataretirada
+        datad = datadevolucao
+        datar_formatada = strptime(datar, "%d/%m/%Y")
+        datad_formatada = strptime(datad, "%d/%m/%Y")
+        horar = horaretirada
+        horad = horadevolucao
+
         if tempo == "06 horas":
             conta_hora = 6
         elif tempo == "12 horas":
@@ -233,6 +239,7 @@ class funcsRR (CsvR):
             conta_hora = 24
         elif tempo == "30 horas":
             conta_hora = 30
+
         return conta_hora
 
 
@@ -246,6 +253,10 @@ class funcsRR (CsvR):
         horar = horaretirada
         horad = horadevolucao
         tempo_max = self.conta_tempo(tempo)
+
+        print(f"retirada {horaretirada}")
+        print(f"dev {horadevolucao}")
+
         aux = 0
         tempo_reserva = 0
         tempo_max_ok = False
@@ -344,7 +355,7 @@ class funcsRR (CsvR):
         self.variaveisR()
         data_disponivel = self.valida_disp(self.gcod, self.dataretirada)
         tempo_valido = self.verifica_tempo(self.gtempo, self.dataretirada, self.datadevolucao, self.horaretirada, self.horadevolucao)
-        data_valido = self.verifica_data(self.dataretirada, self.datadevolucao, self.horaretirada, self.horadevolucao)
+        data_valido = self.verifica_data(self.dataretirada, self.datadevolucao)
         while True:
             if data_valido:
                 if tempo_valido:
@@ -377,19 +388,17 @@ class funcsRR (CsvR):
         
     # funções do calendário
     def calendario1(self):
-        self.calendario1 = Calendar(self.cadastro_reservas, fg="gray75", bg="blue", font=("poppins", "9", "bold"),
-                                    locale="pt_br", mindate=datetime.now() + timedelta(days=1))
-        self.calendario1.place(relx=0.28, rely=0.25)
+        self.calendario1 = Calendar(self.cadastro_reservas, fg="gray75", bg="blue", font=("poppins", "9", "bold"), locale="pt_br", mindate=datetime.today())
+        self.calendario1.place(relx=0.22, rely=0.25)
         self.cal_data_retirada = tk.Button(self.cadastro_reservas, text="Inserir data", command=self.puxar_data_ret)
-        self.cal_data_retirada.place(relx=0.38, rely=0.5, height=25, width=100)
-
-
-    def calendario2(self):
+        self.cal_data_retirada.place(relx=0.22, rely=0.56, height=25, width=100)
+        
+    def calendario2(self):    
         self.calendario2 = Calendar(self.cadastro_reservas, fg="gray75", bg="blue", font=("poppins", "9", "bold"),
-                                    locale="pt_br", mindate=datetime.now() + timedelta(days=1))
-        self.calendario2.place(relx=0.50, rely=0.25)
+                                    locale="pt_br", mindate=datetime.today())
+        self.calendario2.place(relx=0.63, rely=0.25)
         self.cal_data_devolucao = tk.Button(self.cadastro_reservas, text="Inserir data", command=self.puxar_data_dev)
-        self.cal_data_devolucao.place(relx=0.47, rely=0.5, height=25, width=100)
+        self.cal_data_devolucao.place(relx=0.71, rely=0.56, height=25, width=100)
 
     def puxar_data_ret(self):
         data_inicial = self.calendario1.get_date()
@@ -420,15 +429,15 @@ class Reserva (funcsRT, funcsRF, funcsRR) :
 
         self.frame_1 = Frame(self.cadastro_reservas, bd=4, bg="#868B8E", highlightbackground="#0D0D0D",
                              highlightthickness=1)
-        self.frame_1.place(relx=0.048, rely=0.006, relwidth=0.9, relheight=0.23)
+        self.frame_1.place(relx=0.01, rely=0.006, relwidth=0.98, relheight=0.23)
 
         self.frame_2 = Frame(self.cadastro_reservas, bd=4, bg="#868B8E", highlightbackground="#0D0D0D",
                              highlightthickness=1)
-        self.frame_2.place(relx=0.048, rely=0.245, relwidth=0.9, relheight=0.23)
+        self.frame_2.place(relx=0.01, rely=0.245, relwidth=0.98, relheight=0.23)
 
         self.frame_3 = Frame(self.cadastro_reservas, bd=4, bg="#868B8E", highlightbackground="#0D0D0D",
                              highlightthickness=1)
-        self.frame_3.place(relx=0.01, rely=0.65, relwidth=0.98, relheight=0.34)
+        self.frame_3.place(relx=0.01, rely=0.62, relwidth=0.98, relheight=0.37)
         
 ###################################  ENTRY LABELS BOTOES ===============================================
 
@@ -461,16 +470,25 @@ class Reserva (funcsRT, funcsRF, funcsRR) :
 #------------------------------------------------------------------
 
 
-        
+    # Botão calendário retirada
+    
         self.bt_calendario = tk.Button(self.cadastro_reservas, text='Data da Retirada', font=('poppins', 12, 'bold'), command=self.calendario1)
-        self.bt_calendario.place(relx=0.14, rely=0.5, relwidth=0.14, relheight=0.04)
+        self.bt_calendario.place(relx=0.02, rely=0.5, relwidth=0.14, relheight=0.04)
+
+    # Entry retirada
+    
         self.data_retirada = tk.Entry(self.cadastro_reservas, width=4)
-        self.data_retirada.place(relx=0.29, rely=0.5, relwidth=0.08, relheight=0.04)
+        self.data_retirada.place(relx=0.17, rely=0.5, relwidth=0.07, relheight=0.04)
+        
+    # Botão calendário devolução
 
         self.bt_calendario_entrega = tk.Button(self.cadastro_reservas, text='Data da Devolução',font=('poppins', 12, 'bold'), command=self.calendario2)
-        self.bt_calendario_entrega.place(relx=0.55, rely=0.5, relwidth=0.14, relheight=0.04)
+        self.bt_calendario_entrega.place(relx=0.53, rely=0.5, relwidth=0.14, relheight=0.04)
+
+    # Entry devolução
+    
         self.data_devolucao = tk.Entry(self.cadastro_reservas, width=4)
-        self.data_devolucao.place(relx=0.70, rely=0.5, relwidth=0.08, relheight=0.04)
+        self.data_devolucao.place(relx=0.68, rely=0.5, relwidth=0.07, relheight=0.04)
 
 
         self.horas_ret = tk.StringVar(self.cadastro_reservas)
@@ -480,18 +498,28 @@ class Reserva (funcsRT, funcsRF, funcsRR) :
                               "20:00", "21:00","22:00", "23:00")
         self.horas_ret.set("00:00")
         self.horas_dev.set("00:00")
+
+    # Combobox hora retirada
+    
         self.hora_menu_retirada = tk.OptionMenu(self.cadastro_reservas, self.horas_ret, *self.horas_valores)
-        self.hora_menu_retirada.place(relx=0.29, rely=0.55, relwidth=0.07, relheight=0.04)
+        self.hora_menu_retirada.place(relx=0.40, rely=0.5, relwidth=0.07, relheight=0.04)
+
+    # Combobox hora devolução
+    
         self.hora_menu_devolucao = tk.OptionMenu(self.cadastro_reservas, self.horas_dev, *self.horas_valores)
-        self.hora_menu_devolucao.place(relx=0.7, rely=0.55, relwidth=0.07, relheight=0.04)
+        self.hora_menu_devolucao.place(relx=0.91, rely=0.5, relwidth=0.07, relheight=0.04)
+
+    # Label hora retirada
 
         self.hora_menu_retirada_label = tk.Label(self.cadastro_reservas, text='Hora da Retirada:', bg='#ffd', fg='#0D0D0D',
                                           font=('poppins', 12, 'bold'))
-        self.hora_menu_retirada_label.place(relx=0.14, rely=0.55, relwidth=0.14, relheight=0.04)
-#
+        self.hora_menu_retirada_label.place(relx=0.25, rely=0.5, relwidth=0.14, relheight=0.04)
+        
+    # Label hora devolução
+
         self.hora_menu_devolucao_label = tk.Label(self.cadastro_reservas, text='Hora da Devolução:', bg='#ffd', fg='#0D0D0D',
                                           font=('poppins', 12, 'bold'))
-        self.hora_menu_devolucao_label.place(relx=0.55, rely=0.55, relwidth=0.14, relheight=0.04)
+        self.hora_menu_devolucao_label.place(relx=0.76, rely=0.5, relwidth=0.14, relheight=0.04)
 
 
 
@@ -521,16 +549,16 @@ class Reserva (funcsRT, funcsRF, funcsRR) :
         ##  OUTROS BOTÕES, ENTRYS E LEBELS
 
         self.limpacamp = tk.Button(self.cadastro_reservas, text="Limpar Campos", bd=5, command=self.limpar_entries)
-        self.limpacamp.place(relx=0.10, rely=0.6, relwidth=0.1, relheight=0.05)
+        self.limpacamp.place(relx=0.31, rely=0.56, relwidth=0.08, relheight=0.04)
 
         self.btdel = tk.Button(self.cadastro_reservas, text="Delete", bd=5, command=self.confirma)
-        self.btdel.place(relx=0.30, rely=0.6, relwidth=0.1, relheight=0.05)
+        self.btdel.place(relx=0.41, rely=0.56, relwidth=0.08, relheight=0.04)
 
         self.bupR = tk.Button(self.cadastro_reservas, text="Reservar", bd=5, command= self.add_reserva)
-        self.bupR.place(relx=0.43, rely=0.6, relwidth=0.1, relheight=0.05)
+        self.bupR.place(relx=0.51, rely=0.56, relwidth=0.08, relheight=0.04)
 
         self.batR = tk.Button(self.cadastro_reservas, text="Atualizar Lista", bd=5, command=self.select_listR)
-        self.batR.place(relx=0.6, rely=0.6, relwidth=0.1, relheight=0.05)
+        self.batR.place(relx=0.61, rely=0.56, relwidth=0.08, relheight=0.04)
         
 ############################### TRUE VIEW ==============================================================================
     ## true view frame 1
@@ -579,16 +607,16 @@ class Reserva (funcsRT, funcsRF, funcsRR) :
 
 
         self.view_frame2.column("#0", width=0)
-        self.view_frame2.column("codigo", minwidth=0, width=300, anchor=tk.CENTER)
-        self.view_frame2.column("descricao", minwidth=0, width=300, anchor=tk.CENTER)
-        self.view_frame2.column("fabricante", minwidth=0, width=0, anchor=tk.CENTER)
-        self.view_frame2.column("voltagem", minwidth=0, width=300, anchor=tk.CENTER)
+        self.view_frame2.column("codigo", minwidth=0, width=80, anchor=tk.CENTER)
+        self.view_frame2.column("descricao", minwidth=0, width=350, anchor=tk.CENTER)
+        self.view_frame2.column("fabricante", minwidth=0, width=100, anchor=tk.CENTER)
+        self.view_frame2.column("voltagem", minwidth=0, width=150, anchor=tk.CENTER)
         self.view_frame2.column("partnumber", minwidth=0, width=0, anchor=tk.CENTER)
         self.view_frame2.column("tamanho", minwidth=0, width=0, anchor=tk.CENTER)
         self.view_frame2.column("unidade", minwidth=0, width=0, anchor=tk.CENTER)
-        self.view_frame2.column("tipo", minwidth=0, width=350, anchor=tk.CENTER)
+        self.view_frame2.column("tipo", minwidth=0, width=150, anchor=tk.CENTER)
         self.view_frame2.column("material", minwidth=0, width=0, anchor=tk.CENTER)
-        self.view_frame2.column("tempo", minwidth=0, width=0, anchor=tk.CENTER)
+        self.view_frame2.column("tempo", minwidth=0, width=100, anchor=tk.CENTER)
 
         self.view_frame2.place(relx=0.005, rely=0.155, relwidth=0.98, relheight=0.8)
 
