@@ -77,7 +77,10 @@ class Aplicacao(TK, front_Ferramentas, Reserva):
         self.bt_cadastrar_reserva.place(relx=0.1, rely=0.8, relwidth=0.8, relheight=0.15)
 
         self.bt_manual = tk.Button(self.janela, text="Consultar Manual", bd=5, command=self.abrir_manual)
-        self.bt_manual.place(relx=0.76, rely=0.90, relwidth=0.13, relheight=0.05)
+        self.bt_manual.place(relx=0.82, rely=0.90, relwidth=0.13, relheight=0.05)
+
+        self.bt_sobre = tk.Button(self.janela, text="Sobre", bd=5, command=self.abrir_manual)
+        self.bt_sobre.place(relx=0.68, rely=0.90, relwidth=0.13, relheight=0.05)
 
     def labels(self):
         self.label_titulo = tk.Label(self.frame_titulo, text="Central de Ferramentaria", bg='#B9B7BD', font=('poppins', 50, 'bold'))
