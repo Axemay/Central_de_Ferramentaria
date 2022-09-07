@@ -196,15 +196,9 @@ class funcsRR (CsvR):
 
         return data_valida
 
-    def verifica_tempo(self, tempo, dataretirada, datadevolucao, horaretirada, horadevolucao):
-        tempo = tempo
-        print(f"tempo {tempo}")
-        datar = dataretirada
-        datad = datadevolucao
-        datar_formatada = strptime(datar, "%d/%m/%Y")
-        datad_formatada = strptime(datad, "%d/%m/%Y")
-        horar = horaretirada
-        horad = horadevolucao
+    def conta_tempo(self, temp):
+        tempo = temp
+        conta_hora = 0
         if tempo == "06 horas":
             conta_hora = 6
         elif tempo == "12 horas":
@@ -215,7 +209,18 @@ class funcsRR (CsvR):
             conta_hora = 24
         elif tempo == "30 horas":
             conta_hora = 30
-        tempo_max = conta_hora
+        return conta_hora
+
+    def verifica_tempo(self, tempo, dataretirada, datadevolucao, horaretirada, horadevolucao):
+        tempo = tempo
+        print(f"tempo {tempo}")
+        datar = dataretirada
+        datad = datadevolucao
+        datar_formatada = strptime(datar, "%d/%m/%Y")
+        datad_formatada = strptime(datad, "%d/%m/%Y")
+        horar = horaretirada
+        horad = horadevolucao
+        tempo_max = self.conta_tempo(tempo)
         print(f"retirada {horaretirada}")
         print(f"dev {horadevolucao}")
         aux = 0
