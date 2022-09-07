@@ -8,7 +8,7 @@ import webbrowser
 # criar tela
 
 janela = tk.Tk()
-webbrowser.open("manual.pdf")
+
 
 class Aplicacao(TK, front_Ferramentas, Reserva):
     def __init__(self):
@@ -30,6 +30,9 @@ class Aplicacao(TK, front_Ferramentas, Reserva):
         self.janela.resizable(True, True)
         self.janela.maxsize(width= 1920, height=1080) # dimensões máximas
         self.janela.minsize(width= 400, height= 300) # dimensões mínimas
+
+    def abrir_manual(self):
+        webbrowser.open("manual.pdf")
 
     def frames(self):
         self.frame_titulo = tk.Frame(self.janela, bd=4, bg='#B9B7BD',
@@ -73,6 +76,12 @@ class Aplicacao(TK, front_Ferramentas, Reserva):
         self.bt_cadastrar_reserva = tk.Button(self.frame_reserva, text="Acessar", bd=3, font=('poppins', 19, 'bold'), command= self.janela_cadastro_reservas)
         self.bt_cadastrar_reserva.place(relx=0.1, rely=0.8, relwidth=0.8, relheight=0.15)
 
+        self.bt_manual = tk.Button(self.janela, text="Consultar Manual", bd=5, command=self.abrir_manual)
+        self.bt_manual.place(relx=0.82, rely=0.90, relwidth=0.13, relheight=0.05)
+
+        self.bt_sobre = tk.Button(self.janela, text="Sobre", bd=5, command=self.abrir_manual)
+        self.bt_sobre.place(relx=0.68, rely=0.90, relwidth=0.13, relheight=0.05)
+
     def labels(self):
         self.label_titulo = tk.Label(self.frame_titulo, text="Central de Ferramentaria", bg='#B9B7BD', font=('poppins', 50, 'bold'))
         self.label_titulo.place(relx=0.0, rely=0.3, relwidth=1, relheight=0.3)
@@ -101,6 +110,8 @@ class Aplicacao(TK, front_Ferramentas, Reserva):
         self.label_copyright = tk.Label(self.frame_copyright, text="copyright © 2022 - Todos os direitos reservados - DevTeam13", bg='#B9B7BD',
                                      font=('poppins', 10, 'bold'))
         self.label_copyright.place(relx=0.0, rely=0, relwidth=0.65, relheight=0.3)
+
+        
 
 Aplicacao()
 

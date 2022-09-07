@@ -613,16 +613,16 @@ class Reserva (funcsRT, funcsRF, funcsRR) :
 
 
         self.view_frame2.column("#0", width=0)
-        self.view_frame2.column("codigo", minwidth=0, width=80, anchor=tk.CENTER)
-        self.view_frame2.column("descricao", minwidth=0, width=350, anchor=tk.CENTER)
-        self.view_frame2.column("fabricante", minwidth=0, width=100, anchor=tk.CENTER)
-        self.view_frame2.column("voltagem", minwidth=0, width=150, anchor=tk.CENTER)
+        self.view_frame2.column("codigo", minwidth=0, width=130, anchor=tk.CENTER)
+        self.view_frame2.column("descricao", minwidth=0, width=480, anchor=tk.CENTER)
+        self.view_frame2.column("fabricante", minwidth=0, width=210, anchor=tk.CENTER)
+        self.view_frame2.column("voltagem", minwidth=0, width=210, anchor=tk.CENTER)
         self.view_frame2.column("partnumber", minwidth=0, width=0, anchor=tk.CENTER)
         self.view_frame2.column("tamanho", minwidth=0, width=0, anchor=tk.CENTER)
         self.view_frame2.column("unidade", minwidth=0, width=0, anchor=tk.CENTER)
-        self.view_frame2.column("tipo", minwidth=0, width=150, anchor=tk.CENTER)
+        self.view_frame2.column("tipo", minwidth=0, width=210, anchor=tk.CENTER)
         self.view_frame2.column("material", minwidth=0, width=0, anchor=tk.CENTER)
-        self.view_frame2.column("tempo", minwidth=0, width=100, anchor=tk.CENTER)
+        self.view_frame2.column("tempo", minwidth=0, width=220, anchor=tk.CENTER)
 
         self.view_frame2.place(relx=0.005, rely=0.155, relwidth=0.98, relheight=0.8)
 
@@ -655,13 +655,13 @@ class Reserva (funcsRT, funcsRF, funcsRR) :
 
 
         self.view_frame3.column("#0", width=0)
-        self.view_frame3.column("cpf", minwidth=0, width=120, anchor=tk.CENTER)
+        self.view_frame3.column("cpf", minwidth=0, width=110, anchor=tk.CENTER)
         self.view_frame3.column("nome", minwidth=0, width=170, anchor=tk.CENTER)
-        self.view_frame3.column("telefone", minwidth=0, width=150, anchor=tk.CENTER)
-        self.view_frame3.column("codigo", minwidth=0, width=120, anchor=tk.CENTER)
+        self.view_frame3.column("telefone", minwidth=0, width=140, anchor=tk.CENTER)
+        self.view_frame3.column("codigo", minwidth=0, width=80, anchor=tk.CENTER)
         self.view_frame3.column("descricao", minwidth=0, width=200, anchor=tk.CENTER)
-        self.view_frame3.column("voltagem", minwidth=0, width=100, anchor=tk.CENTER)
-        self.view_frame3.column("tipo", minwidth=0, width=120, anchor=tk.CENTER)
+        self.view_frame3.column("voltagem", minwidth=0, width=90, anchor=tk.CENTER)
+        self.view_frame3.column("tipo", minwidth=0, width=100, anchor=tk.CENTER)
         self.view_frame3.column("dataretirada", minwidth=0, width=120, anchor=tk.CENTER)
         self.view_frame3.column("horaretirada", minwidth=0, width=120, anchor=tk.CENTER)
         self.view_frame3.column("dataentrega", minwidth=0, width=120, anchor=tk.CENTER)
