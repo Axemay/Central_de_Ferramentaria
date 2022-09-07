@@ -153,6 +153,7 @@ class funcsRT (Csv):
             self.Gcpf.insert(END, col1)
             self.Gnome.insert(END, col2)
             self.Gtel.insert(END, col3)
+
 class funcsRR (CsvR):
     def variaveisR(self):
         self.gcpf = self.Gcpf.get()
@@ -168,14 +169,13 @@ class funcsRR (CsvR):
         self.horaretirada = self.horas_ret.get()
         self.horadevolucao = self.horas_dev.get()
 
-
-
-
-    def verifica_data(self, datare, datade):
+        #############################Verifica Data e hora de retirada e devolução ###############################################
+    def verifica_data(self, datare, datade, horare, horade):
+        mesmo_dia_ok = False
+        dia_diferete_ok = False
         data_valida = False
         datar = datare
         datad = datade
-
         horare_str = horare[:2]
         horade_str = horade[:2]
         horar = int(horare_str)
@@ -183,67 +183,71 @@ class funcsRR (CsvR):
 
         datar_formatada = strptime(datar, "%d/%m/%Y")
         datad_formatada = strptime(datad, "%d/%m/%Y")
-        if datar_formatada <=  datad_formatada:
+        if datar_formatada <= datad_formatada:
+            dia_diferete_ok = True
+        if horad != horar:
+            if horad > horar:
+                mesmo_dia_ok = True
+        if mesmo_dia_ok and dia_diferete_ok:
             data_valida = True
 
-        return data_valida
-
+            return data_valida
 
 #############################Verifica disponibilidade da ferramenta na data##########################################
-    def valida_disp(self, codg, datare):
+    def valida_disp(self, codg, datare, horar, horad):
         cod = codg
         datar = datare
-        # datad = datade
         datar_formatada = strptime(datar, "%d/%m/%Y")
-        # datad_formatada = strptime(datad, "%d/%m/%Y")
+        horare_str = horar[:2]
+        horaret = int(horare_str)
 
         self.view_frame3.delete(*self.view_frame3.get_children())
         lista = self.leitorR()
-        disponivel = False
+
+        disponivel = True
         for i in range(len(lista)):
             fcods = lista[i][3]
             fcod = fcods
+
+
             if fcod == cod:
+                hora_dev = lista[i][10]
+                hora_dev_str = hora_dev[:2]
+                hora_dev_int = int(hora_dev_str)
+                print(hora_dev_str)
                 data_ini = strptime(lista[i][7], "%d/%m/%Y")
                 data_fim = strptime(lista[i][9], "%d/%m/%Y")
                 print(f"data in {data_ini}")
                 print(f"data de {data_fim}")
-                if datar_formatada >= data_ini and datar_formatada <= data_fim:
+                if datar_formatada >= data_ini and datar_formatada < data_fim:
                     disponivel = False
+                elif datar_formatada == data_fim:
+                    if horaret >= hora_dev_int:
+                        return True
+                    else:
+                        return False
                 else:
                     disponivel = True
         print(f"data r {datar}")
         return disponivel
-#############################Converte tempo máximo da ferramenta pra int##########################################
+
+        #############################Converte tempo máximo da ferramenta pra int##########################################
     def conta_tempo(self, temp):
-        tempo = temp
-        conta_hora = 0
+            tempo = temp
+            conta_hora = 0
+            if tempo == "06 horas":
+                conta_hora = 6
+            elif tempo == "12 horas":
+                conta_hora = 12
+            elif tempo == "18 horas":
+                conta_hora = 18
+            elif tempo == "24 horas":
+                conta_hora = 24
+            elif tempo == "30 horas":
+                conta_hora = 30
+            return conta_hora
 
-    def verifica_tempo(self, tempo, dataretirada, datadevolucao, horaretirada, horadevolucao):
-        tempo = tempo
-        print(f"tempo {tempo}")
-        datar = dataretirada
-        datad = datadevolucao
-        datar_formatada = strptime(datar, "%d/%m/%Y")
-        datad_formatada = strptime(datad, "%d/%m/%Y")
-        horar = horaretirada
-        horad = horadevolucao
-
-        if tempo == "06 horas":
-            conta_hora = 6
-        elif tempo == "12 horas":
-            conta_hora = 12
-        elif tempo == "18 horas":
-            conta_hora = 18
-        elif tempo == "24 horas":
-            conta_hora = 24
-        elif tempo == "30 horas":
-            conta_hora = 30
-
-        return conta_hora
-
-
-#############################Verifica tempo máximmo de reserva permitido##########################################
+        #############################Verifica tempo máximmo de reserva permitido##########################################
     def verifica_tempo(self, tempo, dataretirada, datadevolucao, horaretirada, horadevolucao):
         tempo = tempo
         datar = dataretirada
@@ -253,10 +257,6 @@ class funcsRR (CsvR):
         horar = horaretirada
         horad = horadevolucao
         tempo_max = self.conta_tempo(tempo)
-
-        print(f"retirada {horaretirada}")
-        print(f"dev {horadevolucao}")
-
         aux = 0
         tempo_reserva = 0
         tempo_max_ok = False
@@ -271,7 +271,7 @@ class funcsRR (CsvR):
                 hora_dev_int = i
         if datar != datad:
             aux = 24 - hora_ret_int
-            tempo_reserva =  aux +  hora_dev_int
+            tempo_reserva = aux + hora_dev_int
         else:
             tempo_reserva = hora_dev_int - hora_ret_int
 
@@ -349,13 +349,19 @@ class funcsRR (CsvR):
         self.data_devolucao.delete(0, END)
         self.horas_ret.set("00:00")
         self.horas_dev.set("00:00")
-        
+
+    # def gera_cod(self):
+    #     self.view_frame3.delete(*self.view_frame3.get_children())
+    #     lista = self.leitorR()
+    #     codr = len(lista)
+    #     return codr
 
     def add_reserva(self):
+        # cod_reserva = self.gera_cod()
         self.variaveisR()
-        data_disponivel = self.valida_disp(self.gcod, self.dataretirada)
+        data_disponivel = self.valida_disp(self.gcod, self.dataretirada, self.horaretirada, self.horadevolucao)
         tempo_valido = self.verifica_tempo(self.gtempo, self.dataretirada, self.datadevolucao, self.horaretirada, self.horadevolucao)
-        data_valido = self.verifica_data(self.dataretirada, self.datadevolucao)
+        data_valido = self.verifica_data(self.dataretirada, self.datadevolucao, self.horaretirada, self.horadevolucao)
         while True:
             if data_valido:
                 if tempo_valido:
@@ -379,23 +385,23 @@ class funcsRR (CsvR):
         #                             fg="#ffd", font=("poppins", 16, 'bold'))
         # self.res.place(relx=0.01, rely=0.2, relwidth=0.98, relheight=0.7)
         self.limpar_dadosR()
-        
+
     def confirma(self):
         resposta = askyesno(title="Exclusão de reserva",  message="Confirma a exclusão da reserva selecionada?")
         if resposta:
             self.deleteR()
-        
-        
+
+
     # funções do calendário
     def calendario1(self):
-        self.calendario1 = Calendar(self.cadastro_reservas, fg="gray75", bg="blue", font=("poppins", "9", "bold"), locale="pt_br", mindate=datetime.today())
+        self.calendario1 = Calendar(self.cadastro_reservas, fg="gray75", bg="blue", font=("poppins", "9", "bold"), locale="pt_br", mindate=datetime.now() + timedelta(days=1))
         self.calendario1.place(relx=0.22, rely=0.25)
         self.cal_data_retirada = tk.Button(self.cadastro_reservas, text="Inserir data", command=self.puxar_data_ret)
         self.cal_data_retirada.place(relx=0.22, rely=0.56, height=25, width=100)
-        
-    def calendario2(self):    
+
+    def calendario2(self):
         self.calendario2 = Calendar(self.cadastro_reservas, fg="gray75", bg="blue", font=("poppins", "9", "bold"),
-                                    locale="pt_br", mindate=datetime.today())
+                                    locale="pt_br", mindate=datetime.now() + timedelta(days=1))
         self.calendario2.place(relx=0.63, rely=0.25)
         self.cal_data_devolucao = tk.Button(self.cadastro_reservas, text="Inserir data", command=self.puxar_data_dev)
         self.cal_data_devolucao.place(relx=0.71, rely=0.56, height=25, width=100)
