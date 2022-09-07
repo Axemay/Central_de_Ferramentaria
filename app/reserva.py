@@ -184,18 +184,32 @@ class funcsRR (CsvR):
     #     print(f"con hora {self.conta_hora}")
     #     return self.conta_hora
 
-
-    def verifica_data(self, datare, datade):
+#############################Verifica Data e hora de retirada e devolução ###############################################
+    def verifica_data(self, datare, datade, horare, horade):
+        mesmo_dia_ok = False
+        dia_diferete_ok = False
         data_valida = False
         datar = datare
         datad = datade
+        horare_str = horare[:2]
+        horade_str = horade[:2]
+        horar = int(horare_str)
+        horad = int(horade_str)
+        print(f"hora re {horar}")
+        print(f"hora de {horad}")
         datar_formatada = strptime(datar, "%d/%m/%Y")
         datad_formatada = strptime(datad, "%d/%m/%Y")
         if datar_formatada <=  datad_formatada:
+            dia_diferete_ok = True
+        if horad != horar:
+            if horad > horar:
+                mesmo_dia_ok = True
+        if mesmo_dia_ok and dia_diferete_ok:
             data_valida = True
 
         return data_valida
 
+#############################Converte tempo máximo da ferramenta pra int##########################################
     def conta_tempo(self, temp):
         tempo = temp
         conta_hora = 0
@@ -211,6 +225,8 @@ class funcsRR (CsvR):
             conta_hora = 30
         return conta_hora
 
+
+#############################Verifica tempo máximmo de reserva permitido##########################################
     def verifica_tempo(self, tempo, dataretirada, datadevolucao, horaretirada, horadevolucao):
         tempo = tempo
         print(f"tempo {tempo}")
@@ -321,7 +337,7 @@ class funcsRR (CsvR):
     def add_reserva(self):
         self.variaveisR()
         tempo_valido = self.verifica_tempo(self.gtempo, self.dataretirada, self.datadevolucao, self.horaretirada, self.horadevolucao)
-        data_valido = self.verifica_data(self.dataretirada, self.datadevolucao)
+        data_valido = self.verifica_data(self.dataretirada, self.datadevolucao, self.horaretirada, self.horadevolucao)
         while True:
             if data_valido:
                 if tempo_valido:
@@ -349,7 +365,7 @@ class funcsRR (CsvR):
     # funções do calendário
     def calendario1(self):
         self.calendario1 = Calendar(self.cadastro_reservas, fg="gray75", bg="blue", font=("poppins", "9", "bold"),
-                                    locale="pt_br", mindate=datetime.today())
+                                    locale="pt_br", mindate=datetime.now() + timedelta(days=1))
         self.calendario1.place(relx=0.28, rely=0.25)
         self.cal_data_retirada = tk.Button(self.cadastro_reservas, text="Inserir data", command=self.puxar_data_ret)
         self.cal_data_retirada.place(relx=0.38, rely=0.5, height=25, width=100)
@@ -357,7 +373,7 @@ class funcsRR (CsvR):
 
     def calendario2(self):
         self.calendario2 = Calendar(self.cadastro_reservas, fg="gray75", bg="blue", font=("poppins", "9", "bold"),
-                                    locale="pt_br", mindate=datetime.today())
+                                    locale="pt_br", mindate=datetime.now() + timedelta(days=1))
         self.calendario2.place(relx=0.50, rely=0.25)
         self.cal_data_devolucao = tk.Button(self.cadastro_reservas, text="Inserir data", command=self.puxar_data_dev)
         self.cal_data_devolucao.place(relx=0.47, rely=0.5, height=25, width=100)
