@@ -4,10 +4,12 @@ from tkinter import END
 from tkinter import Frame, ttk
 from tkinter import Scrollbar
 from tkinter import messagebox
+from tkinter.messagebox import askyesno
 from CRUD_F import *
 from CRUD_R import *
 from tkcalendar import Calendar
 from datetime import date, time, datetime, timedelta
+from time import strptime
 
 
 from CRUD_T import *
@@ -162,62 +164,35 @@ class funcsRR (CsvR):
         self.horaretirada = self.horas_ret.get()
         self.horadevolucao = self.horas_dev.get()
 
-        # def validadh(msg):
-        #     try:
-        #         msg = int(msg)
-        #     except (ValueError, TypeError):
-        #         messagebox.showerror("Erro", "Digite apenas números")
-        #     else:
-        #         return str(msg)
-        #
-        # def doisdigitos(msg):
-        #     if len(msg) > 2 or  len(msg) == 0:
-        #         messagebox.showerror("Erro", "Insira até 2 dígitos")
-        #     else:
-        #         return msg
-        #
-        # def validahora(msg):
-        #     msg = int(msg)
-        #     if msg < 0 or msg > 24:
-        #         messagebox.showerror("Erro", "O horário de expediente para retirada e entrega\ndas ferramentas é de 08:00hs às 17:00hs")
-        #     else:
-        #         return str(msg)
+    
+        
+        
+        
+          
+        
+                        
 
-        # def validames(msg):
-        #     msg = int(msg)
-        #     if msg < 1 or msg > 12:
-        #         messagebox.showerror("Erro", "O ano deve estar compatível com o calendário")
-        #     else:
-        #         return str(msg)
-
-        # def validadia(msg):
-        #      try:
-        #         res = msg
-        #      except (ValueError, TypeError):
-        #         messagebox.showerror("Erro", "Esse dia não consta no calendário")
-        #      else:
-        #         return res
-        #
+           
+           
         # self.dataentD = doisdigitos(validadh(self.vData_entregaD.get()))
         # # self.dataentM = validames(doisdigitos(validadh(self.vData_entregaM.get())))
         # self.dataentA = self.vData_entregaA.get()
         # self.horaentH = validahora(doisdigitos(validadh(self.vHora_entregaH.get())))
         # self.horaentM = self.vHora_entregaM.get()
         # self.horaentS = self.vHora_entregaS.get()
-        # self.dataretD = doisdigitos(validadh(self.vData_retiradaD.get()))
+        
         # self.dataretM = validames(doisdigitos(validadh(self.vData_retiradaM.get())))
         # self.dataretA = self.vData_retiradaA.get()
         # self.horaretH = validahora(doisdigitos(validadh(self.vHora_retiradaH.get())))
         # self.horaretM = self.vHora_retiradaM.get()
         # self.horaretS = self.vHora_retiradaS.get()
-        #
-        #
+        
         # self.retira = validadia(datetime(int(self.dataretA), int(self.dataretM), int(self.dataretD), int(self.horaretH),
         #                        int(self.horaretM), int(self.horaretS)))
-        #
+        
         # self.entrega = validadia(datetime(int(self.dataentA), int(self.dataentM), int(self.dataentD), int(self.horaentH),
         #                        int(self.horaentM), int(self.horaentS)))
-        #
+        
         # self.diferenca = self.retira - data
         # self.string=str(self.diferenca)
         # self.output=self.string.split()
@@ -299,10 +274,10 @@ class funcsRR (CsvR):
     def limpar_entries(self):
         self.vPesquisa_ReservaT.delete(0, END)
         self.vPesquisa_ReservaF.delete(0, END)
-        self.vData_devolucao.delete(0, END)
-        self.vHora_devolucao.delete(0, END)
-        self.vData_retirada.delete(0, END)
-        self.vHora_retirada.delete(0, END)
+        self.data_retirada.delete(0, END)
+        self.data_devolucao.delete(0, END)
+        self.horas_ret.set("00:00")
+        self.horas_dev.set("00:00")
 
     def add_reserva(self):
         self.variaveisR()
@@ -313,6 +288,13 @@ class funcsRR (CsvR):
         #                             fg="#ffd", font=("poppins", 16, 'bold'))
         # self.res.place(relx=0.01, rely=0.2, relwidth=0.98, relheight=0.7)
         self.limpar_dadosR()
+
+    def confirma(self):
+        resposta = askyesno(title="Exclusão de reserva",  message="Confirma a exclusão da reserva selecionada?")
+        if resposta:
+            self.deleteR()
+            
+
     # funções do calendário
     def calendario(self):
         self.calendario1 = Calendar(self.cadastro_reservas, fg="gray75", bg="blue", font=("poppins", "9", "bold"), locale="pt_br")
@@ -326,18 +308,21 @@ class funcsRR (CsvR):
         self.cal_data_devolucao.place(relx=0.47, rely=0.5, height=25, width=100)
 
     def puxar_data_ret(self):
-        data_inicial = self.calendario1.get_date()
+        self.data_inicial = self.calendario1.get_date()
+        print(self.data_inicial)
+        print(type(self.data_inicial))
         self.data_retirada.delete(0, END)
-        self.data_retirada.insert(END, data_inicial)
+        self.data_retirada.insert(END, self.data_inicial)
         self.calendario1.destroy()
         self.cal_data_retirada.destroy()
 
     def puxar_data_dev(self):
-        data_final = self.calendario2.get_date()
+        self.data_final = self.calendario2.get_date()
         self.data_devolucao.delete(0, END)
-        self.data_devolucao.insert(END, data_final)
+        self.data_devolucao.insert(END, self.data_final)
         self.calendario2.destroy()
         self.cal_data_devolucao.destroy()
+
 #----------------------------------------------------------------------------------------------------------------------
 class Reserva (funcsRT, funcsRF, funcsRR) :
     def janela_cadastro_reservas(self):
@@ -452,13 +437,13 @@ class Reserva (funcsRT, funcsRF, funcsRR) :
 #------------------------------------------------------------
         ##  OUTROS BOTÕES, ENTRYS E LEBELS
 
-        # self.limpacamp = tk.Button(self.cadastro_reservas, text="Limpar Campos", bd=5, command=self.limpar_entries)
-        # self.limpacamp.place(relx=0.10, rely=0.6, relwidth=0.1, relheight=0.05)
+        self.limpacamp = tk.Button(self.cadastro_reservas, text="Limpar Campos", bd=5, command=self.limpar_entries)
+        self.limpacamp.place(relx=0.10, rely=0.6, relwidth=0.1, relheight=0.05)
 
-        self.btdel = tk.Button(self.cadastro_reservas, text="Delete", bd=5, command=self.deleteR)
+        self.btdel = tk.Button(self.cadastro_reservas, text="Delete", bd=5, command=self.confirma)
         self.btdel.place(relx=0.30, rely=0.6, relwidth=0.1, relheight=0.05)
 
-        self.bupR = tk.Button(self.cadastro_reservas, text="Reservar", bd=5, command= self.add_reserva)
+        self.bupR = tk.Button(self.cadastro_reservas, text="Reservar", bd=5, command= self.valida_datahora)
         self.bupR.place(relx=0.43, rely=0.6, relwidth=0.1, relheight=0.05)
 
         self.batR = tk.Button(self.cadastro_reservas, text="Atualizar Lista", bd=5, command=self.select_listR)
