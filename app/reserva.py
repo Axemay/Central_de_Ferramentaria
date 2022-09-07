@@ -306,10 +306,11 @@ class funcsRR (CsvR):
     def limpar_entries(self):
         self.vPesquisa_ReservaT.delete(0, END)
         self.vPesquisa_ReservaF.delete(0, END)
-        self.vData_devolucao.delete(0, END)
-        self.vHora_devolucao.delete(0, END)
-        self.vData_retirada.delete(0, END)
-        self.vHora_retirada.delete(0, END)
+        self.data_retirada.delete(0, END)
+        self.data_devolucao.delete(0, END)
+        self.horas_ret.set("00:00")
+        self.horas_dev.set("00:00")
+        
 
     def add_reserva(self):
         self.variaveisR()
@@ -332,6 +333,13 @@ class funcsRR (CsvR):
         #                             fg="#ffd", font=("poppins", 16, 'bold'))
         # self.res.place(relx=0.01, rely=0.2, relwidth=0.98, relheight=0.7)
         self.limpar_dadosR()
+        
+    def confirma(self):
+    resposta = askyesno(title="Exclusão de reserva",  message="Confirma a exclusão da reserva selecionada?")
+    if resposta:
+        self.deleteR()
+        
+        
     # funções do calendário
     def calendario(self):
         self.calendario1 = Calendar(self.cadastro_reservas, fg="gray75", bg="blue", font=("poppins", "9", "bold"), locale="pt_br", mindate=datetime.today())
@@ -473,10 +481,10 @@ class Reserva (funcsRT, funcsRF, funcsRR) :
 #------------------------------------------------------------
         ##  OUTROS BOTÕES, ENTRYS E LEBELS
 
-        # self.limpacamp = tk.Button(self.cadastro_reservas, text="Limpar Campos", bd=5, command=self.limpar_entries)
-        # self.limpacamp.place(relx=0.10, rely=0.6, relwidth=0.1, relheight=0.05)
+        self.limpacamp = tk.Button(self.cadastro_reservas, text="Limpar Campos", bd=5, command=self.limpar_entries)
+        self.limpacamp.place(relx=0.10, rely=0.6, relwidth=0.1, relheight=0.05)
 
-        self.btdel = tk.Button(self.cadastro_reservas, text="Delete", bd=5, command=self.deleteR)
+        self.btdel = tk.Button(self.cadastro_reservas, text="Delete", bd=5, command=self.confirma)
         self.btdel.place(relx=0.30, rely=0.6, relwidth=0.1, relheight=0.05)
 
         self.bupR = tk.Button(self.cadastro_reservas, text="Reservar", bd=5, command= self.add_reserva)
