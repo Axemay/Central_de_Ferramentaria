@@ -93,6 +93,7 @@ class funcs(Csvf):
             tempo = self.vaziof(self.vTemMax_ferramenta.get())
             self.res10 = tempo
 
+
             # self.doubleclick(event='click')
             self.updatef(self.codigo, self.res2, self.res3, self.res4, self.res5, self.res6, self.res7, self.res8, self.res9, self.res10 )
             self.select_listf()
