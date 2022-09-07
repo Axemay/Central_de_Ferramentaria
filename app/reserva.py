@@ -168,21 +168,7 @@ class funcsRR (CsvR):
         self.horaretirada = self.horas_ret.get()
         self.horadevolucao = self.horas_dev.get()
 
-    # def cont_horas(self, tempo):
-    #     tempo = tempo
-    #     self.conta_hora = 0
-    #     if tempo == "06 horas":
-    #         conta_hora = 6
-    #     elif tempo == "12 horas":
-    #         conta_hora = 12
-    #     elif tempo == "18 horas":
-    #         conta_hora = 18
-    #     elif tempo == "24 horas":
-    #         conta_hora = 24
-    #     elif tempo == "30 horas":
-    #         conta_hora = 30
-    #     print(f"con hora {self.conta_hora}")
-    #     return self.conta_hora
+
 
 #############################Verifica Data e hora de retirada e devolução ###############################################
     def verifica_data(self, datare, datade, horare, horade):
@@ -195,8 +181,7 @@ class funcsRR (CsvR):
         horade_str = horade[:2]
         horar = int(horare_str)
         horad = int(horade_str)
-        print(f"hora re {horar}")
-        print(f"hora de {horad}")
+
         datar_formatada = strptime(datar, "%d/%m/%Y")
         datad_formatada = strptime(datad, "%d/%m/%Y")
         if datar_formatada <=  datad_formatada:
@@ -209,6 +194,31 @@ class funcsRR (CsvR):
 
         return data_valida
 
+#############################Verifica disponibilidade da ferramenta na data##########################################
+    def valida_disp(self, codg, datare):
+        cod = codg
+        datar = datare
+        # datad = datade
+        datar_formatada = strptime(datar, "%d/%m/%Y")
+        # datad_formatada = strptime(datad, "%d/%m/%Y")
+
+        self.view_frame3.delete(*self.view_frame3.get_children())
+        lista = self.leitorR()
+        disponivel = False
+        for i in range(len(lista)):
+            fcods = lista[i][3]
+            fcod = fcods
+            if fcod == cod:
+                data_ini = strptime(lista[i][7], "%d/%m/%Y")
+                data_fim = strptime(lista[i][9], "%d/%m/%Y")
+                print(f"data in {data_ini}")
+                print(f"data de {data_fim}")
+                if datar_formatada >= data_ini and datar_formatada <= data_fim:
+                    disponivel = False
+                else:
+                    disponivel = True
+        print(f"data r {datar}")
+        return disponivel
 #############################Converte tempo máximo da ferramenta pra int##########################################
     def conta_tempo(self, temp):
         tempo = temp
@@ -229,7 +239,6 @@ class funcsRR (CsvR):
 #############################Verifica tempo máximmo de reserva permitido##########################################
     def verifica_tempo(self, tempo, dataretirada, datadevolucao, horaretirada, horadevolucao):
         tempo = tempo
-        print(f"tempo {tempo}")
         datar = dataretirada
         datad = datadevolucao
         datar_formatada = strptime(datar, "%d/%m/%Y")
@@ -237,8 +246,6 @@ class funcsRR (CsvR):
         horar = horaretirada
         horad = horadevolucao
         tempo_max = self.conta_tempo(tempo)
-        print(f"retirada {horaretirada}")
-        print(f"dev {horadevolucao}")
         aux = 0
         tempo_reserva = 0
         tempo_max_ok = False
@@ -259,8 +266,7 @@ class funcsRR (CsvR):
 
         if tempo_reserva <= tempo_max:
             tempo_max_ok = True
-        print(f"tempo reserva {tempo_reserva}")
-        print(f"max {tempo_max}")
+
         return tempo_max_ok
 
     def limpar_dadosR(self):
@@ -336,14 +342,21 @@ class funcsRR (CsvR):
 
     def add_reserva(self):
         self.variaveisR()
+        data_disponivel = self.valida_disp(self.gcod, self.dataretirada)
         tempo_valido = self.verifica_tempo(self.gtempo, self.dataretirada, self.datadevolucao, self.horaretirada, self.horadevolucao)
         data_valido = self.verifica_data(self.dataretirada, self.datadevolucao, self.horaretirada, self.horadevolucao)
         while True:
             if data_valido:
                 if tempo_valido:
-                    self.appendR(self.gcpf, self.gnome, self.gtel, self.gcod, self.gdes, self.gvolt, self.gtipo,
-                                 self.dataretirada, self.horaretirada, self.datadevolucao, self.horadevolucao)
-                    self.select_listR()
+                    if data_disponivel:
+
+                        self.appendR(self.gcpf, self.gnome, self.gtel, self.gcod, self.gdes, self.gvolt, self.gtipo,
+                                     self.dataretirada, self.horaretirada, self.datadevolucao, self.horadevolucao)
+                        self.select_listR()
+
+                    else:
+                        messagebox.showerror("Erro",
+                                             "A ferramenta não está disponível para essa data.")
                 else:
                     messagebox.showerror("Erro", "O tempo total da reserva excede o permitido para essa ferramenta.")
             else:
