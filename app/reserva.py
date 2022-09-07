@@ -342,11 +342,15 @@ class funcsRR (CsvR):
         
         
     # funções do calendário
-    def calendario(self):
-        self.calendario1 = Calendar(self.cadastro_reservas, fg="gray75", bg="blue", font=("poppins", "9", "bold"), locale="pt_br", mindate=datetime.today())
+    def calendario1(self):
+        self.calendario1 = Calendar(self.cadastro_reservas, fg="gray75", bg="blue", font=("poppins", "9", "bold"),
+                                    locale="pt_br", mindate=datetime.today())
         self.calendario1.place(relx=0.28, rely=0.25)
         self.cal_data_retirada = tk.Button(self.cadastro_reservas, text="Inserir data", command=self.puxar_data_ret)
         self.cal_data_retirada.place(relx=0.38, rely=0.5, height=25, width=100)
+
+
+    def calendario2(self):
         self.calendario2 = Calendar(self.cadastro_reservas, fg="gray75", bg="blue", font=("poppins", "9", "bold"),
                                     locale="pt_br", mindate=datetime.today())
         self.calendario2.place(relx=0.50, rely=0.25)
@@ -424,12 +428,12 @@ class Reserva (funcsRT, funcsRF, funcsRR) :
 
 
         
-        self.bt_calendario = tk.Button(self.cadastro_reservas, text='Data da Retirada', font=('poppins', 12, 'bold'), command=self.calendario)
+        self.bt_calendario = tk.Button(self.cadastro_reservas, text='Data da Retirada', font=('poppins', 12, 'bold'), command=self.calendario1)
         self.bt_calendario.place(relx=0.14, rely=0.5, relwidth=0.14, relheight=0.04)
         self.data_retirada = tk.Entry(self.cadastro_reservas, width=4)
         self.data_retirada.place(relx=0.29, rely=0.5, relwidth=0.08, relheight=0.04)
 
-        self.bt_calendario_entrega = tk.Button(self.cadastro_reservas, text='Data da Devolução',font=('poppins', 12, 'bold'), command=self.calendario)
+        self.bt_calendario_entrega = tk.Button(self.cadastro_reservas, text='Data da Devolução',font=('poppins', 12, 'bold'), command=self.calendario2)
         self.bt_calendario_entrega.place(relx=0.55, rely=0.5, relwidth=0.14, relheight=0.04)
         self.data_devolucao = tk.Entry(self.cadastro_reservas, width=4)
         self.data_devolucao.place(relx=0.70, rely=0.5, relwidth=0.08, relheight=0.04)
