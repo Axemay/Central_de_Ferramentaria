@@ -1,7 +1,5 @@
 import tkinter as tk
-from app.tecnico import TK
 
-# janela_sobre =  tk.Tk()
 class sobre():
     def janela_sobre(self):
             
@@ -21,7 +19,7 @@ class sobre():
             self.logo_estacio = tk.PhotoImage(file='../ico/logo1.png')
             self.label_logo = tk.Label(self.frame_sobre, image=self.logo_estacio)
             self.label_logo.place(relx=0.3, rely=0.1, relwidth=0.385, relheight=0.35)
-            
+
             # label_estacio = tk.Label(frame_sobre, text="Universidade Estácio de Sá", bg='#fff', font=('poppins', 25, 'bold'))
             # logo.estacio = tk.PhotoImage(file='../ico/worker.png')
             # label_tec_Img = tk.Label(self.frame_tecnico, image=self.img_tec)
