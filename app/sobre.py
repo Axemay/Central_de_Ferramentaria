@@ -5,6 +5,7 @@ from app.tecnico import TK
 class sobre():
     def janela_sobre(self):
             
+<<<<<<< Updated upstream
             self.sobre = tk.Toplevel()
             self.sobre.title('Sobre')
             self.sobre.iconphoto(False, tk.PhotoImage(file='../ico/info.png'))
@@ -21,6 +22,17 @@ class sobre():
             self.logo_estacio = tk.PhotoImage(file='../ico/logo1.png')
             self.label_logo = tk.Label(self.frame_sobre, image=self.logo_estacio)
             self.label_logo.place(relx=0.3, rely=0.1, relwidth=0.385, relheight=0.35)
+=======
+            sobre = tk.Tk()
+            sobre.title('Sobre')
+            sobre.configure(background='#B9B7BD')
+            sobre.geometry('800x700')
+            sobre.resizable(False, False)
+            sobre.minsize(width=600, height=400)
+
+            frame1 = tk.Frame(sobre, bd= 4, bg='#ffffff', highlightbackground='#868B8E', highlightthickness=2)
+            frame1.place(relx= 0.01, rely = 0.01, relwidth= 0.98, relheight = 0.92)
+>>>>>>> Stashed changes
             
             # label_estacio = tk.Label(frame_sobre, text="Universidade Estácio de Sá", bg='#fff', font=('poppins', 25, 'bold'))
             # logo.estacio = tk.PhotoImage(file='../ico/worker.png')
@@ -30,8 +42,15 @@ class sobre():
 
 
 
+<<<<<<< Updated upstream
             self.bt_fechar = tk.Button(self.sobre, text="Encerrar", bd=5, command=self.sobre.destroy)
             self.bt_fechar.place(relx=0.40, rely=0.93, relwidth=0.20, relheight=0.05)
+=======
+            bt_fechar = tk.Button(sobre, text="Fechar", bd=5, command=sobre.destroy)
+            bt_fechar.place(relx=0.40, rely=0.94, relwidth=0.20, relheight=0.05)
+
+            
+>>>>>>> Stashed changes
 
             
 
