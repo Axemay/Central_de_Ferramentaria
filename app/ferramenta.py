@@ -92,7 +92,18 @@ class funcs(Csvf):
 
 
             tempo = self.vaziof(self.vTemMax_ferramenta.get())
-            self.res10 = tempo
+            if tempo == "06 horas":
+                self.res10 = tempo
+            elif tempo == "12 horas":
+                self.res10 = tempo
+            elif tempo == "18 horas":
+                self.res10 = tempo
+            elif tempo == "24 horas":
+                self.res10 = tempo 
+            elif tempo == "30 horas":
+                self.res10 = tempo
+            else:
+                messagebox.showerror("Erro", "Tempo não condiz com as opções de reserva")
 
 
             # self.doubleclick(event='click')
