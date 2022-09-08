@@ -166,7 +166,7 @@ class funcs(Csv):
         chave = 0
 
         cpf = self.vazio(self.vcpf.get())
-        self.valido = self.valida_digito(cpf)
+
         while True:
             with open('./tecnico.csv', encoding='utf-8') as self.file:
                 self.csv_Dreader = DictReader(self.file)
@@ -175,16 +175,20 @@ class funcs(Csv):
                 if row['cpf'] == cpf:
                     messagebox.showerror("Erro", "CPF: Ja existe")
                     return
-            if len(cpf) == 11 and len(set(cpf)) != 1 and self.valido:
-                try:
-                    cpf = int(cpf)
-                except (ValueError, TypeError):
-                    messagebox.showerror("Erro", "CPF: Digite apenas números")
+            if cpf.isnumeric():
+                self.valido = self.valida_digito(cpf)
+                if len(cpf) == 11 and len(set(cpf)) != 1 and self.valido:
+                    try:
+                        cpf = int(cpf)
+                    except (ValueError, TypeError):
+                        messagebox.showerror("Erro", "CPF: Digite apenas números")
+                    else:
+                        self.res1 = cpf
+                        chave += 1
                 else:
-                    self.res1 = cpf
-                    chave += 1
+                    messagebox.showerror("Erro", "CPF: Insira um CPF Valido de 11 dígitos")
             else:
-                messagebox.showerror("Erro", "CPF: Insira um CPF Valido de 11 dígitos")
+                messagebox.showerror("Erro", "CPF: Digite apenas números")
             break
 
         nome = self.vazio(self.vnome.get())
