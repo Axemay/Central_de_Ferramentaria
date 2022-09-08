@@ -205,9 +205,25 @@ class funcs(Csvf):
         chave += 1
 
         tempo = self.vaziof(self.vTemMax_ferramenta.get())
-        self.res10 = tempo
-        chave += 1
-
+        if tempo == "06 horas":
+            self.res10 = tempo
+            chave += 1
+        elif tempo == "12 horas":
+            self.res10 = tempo
+            chave += 1
+        elif tempo == "18 horas":
+            self.res10 = tempo
+            chave += 1
+        elif tempo == "24 horas":
+            self.res10 = tempo
+            chave += 1
+        elif tempo == "30 horas":
+            self.res10 = tempo
+            chave += 1
+        else:
+            messagebox.showerror("Erro", "Tempo não condiz com as opções de reserva")
+        
+        
         while True:
             if chave == 10:
                     self.appendf(self.res1, self.res2, self.res3, self.res4, self.res5, self.res6, self.res7, self.res8, self.res9, self.res10)
@@ -352,8 +368,7 @@ class front_Ferramentas(funcs):
         self.TemMax_ferramenta.place(relx=0.65, rely=0.81, relwidth=0.22, relheight=0.07)
 
         self.vTemMax_ferramenta = ttk.Combobox(self.frame_1,
-                                               values=["06 horas", "12 horas", "18 horas", "24 horas", "30 horas"],
-                                               state="readonly")
+                                               values=["06 horas", "12 horas", "18 horas", "24 horas", "30 horas"])
         self.vTemMax_ferramenta.place(relx=0.88, rely=0.81, relwidth=0.1, relheight=0.07)
 
 ################# -------------- BOTÕES    ####--------------------------------------------------------------------------------
