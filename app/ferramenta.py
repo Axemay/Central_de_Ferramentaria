@@ -117,13 +117,12 @@ class funcs(Csvf):
             self.deletf(self.codigo)
             self.limpar_dadosF()
             self.select_listf()
-        
+            #
             self.res = tk.Label(self.frame_2, text=f"Cadastro excluído  com sucesso!", bg="#868B8E",fg= "#ffd", font=("poppins", 16, 'bold'))
             self.res.place(relx=0.00, rely=0.00, relwidth=1, relheight=1)
             fvalida = False
         else:
             messagebox.showerror("Erro", "Selecione um cadastro para deletar")
-
     def vaziof(self, msg):
         if msg == "":
             messagebox.showerror("Erro", "Todos os campos devem ser preenchidos")
@@ -222,8 +221,8 @@ class funcs(Csvf):
             chave += 1
         else:
             messagebox.showerror("Erro", "Tempo não condiz com as opções de reserva")
-        
-        
+
+
         while True:
             if chave == 10:
                     self.appendf(self.res1, self.res2, self.res3, self.res4, self.res5, self.res6, self.res7, self.res8, self.res9, self.res10)
@@ -244,7 +243,7 @@ class funcs(Csvf):
         # lista = self.leitura()
         lista = self.leitorf()
         for i in lista:
-            if i == ["codigo","descricao","fabricante","voltagem","partnumber","tamanho","unidade","tipo","material", "tempo"]:
+            if i == ["codigo","descricao","fabricante","voltagem","partnumber","tamanho","unidade","tipo","material","tempo"]:
                 continue
             self.view_frame2f.insert("", END, values=i)
 
@@ -259,7 +258,7 @@ class funcs(Csvf):
         self.vtipo_ferramenta.delete(0, END)
         self.vmaterial_ferramenta.delete(0, END)
         self.vTemMax_ferramenta.delete(0, END)
-
+        self.vcodigo.delete(0, END)
     def doubleclickf(self, event):
         self.limpar_dadosF()
         self.view_frame2f.selection()
@@ -369,6 +368,7 @@ class front_Ferramentas(funcs):
 
         self.vTemMax_ferramenta = ttk.Combobox(self.frame_1,
                                                values=["06 horas", "12 horas", "18 horas", "24 horas", "30 horas"])
+
         self.vTemMax_ferramenta.place(relx=0.88, rely=0.81, relwidth=0.1, relheight=0.07)
 
 ################# -------------- BOTÕES    ####--------------------------------------------------------------------------------

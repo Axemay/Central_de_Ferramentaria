@@ -568,7 +568,7 @@ class Reserva (funcsRT, funcsRF, funcsRR) :
         self.batR.place(relx=0.61, rely=0.56, relwidth=0.08, relheight=0.04)
 
         self.butxls = tk.Button(self.cadastro_reservas, text="Gerar Arquivo XLSX", bd=5, command=ccx.exportxlsR)
-        self.butxls.place(relx=0.73, rely=0.56, relwidth=0.12, relheight=0.04)
+        self.butxls.place(relx=0.85, rely=0.56, relwidth=0.12, relheight=0.04)
         
 ############################### TRUE VIEW ==============================================================================
     ## true view frame 1

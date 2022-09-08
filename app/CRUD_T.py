@@ -45,7 +45,7 @@ class Csv():
         with open('./tecnico.csv', encoding='utf-8') as self.file:
             self.csv_Dreader = DictReader(self.file)
             self.data = list(self.csv_Dreader)
-        with open('./tecnico.csv', 'w') as self.file:
+        with open('./tecnico.csv', 'w', encoding='utf-8') as self.file:
             header = ("cpf", "nome", "telefone", "turno", "equipe")
 
             self.csv_Dwriter = DictWriter(self.file, fieldnames=header, lineterminator='\n')
