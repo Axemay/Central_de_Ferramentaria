@@ -2,6 +2,10 @@
 
 <p>Projeto em grupo proposto como requisito para aquisição da certificação do Mundo 1, na graduação tecnológica de Desenvolvimento Full Stack da Universidade Estácio de Sá</p>
 <hr>
+![image](https://user-images.githubusercontent.com/101254285/189240709-26cb29ea-613b-4297-b29b-efcd80ff3b35.png)
+
+<h3>Link do vídeo: </h3>
+
 <p>Grupo: DevTeam13</p>
 <p>Participantes:</p>
 <ul>
@@ -29,6 +33,10 @@
 <li>typing -> Dict</li>
 <li>webbrowser</li>
 </ul>
+
+<h3>Central de Ferramentaria</h3>
+![image](https://user-images.githubusercontent.com/101254285/189240869-df2acddc-fd03-4183-bb79-a160dcd20420.png)
+
 
 <h3>Regras de negócio</h3>
 
