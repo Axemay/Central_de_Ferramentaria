@@ -92,7 +92,18 @@ class funcs(Csvf):
 
 
             tempo = self.vaziof(self.vTemMax_ferramenta.get())
-            self.res10 = tempo
+            if tempo == "06 horas":
+                self.res10 = tempo
+            elif tempo == "12 horas":
+                self.res10 = tempo
+            elif tempo == "18 horas":
+                self.res10 = tempo
+            elif tempo == "24 horas":
+                self.res10 = tempo 
+            elif tempo == "30 horas":
+                self.res10 = tempo
+            else:
+                messagebox.showerror("Erro", "Tempo não condiz com as opções de reserva")
 
 
             # self.doubleclick(event='click')
@@ -204,8 +215,24 @@ class funcs(Csvf):
         chave += 1
 
         tempo = self.vaziof(self.vTemMax_ferramenta.get())
-        self.res10 = tempo
-        chave += 1
+        if tempo == "06 horas":
+            self.res10 = tempo
+            chave += 1
+        elif tempo == "12 horas":
+            self.res10 = tempo
+            chave += 1
+        elif tempo == "18 horas":
+            self.res10 = tempo
+            chave += 1
+        elif tempo == "24 horas":
+            self.res10 = tempo
+            chave += 1
+        elif tempo == "30 horas":
+            self.res10 = tempo
+            chave += 1
+        else:
+            messagebox.showerror("Erro", "Tempo não condiz com as opções de reserva")
+
 
         while True:
             if chave == 10:
