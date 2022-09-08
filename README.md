@@ -9,11 +9,26 @@
 <li><a href="https://github.com/fneto1723">Francisco Ferreira de Queiroz Neto</a> - 202205164951</li>
 <li><a href="https://github.com/dpsndroid">Daniel Portella de Souza Nepomuceno</a> - 202205063186</li>
 <li><a href="https://github.com/Rafa1a">Rafael Leal Altero</a> - 202205021882</li>
-<li>Paulo</li>
 </ul>
 
 <h2>Objetivo da missão de certificação do Mundo 1</h2>
 <p>Desenvolver uma aplicação para gerenciamento de equipamentos em um ambiente de preparação de conteúdo audiovisual voltado para educação.</p>
+
+<h3>Bibliotecas e módulos utilizados</h3>
+<ul>
+<li>csv -> DictWriter, DictReader, writer, reader</li>
+<li>datetime -> date, time, datetime, timedelta</li>
+<li>openpyxl</li>
+<li>os</li>
+<li>pandas</li>
+<li>pathlib</li>
+<li>re</li>
+<li>time -> strptime</li>
+<li>tkcalendar -> Calendar</li>
+<li>tkinter -> END, Frame, ttk, Scrollbar, messagebox -> askyesno</li>
+<li>typing -> Dict</li>
+<li>webbrowser</li>
+</ul>
 
 <h3>Regras de negócio</h3>
 
