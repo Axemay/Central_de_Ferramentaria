@@ -3,5 +3,6 @@ codigo,descricao,fabricante,voltagem,partnumber,tamanho,unidade,tipo,material,te
 106,serra tico-tico,black+decker,127,qwe4543rt,200,mm,elétrica,metal,12 horas
 107,lixadeira orbital ,vondor,220,qw5874df,20,mm,elétrica,metal,12 horas
 108,esmerilhadeira ang,makita,127,asw5678rt,115,mm,elétrica,metal,12 horas
-109,pistola pulverizadora,dexter,220,dfe5684gf,"313,5x275x230",mm,elétrica,plástico,18 horas
+109,pistola pulverizadora,dexter,220,dfe5684gf,"313,5x275x230",mm,manual,plástico,18 horas
 110,serra tico-tico,black+decker,127,qwe4543rt,200,mm,elétrica,metal,24 horas
+111,serra tico-tica,black+decker,220,xle4543rt,300,cm,manual,ferro,12 horas
