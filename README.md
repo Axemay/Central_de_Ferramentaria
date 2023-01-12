@@ -1,7 +1,7 @@
 <h1>Sistema de controle de reservas de ferramentas</h1>
 
 <p>Projeto em grupo proposto como requisito para aquisição da certificação do Mundo 1, na graduação tecnológica de Desenvolvimento Full Stack da Universidade Estácio de Sá</p>
-<hr>
+
 ![image](https://user-images.githubusercontent.com/101254285/189240709-26cb29ea-613b-4297-b29b-efcd80ff3b35.png)
 
 <h3>Link do vídeo: <a href="https://youtu.be/izh7uXpsDB4">https://youtu.be/izh7uXpsDB4<a></h3>
@@ -36,6 +36,7 @@
 
 <h3>Central de Ferramentaria</h3>
 <p>Na tela inicial, o usuário poderá abrir o manual de uso do sistema.</p>
+
 ![image](https://user-images.githubusercontent.com/101254285/189252464-ac454e23-ebff-4b6a-b1bc-73a34457cb11.png)
 
 
@@ -55,6 +56,7 @@
 
 
 <p>Técnicos, Ferramentas e reservas podem ser removidos.</p>
+
 ![image](https://user-images.githubusercontent.com/101254285/189255959-7f550536-e3fb-4e01-8d33-dbdea6e2ed35.png)
 
 
